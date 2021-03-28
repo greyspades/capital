@@ -1,0 +1,114 @@
+import React from "react";
+// nodejs library that concatenates classes
+import classNames from "classnames";
+// @material-ui/core components
+import { makeStyles } from "@material-ui/core/styles";
+import {parseCookies} from '../middleware/cookies'
+//import Cookie from 'js-cookie'
+import cookieCutter from 'cookie-cutter'
+// @material-ui/icons
+
+// core components
+import Header from "components/Header/Header.js";
+import Footer from "components/Footer/Footer.js";
+import GridContainer from "components/Grid/GridContainer.js";
+import GridItem from "components/Grid/GridItem.js";
+import Button from "components/CustomButtons/Button.js";
+import HeaderLinks from "components/Header/HeaderLinks.js";
+import Parallax from "components/Parallax/Parallax.js";
+import Plans from '../pages-sections/LandingPage-Sections/plans.js'
+import styles from "assets/jss/nextjs-material-kit/pages/landingPage.js";
+import Converter from '../pages-sections/LandingPage-Sections/converter'
+import rc from '../assets/img/RC.png'
+import Slider from "../pages-sections/LandingPage-Sections/slider"
+
+
+import {
+  
+  Input,
+  InputGroupAddon,
+  InputGroupText,
+  InputGroup,
+  Container,
+  Row,
+  Col,
+  //Button
+} from "reactstrap";
+
+// Sections for this page
+import ProductSection from "pages-sections/LandingPage-Sections/ProductSection.js";
+import TeamSection from "pages-sections/LandingPage-Sections/TeamSection.js";
+import WorkSection from "pages-sections/LandingPage-Sections/WorkSection.js";
+import SectionCarousel from 'pages-sections/Components-Sections/SectionCarousel.js'
+import ActiveUsers from '../pages-sections/LandingPage-Sections/activeUsers'
+import cookies from "next-cookies";
+const dashboardRoutes = [];
+
+const useStyles = makeStyles(styles);
+
+export default function LandingPage(props,{data}) {
+  const classes = useStyles();
+  const { ...rest } = props;
+
+  //const user=cookieCutter.get('person')
+  return (
+    <div>
+      <Header
+        color="transparent"
+        routes={dashboardRoutes}
+        
+        rightLinks={<HeaderLinks />}
+        fixed
+        changeColorOnScroll={{
+          height: 400,
+          color: "white"
+        }}
+        {...rest}
+      />
+      <Parallax filter responsive image={require("assets/img/header.jpg")}  >
+        <div className={classes.container} style={{}}>
+          <GridContainer>
+            <GridItem xs={12} sm={12} md={6}>
+              <img src={rc} className='logo' />
+              <h1 className={classes.title}>Your Story Starts With Us.</h1>
+              <h5 className='talk' style={{}}>
+              We precisely provide value in those areas that matter. We assist portfolio companies in developing and 
+                executing strategic growth, building the board and executive management team, exploring capitalization
+                 structures, pursuing growth mergers and acquisitions, and enhancing market presence.
+              </h5>
+              <br />
+            
+            </GridItem>
+          </GridContainer>
+        </div>
+      </Parallax>
+      <div className={classNames(classes.main, classes.mainRaised)} style={{backgroundColor:'#050124'}}>
+        <div className={classes.container}>
+          <ProductSection />
+          <Slider />
+            
+      
+          <ActiveUsers />
+          <Converter />
+          <Plans />
+          <TeamSection />
+          <WorkSection />
+
+        </div>
+      </div>
+      <Footer />
+    </div>
+  );
+}
+/*LandingPage.getInitialValues=async ({req,res})=>{
+  const cookieData=parseCookies(req)
+  return {
+    data:cookieData
+  }
+}*/
+/*export async function getServerSideProps({req,res}) {
+  const cook=req.cookies.room
+  return {
+    props:{token:cook}
+  }
+}*/
