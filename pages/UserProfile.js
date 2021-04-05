@@ -22,9 +22,11 @@ import { Line, Bar } from "react-chartjs-2";
 import classNames from 'classnames'
 import AccountBalanceWalletIcon from '@material-ui/icons/AccountBalanceWallet'
 // reactstrap components
+import Check from '@material-ui/icons/Check'
+import {CircularProgress} from '@material-ui/core'
 import AttachMoneyIcon from '@material-ui/icons/AttachMoney'
 import BarChartIcon from '@material-ui/icons/BarChart'
-import Axios from 'axios'
+//import Axios from 'axios'
 import {
   Button,
   Container,
@@ -36,6 +38,7 @@ import {
   CardHeader,
   CardBody,
   CardTitle,
+  
   DropdownToggle,
   DropdownMenu,
   DropdownItem,
@@ -43,12 +46,19 @@ import {
   Label,
   FormGroup,
   Input,
-  Table,
+  Spinner,
+  
   Row,
   Col,
   UncontrolledTooltip,
 } from "reactstrap";
+
+//import LoadingButton from '@material-ui/lab';
+import info from './api/info'
+import {motion} from 'framer-motion'
+import Dropdown from 'react-dropdown'
 import cookieCutter from 'cookie-cutter'
+import bitcoinIcon from '../assets/img/bitcoin.svg'
 //import cookies from 'cookies'
 // core components
 import {
@@ -58,9 +68,18 @@ import {
   chartExample4,
 } from '../variables/charts'
 import dynamic from 'next/dynamic'
+import {Formik} from 'formik'
+import Axios from "axios";
+import { parseCookies } from "./api/cookies.js";
+import HyperModal from 'react-hyper-modal'
+import Table from 'rc-table'
+import { faYenSign } from "@fortawesome/free-solid-svg-icons";
+import 'react-dropdown/style.css'
 
-import axios from "axios";
-//import { parseCookies } from "./api/cookies.js";
+const Popover=dynamic(()=>import('@idui/react-popover'),
+  {ssr:false}
+)
+
 //import useLocalStorage from 'react-hook-uselocalstorage';
 
 //const cookieCutter=dynamic(()=>import('cookie-cutter'),{ssr:false})
@@ -69,19 +88,481 @@ import axios from "axios";
 
 function UserProfile({data}) {
   //const [main,setMain]=useContext(UserContext)
-  //const [user,setUser]=useState(()=>JSON.parse(cookieCutter.get('key')))
+  const [user,setUser]=useState(()=>JSON.parse(data.key))
+  const [info,setInfo]=useState('')
   const [bigChartData, setbigChartData] = React.useState("data1");
   const setBgChartData = (name) => {
     setbigChartData(name);
   };
+  const [coin,setCoin]=useState({
+    pair:'BTC',
+    cryptoPrice:'',
+    investment:'',
+  })
+  const [crypto,setCrypto]=useState()
+  const [showInvest,setShowInvest]=useState(true)
+  const [addressShow,setAddress]=useState(false)
+  const [pairIcon,setPairIcon]=useState(bitcoinIcon)
+  const [pending,setPending]=useState(false)
+  const [showWithdraw,setShowWithdraw]=useState(false)
+  const [message,setMessage]=useState({
+    item:{},
+    show:true,
+    type:'invest'
+
+  })
+  const [response,setResponse]=useState()
+  const [withdrawn, setWithdrawn]=useState({
+    done:false,
+    pending:false,
+  })
 
   
-  //const user=JSON.parse(cookieCutter.get('key'))
-  /*useEffect(()=>{
-    setUser(JSON.parse(cookieCutter.get('key')))
-    console.log(user)
-  },[])*/
-  //const detail=JSON.parse(cookieCutter.get('userDetails'))
+  useEffect((req)=>{
+   let item=user
+   /*Axios.post('/api/info',{item})
+   .then((res)=>{
+     //console.log(res.data.balance)
+     setInfo(res.data)
+     console.log(res.data.investment)
+   })*/
+  },[])
+  
+  const columns=[
+    {
+      title:'S/N',
+      dataIndex:'S/N',
+      key:'S/N',
+      width:100,
+    },
+    {
+      title:'Plan',
+      dataIndex:'plan',
+      key:'plan',
+      width:100,
+    },
+    {
+      title:'Amount($)',
+      dataIndex:'amount',
+      key:'amount',
+      width:100,
+    },
+   
+    {
+      title:'Date',
+      dataIndex:'date',
+      key:'date',
+      width:100,
+    },
+    {
+      title:'Status',
+      dataIndex:'Status',
+      key:'Status',
+      width:100,
+    },
+   
+    {
+      title:'Pair',
+      dataIndex:'pair',
+      key:'pair',
+      width:100,
+    }
+  ]
+
+
+ 
+  const convert=(item)=>{
+    Axios.get(`/api/convert`)
+    .then((res)=>{
+      
+      setCrypto(res.data)
+      console.log(res.data)
+    })
+  }
+  
+
+
+  const showMessage=(item)=>{
+    if(message.show && message.type=='withdraw'){
+      return(
+        <Card style={{marginTop:50,backgroundColor:'white'}} className='address-card'>
+        <CardBody>
+        <div style={{fontSize:20,color:'white',padding:5}}>
+        Your request is being processed
+    </div>
+    <div style={{color:'black'}}>
+      You are about to make a withdrawal of {message.item.amount} which is equivalent to {crypto} to
+      the address {message.item.walletId} you will recieve an alert shortly, please inform us if you do not recieve your money within 24 hours
+    </div>
+        </CardBody>
+        </Card>
+      )
+     
+    }
+    else if(message.show && message.type=='invest'){
+      return(
+        <Card style={{marginTop:50,backgroundColor:'white'}} className='address-card'>
+        <CardBody>
+        <div style={{fontSize:20,padding:5}}>
+        Your request is being processed
+    </div>
+    <div style={{color:'black',}}>
+      You are about to make an investment of {message.item.investment} which is equivalent to {crypto} to
+      the address  you will recieve an alert shortly, please inform us if you do not recieve your money within 24 hours
+    </div>
+        </CardBody>
+        </Card>
+      )
+    }
+  }
+  const spin=()=>{
+    if(withdrawn.done==false && withdrawn.pending==true){
+      return (
+        <div>
+           <CircularProgress color='green' thickness={5} />
+        </div>
+      )
+    }
+    else if(withdrawn.pending==false && withdrawn.done==true){
+      return (
+        <div>
+          <Check />
+        </div>
+      )
+    }
+    else if(withdrawn.done==false && withdrawn.pending==false && showInvest==false) {
+      return (
+        <div style={{padding:2,textAlign:'center'}}>
+               withdraw
+             </div>
+      )
+    }
+    else if(withdrawn.done==false && withdrawn.pending==false &&showInvest==true) {
+      return (
+        <div style={{padding:2,textAlign:'center'}}>
+               invest
+             </div>
+      )
+    }
+   
+  }
+
+
+  const withdraw=()=>{
+    
+      return (
+        <div>
+         <Card style={{backgroundColor:"#050124",padding:10,marginLeft:40}}>
+           <Button  style={{backgroundColor:'red',width:100,display:'flex',flexDirection:'column',justifyContent:'center'}}
+            onClick={()=>{setShowWithdraw(false)}}
+           >
+            <div style={{textAlign:'center',marginLeft:-10}}>
+            close
+            </div>
+           </Button>
+           <CardBody >
+           <Formik initialValues={{amount:'',walletId:'',pair:''}} onSubmit={(value)=>{
+             
+             let today=new Date()
+             let year=today.getFullYear()+'-'
+             let time=today.getHours()+":"
+             let date=year+''+time
+
+             let item={
+               username:user.username,
+               amount:value.amount,
+               walletId:value.walletId,
+               pair:value.pair,
+               date:date,
+               time:time,
+             }
+
+            
+            console.log(item)
+
+            setWithdrawn({
+              pending:true,
+              done:false
+            })
+            
+             Axios.post(`/api/withdraw`,{item})
+             .then((res)=>{
+               if(res.data=='SUCCESS'){
+                 //setMessage(true)
+                 //setCrypto(res.data.value)
+                 console.log(res.data)
+                 
+                 setWithdrawn({
+                   pending:false,
+                   done:true,
+                 })
+                 setMessage({
+                   show:true,
+                   type:'withdraw',
+                   item:item,
+                 })
+
+               }
+             })
+             .catch((err)=>{
+               console.log(err)
+               setWithdrawn({
+                pending:false,
+                done:false,
+              })
+              setShowInvest(false)
+             })
+          
+   }} >
+   {({handleSubmit,handleChange,values})=>(
+   <div style={{padding:20,height:600}}>
+     <h3 style={{color:'white',textAlign:'center'}}>
+       Make withdrawal
+     </h3>
+      <form>
+        
+        <Row>
+        
+          <Col md={9} className='withdraw-group'>
+            <div className=''>
+      <input 
+      className='input invest'
+      placeholder='Amount to be Withdrawn'
+      type='number'
+      onChange={handleChange('amount')}
+      value={values.amount}
+      >
+
+      </input>
+      </div>
+      <div>
+
+      </div>
+      <div style={{marginTop:20}}>
+      
+      <input
+      className='input invest'
+      placeholder={`Your wallet ID`}
+      type='number'
+      onChange={handleChange('walletId')}
+      value={values.walletId}
+      >
+
+      </input>
+           
+      </div>
+          </Col>
+          <Col md={3} xs={12}>
+
+            {/*<Dropdown onChange={handleChange('pair')} placeholderClassName='pair-placeholder' value={'USD'} placeholder={dropPairs[0]} menuClassName='pair-drop-menu' className='pair-drop' options={dropPairs}  />*/}
+
+            <select onChange={handleChange('pair')} className='pair-drop' name='pair' id='pair' defaultValue='BTC'>
+              <option value='BTC'>BTC</option>
+              <option value='ETH'>ETH</option>
+            </select>
+
+          </Col>
+          <div className='invest-button'>
+          <Button style={{ height:50,width:100,backgroundColor:"#9a7801",display:'flex',flexDirection:'row',}} className='inv-btn' onClick={handleSubmit} > 
+             <div className='withdraw-spinner'>
+             {spin()}
+             </div>
+          </Button>
+          </div>
+          <div>
+            {showMessage()}
+          </div>
+         
+        </Row>
+    </form>
+   </div>
+        )}
+      </Formik> 
+           </CardBody>
+         </Card>
+        </div>
+      ) 
+  }
+
+  
+  const invest=()=>{
+    return (
+      <div>
+         <Popover fitMaxWidthToBounds className='pop' width='500' maxWidth='500'  trigger='click' content={()=>(
+           <Card className='pop-content' >
+           <Button  style={{backgroundColor:'red',width:100,display:'flex',flexDirection:'column',justifyContent:'center'}}
+            onClick={()=>{setShowInvest(false)}}
+           >
+            <div style={{textAlign:'center',marginLeft:-10}}>
+            close
+            </div>
+           </Button>
+           <CardBody >
+           <Formik initialValues={{investment:'',price:'',pair:''}} onSubmit={(value)=>{
+             
+             
+             let today=new Date()
+             let year=today.getFullYear()+'-'
+             let time=today.getHours()+":"
+             let date=year+''+time
+
+             let item={
+              investment:value.investment,
+              username:user.username,
+              pair:value.pair,
+              date:date,
+            }
+
+             /*setCoin(()=>{
+               return {
+                 username:user.username,
+                 investment:parseInt(values.investment),
+                 pair:coin.pair,
+                 price:values.price,
+                 date:date,
+               }
+             })*/
+             setWithdrawn({
+               pending:true,
+               done:false,
+             })
+            Axios.post('/api/invest',{item})
+             .then((res)=>{
+               console.log(res.data)
+                 if(res.data=='SUCCESS'){
+                  setWithdrawn({
+                    pending:false,
+                    done:true,
+                  })
+                  
+                  setMessage({
+                    show:true,
+                    type:'invest',
+                    item:item
+                  })
+                  console.log(message)
+                 }
+             })
+}} >
+  {({handleSubmit,handleChange,values})=>(
+   <div style={{padding:20,height:600}}>
+     <h3 style={{color:'white',textAlign:'center'}}>
+       Make Investment
+     </h3>
+      <form>
+        <div className='pair-container'>
+        <select onChange={handleChange('pair')} className='pair-drop' name='pair' id='pair' defaultValue='BTC'>
+              <option value='BTC'>BTC</option>
+              <option value='ETH'>ETH</option>
+            </select>
+               
+        </div>
+        <Row>
+          <Col md={8} className='invest-group'>
+            <div className=''>
+      <input 
+      className='input invest'
+      placeholder='Amount in USD'
+      type='number'
+      onChange={handleChange('investment')}
+      value={values.investment}
+      >
+
+      </input>
+      </div>
+      <div>
+
+      </div>
+      <div style={{marginTop:20}}>
+      
+      <input 
+      className='input invest'
+      placeholder={`Amount in ${values.pair}`}
+      type='number'
+      onChange={handleChange('price')}
+      value={crypto}
+      readOnly
+      >
+
+      </input>
+    
+      </div>
+        
+      <div className='invest-button'>
+        <Button style={{height:50,width:100,backgroundColor:"#9a7801",display:'flex',flexDirection:'row',}} className='inv-btn' onClick={handleSubmit} > 
+        <div className='withdraw-spinner'>
+             {spin()}
+             </div>
+        </Button>
+      </div>
+          </Col>
+          <div>
+            {showMessage()}
+          </div>
+         
+        </Row>
+    </form>
+   </div>
+        )}
+      </Formik> 
+           </CardBody>
+         </Card>
+         )}>
+           <Button>
+             invest
+           </Button>
+         </Popover>
+      </div>
+    )
+  }
+  
+  const toggleWithdraw=()=>{
+    return (
+      <div>
+        <Button onClick={()=>{setShowWithdraw(true)}}>
+            Withdraw
+       </Button>
+      </div>
+    )
+  }
+
+
+  const showPending=()=>{
+    if(pending){
+      return (
+        <div  >
+          
+        </div>
+      )
+    }
+  }
+
+ const toggleInvest=()=>{
+   return (
+     <div>
+       <Button onClick={()=>{setShowInvest(true)}}>
+            Invest
+       </Button>
+     </div>
+   )
+ }
+
+  const showAddress=(item)=>{
+   if(addressShow){
+    return(
+      <Card style={{marginTop:100,backgroundColor:'#9a7801'}} className='address-card'>
+      <CardBody>
+      <div style={{fontSize:20,color:'white',padding:5}}>
+    You are required to pay the sum of   which is equivalent to {} 
+    to this wallet address   and upload proof of payment
+  </div>
+      </CardBody>
+      </Card>
+    )
+   }
+  }
+
+
   return (
     <>
       <div className="content">
@@ -208,6 +689,12 @@ function UserProfile({data}) {
               </Row>
             
             </Col>
+
+
+
+
+
+
           <Col md="4" className='profile-card'>
             <Card className="card-user profile-card ">
               <CardBody>
@@ -223,7 +710,7 @@ function UserProfile({data}) {
                       className="avatar"
                      
                     />
-                    <h3 className="title"></h3>
+                    <h3 className="title">{user.username}</h3>
                   </a>
                   <p className="description">Ceo/Co-Founder</p>
                 </div>
@@ -237,13 +724,13 @@ function UserProfile({data}) {
                           <Container className='balance'>
                             <Row style={{}} >
                              <h3 style={{marginLeft:10}}>
-                               Balance
+                              Total Balance
                              </h3>
                             </Row>
                             <Row className='balance-figure'>
                               <div>
                               <AttachMoneyIcon style={{width:50,height:30,marginTop:-5}} className='' />
-                                .00
+                                {info.balance || 0}.00
                               </div>
                             </Row>
                           </Container>
@@ -258,20 +745,39 @@ function UserProfile({data}) {
                     <Container className='balance'>
                             <Row style={{}} >
                              <h3 style={{marginLeft:10}}>
-                               Investment
+                               Total investment
                              </h3>
                             </Row>
                             <Row className='balance-figure'>
                               <div>
                               <AttachMoneyIcon style={{width:50,height:30,marginTop:-5}} className='' />
-                                .00
+                                {user.investment || 0}.00
                               </div>
                             </Row>
                           </Container>
                       
                     </Col>
                   </Row>
+
                 </Container>
+                    
+                    <Container>
+                     <Row>
+                       <Col className='transaction-buttons' xs={6} md={6}>
+                          {invest()}
+                       </Col>
+                       
+                       <Col className='transaction-buttons' xs={6} md={6}>
+                          {showWithdraw ? withdraw() : toggleWithdraw()}
+                       </Col>
+                     </Row>
+                    </Container>
+
+                  <div>
+                    <Table columns={columns} data={info.investment} />
+                    
+                  </div>
+                
                 
               </CardBody>
               <CardFooter>
@@ -305,17 +811,22 @@ export default UserProfile;
     data:info
   }
 }*/
-/*UserProfile.getInitialProps=async ({req})=>{
+UserProfile.getInitialProps=async ({req})=>{
   /*let user=JSON.parse(cookieCutter.get('key'))
   Axios.post('/api/info',{user})
   .then((res)=>{
     return {
       data:res.data
     }
-  })
-  const cookies=parseCookies(req)
-  const info=cookies.key
+  })*/
+  
+  const user=parseCookies(req)
+  //const info=cookies.key
+  //const info =JSON.parse(cookieCutter.parse('key'))
+  //info(user)
+  
   return {
-    data:info
-  }*/
+    data:user
+  }
+}
 
