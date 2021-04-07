@@ -27,6 +27,7 @@ import {CircularProgress} from '@material-ui/core'
 import AttachMoneyIcon from '@material-ui/icons/AttachMoney'
 import BarChartIcon from '@material-ui/icons/BarChart'
 //import Axios from 'axios'
+import { Modal } from 'react-responsive-modal';
 import {
   Button,
   Container,
@@ -68,7 +69,7 @@ import {
   chartExample4,
 } from '../variables/charts'
 import dynamic from 'next/dynamic'
-import {Formik} from 'formik'
+import {Formik,Field,Form} from 'formik'
 import Axios from "axios";
 import { parseCookies } from "./api/cookies.js";
 import HyperModal from 'react-hyper-modal'
@@ -100,15 +101,15 @@ function UserProfile({data}) {
     investment:'',
   })
   const [crypto,setCrypto]=useState()
-  const [showInvest,setShowInvest]=useState(true)
+  const [showInvest,setShowInvest]=useState(false)
   const [addressShow,setAddress]=useState(false)
   const [pairIcon,setPairIcon]=useState(bitcoinIcon)
   const [pending,setPending]=useState(false)
   const [showWithdraw,setShowWithdraw]=useState(false)
   const [message,setMessage]=useState({
     item:{},
-    show:true,
-    type:'invest'
+    show:false,
+    type:''
 
   })
   const [response,setResponse]=useState()
@@ -116,16 +117,20 @@ function UserProfile({data}) {
     done:false,
     pending:false,
   })
+  const [invested,setInvested]=useState({
+    pending:false,
+    done:false,
+  })
 
   
   useEffect((req)=>{
    let item=user
-   /*Axios.post('/api/info',{item})
+   Axios.post('/api/info',{item})
    .then((res)=>{
      //console.log(res.data.balance)
      setInfo(res.data)
      console.log(res.data.investment)
-   })*/
+   })
   },[])
   
   const columns=[
@@ -133,19 +138,22 @@ function UserProfile({data}) {
       title:'S/N',
       dataIndex:'S/N',
       key:'S/N',
-      width:100,
+      width:50,
+      fixed:false
     },
     {
       title:'Plan',
       dataIndex:'plan',
       key:'plan',
       width:100,
+      fixed:false
     },
     {
       title:'Amount($)',
       dataIndex:'amount',
       key:'amount',
       width:100,
+      fixed:false
     },
    
     {
@@ -153,12 +161,14 @@ function UserProfile({data}) {
       dataIndex:'date',
       key:'date',
       width:100,
+      fixed:false
     },
     {
       title:'Status',
       dataIndex:'Status',
       key:'Status',
       width:100,
+      fixed:false
     },
    
     {
@@ -166,11 +176,32 @@ function UserProfile({data}) {
       dataIndex:'pair',
       key:'pair',
       width:100,
+      fixed:false
     }
   ]
+  const openInvest=()=>{
+    setShowInvest(true)
+  }
+  const closeInvest=()=>{
+    setShowInvest(false)
+    setMessage({
+      show:false,
+      type:'',
+      item:''
+    })
+  }
+
+  const OpenWithdraw=()=>setShowWithdraw(true)
+  const closeWithdraw=()=>{
+    setShowWithdraw(false)
+    setMessage({
+      show:false,
+      type:'',
+      item:''
+    })
+  }
 
 
- 
   const convert=(item)=>{
     Axios.get(`/api/convert`)
     .then((res)=>{
@@ -216,28 +247,28 @@ function UserProfile({data}) {
     }
   }
   const spin=()=>{
-    if(withdrawn.done==false && withdrawn.pending==true){
+    if(withdrawn.done==false && withdrawn.pending==true || invested.done==false && invested.pending==true){
       return (
         <div>
-           <CircularProgress color='green' thickness={5} />
+           <CircularProgress color='white' thickness={5} />
         </div>
       )
     }
-    else if(withdrawn.pending==false && withdrawn.done==true){
+    else if(withdrawn.pending==false && withdrawn.done==true || invested.done==true && invested.pending==false){
       return (
         <div>
           <Check />
         </div>
       )
     }
-    else if(withdrawn.done==false && withdrawn.pending==false && showInvest==false) {
+    else if(withdrawn.done==false && withdrawn.pending==false && showWithdraw==true) {
       return (
         <div style={{padding:2,textAlign:'center'}}>
                withdraw
              </div>
       )
     }
-    else if(withdrawn.done==false && withdrawn.pending==false &&showInvest==true) {
+    else if(invested.done==false && invested.pending==false && showInvest==true) {
       return (
         <div style={{padding:2,textAlign:'center'}}>
                invest
@@ -252,134 +283,137 @@ function UserProfile({data}) {
     
       return (
         <div>
-         <Card style={{backgroundColor:"#050124",padding:10,marginLeft:40}}>
-           <Button  style={{backgroundColor:'red',width:100,display:'flex',flexDirection:'column',justifyContent:'center'}}
-            onClick={()=>{setShowWithdraw(false)}}
-           >
-            <div style={{textAlign:'center',marginLeft:-10}}>
-            close
-            </div>
-           </Button>
-           <CardBody >
-           <Formik initialValues={{amount:'',walletId:'',pair:''}} onSubmit={(value)=>{
-             
-             let today=new Date()
-             let year=today.getFullYear()+'-'
-             let time=today.getHours()+":"
-             let date=year+''+time
-
-             let item={
-               username:user.username,
-               amount:value.amount,
-               walletId:value.walletId,
-               pair:value.pair,
-               date:date,
-               time:time,
-             }
-
-            
-            console.log(item)
-
-            setWithdrawn({
-              pending:true,
-              done:false
-            })
-            
-             Axios.post(`/api/withdraw`,{item})
-             .then((res)=>{
-               if(res.data=='SUCCESS'){
-                 //setMessage(true)
-                 //setCrypto(res.data.value)
-                 console.log(res.data)
-                 
-                 setWithdrawn({
-                   pending:false,
-                   done:true,
-                 })
-                 setMessage({
-                   show:true,
-                   type:'withdraw',
-                   item:item,
-                 })
-
-               }
-             })
-             .catch((err)=>{
-               console.log(err)
-               setWithdrawn({
-                pending:false,
-                done:false,
-              })
-              setShowInvest(false)
-             })
-          
-   }} >
-   {({handleSubmit,handleChange,values})=>(
-   <div style={{padding:20,height:600}}>
-     <h3 style={{color:'white',textAlign:'center'}}>
-       Make withdrawal
-     </h3>
-      <form>
-        
-        <Row>
-        
-          <Col md={9} className='withdraw-group'>
-            <div className=''>
-      <input 
-      className='input invest'
-      placeholder='Amount to be Withdrawn'
-      type='number'
-      onChange={handleChange('amount')}
-      value={values.amount}
-      >
-
-      </input>
-      </div>
-      <div>
-
-      </div>
-      <div style={{marginTop:20}}>
-      
-      <input
-      className='input invest'
-      placeholder={`Your wallet ID`}
-      type='number'
-      onChange={handleChange('walletId')}
-      value={values.walletId}
-      >
-
-      </input>
-           
-      </div>
-          </Col>
-          <Col md={3} xs={12}>
-
-            {/*<Dropdown onChange={handleChange('pair')} placeholderClassName='pair-placeholder' value={'USD'} placeholder={dropPairs[0]} menuClassName='pair-drop-menu' className='pair-drop' options={dropPairs}  />*/}
-
-            <select onChange={handleChange('pair')} className='pair-drop' name='pair' id='pair' defaultValue='BTC'>
-              <option value='BTC'>BTC</option>
-              <option value='ETH'>ETH</option>
-            </select>
-
-          </Col>
-          <div className='invest-button'>
-          <Button style={{ height:50,width:100,backgroundColor:"#9a7801",display:'flex',flexDirection:'row',}} className='inv-btn' onClick={handleSubmit} > 
-             <div className='withdraw-spinner'>
-             {spin()}
-             </div>
+          <Button onClick={OpenWithdraw}>
+            Withdraw
           </Button>
-          </div>
-          <div>
-            {showMessage()}
-          </div>
+          <Modal classNames={{
+            modal:'pop',
+
+          }} center open={showWithdraw} onClose={closeWithdraw}>
+          <div className='pop-content' style={{}}>
          
-        </Row>
-    </form>
-   </div>
-        )}
-      </Formik> 
-           </CardBody>
-         </Card>
+           
+         <Formik initialValues={{amount:'',walletId:'',pair:''}} onSubmit={(value)=>{
+           
+           let today=new Date()
+           let year=today.getFullYear()+'-'
+           let time=today.getHours()+":"
+           let date=year+''+time
+
+           let item={
+             username:user.username,
+             amount:value.amount,
+             walletId:value.walletId,
+             pair:value.pair,
+             date:date,
+             time:time,
+           }
+
+          
+          console.log(item)
+
+          setWithdrawn({
+            pending:true,
+            done:false
+          })
+          
+           Axios.post(`/api/withdraw`,{item})
+           .then((res)=>{
+             if(res.data=='SUCCESS'){
+               //setMessage(true)
+               //setCrypto(res.data.value)
+               console.log(res.data)
+               
+               setWithdrawn({
+                 pending:false,
+                 done:true,
+               })
+               setMessage({
+                 show:true,
+                 type:'withdraw',
+                 item:item,
+               })
+
+             }
+           })
+           .catch((err)=>{
+             console.log(err)
+             setWithdrawn({
+              pending:false,
+              done:false,
+            })
+            setShowInvest(false)
+           })
+        
+ }} >
+ {({handleSubmit,handleChange,values})=>(
+ <div style={{height:500,padding:10}}>
+   <h3 style={{color:'white',textAlign:'center'}}>
+     Make withdrawal
+   </h3>
+    <form>
+      
+      <Row>
+      
+        <Col md={12} className='withdraw-group'>
+          <div className=''>
+    <input 
+    className='input invest'
+    placeholder='Amount to be Withdrawn'
+    type='number'
+    onChange={handleChange('amount')}
+    value={values.amount}
+    required
+    >
+
+    </input>
+    </div>
+    <div>
+
+    </div>
+    <div style={{marginTop:20}}>
+    
+    <input
+    className='input invest'
+    placeholder={`Your wallet ID`}
+    type='number'
+    onChange={handleChange('walletId')}
+    value={values.walletId}
+    >
+
+    </input>
+         
+    </div>
+        </Col>
+        <Col md={12} xs={12}>
+          <div className='withdraw-pair'>
+          <select onChange={handleChange('pair')} className='pair-drop' name='pair' id='pair' value={values.pair} defaultValue='BTC'>
+            <option hidden>Coin</option>
+            <option value='BTC'>BTC</option>
+            <option value='ETH'>ETH</option>
+          </select>
+
+          </div>
+        </Col>
+        <Col xs={12} md={12} className='withdraw-button'>
+        <Button style={{ height:50,width:100,backgroundColor:"#9a7801",display:'flex',flexDirection:'row',}}  onClick={handleSubmit} > 
+           <div className='withdraw-spinner'>
+           {spin()}
+           </div>
+        </Button>
+        </Col>
+        <div>
+          {showMessage()}
+        </div>
+       
+      </Row>
+  </form>
+ </div>
+      )}
+    </Formik> 
+         
+       </div>
+          </Modal>
         </div>
       ) 
   }
@@ -388,30 +422,34 @@ function UserProfile({data}) {
   const invest=()=>{
     return (
       <div>
-         <Popover fitMaxWidthToBounds className='pop' width='500' maxWidth='500'  trigger='click' content={()=>(
-           <Card className='pop-content' >
-           <Button  style={{backgroundColor:'red',width:100,display:'flex',flexDirection:'column',justifyContent:'center'}}
-            onClick={()=>{setShowInvest(false)}}
-           >
-            <div style={{textAlign:'center',marginLeft:-10}}>
-            close
-            </div>
-           </Button>
-           <CardBody >
+        <Button onClick={openInvest}>
+          Invest
+        </Button>
+        <Modal classNames={{
+          modal:'pop'
+        }} center open={showInvest} onClose={closeInvest}>
+        <div className='pop-content' >
+         
+           
            <Formik initialValues={{investment:'',price:'',pair:''}} onSubmit={(value)=>{
              
              
              let today=new Date()
-             let year=today.getFullYear()+'-'
+             let year=today.getFullYear()+'/'
              let time=today.getHours()+":"
-             let date=year+''+time
+             let month=today.getMonth()+'/'
+             let day=today.getDate()
+             let date=`${year}${month}${day}`
+             
 
              let item={
               investment:value.investment,
               username:user.username,
               pair:value.pair,
               date:date,
+              status:'pending'
             }
+            console.log(date)
 
              /*setCoin(()=>{
                return {
@@ -422,7 +460,7 @@ function UserProfile({data}) {
                  date:date,
                }
              })*/
-             setWithdrawn({
+             setInvested({
                pending:true,
                done:false,
              })
@@ -430,35 +468,43 @@ function UserProfile({data}) {
              .then((res)=>{
                console.log(res.data)
                  if(res.data=='SUCCESS'){
-                  setWithdrawn({
-                    pending:false,
-                    done:true,
-                  })
+                 setInvested({
+                   pending:false,
+                   done:true,
+                 })
                   
                   setMessage({
                     show:true,
                     type:'invest',
                     item:item
                   })
-                  console.log(message)
                  }
              })
+             .catch((err)=>{
+               console.log(err)
+               setInvested({
+                 pending:false,
+                 done:false,
+               })
+             })
 }} >
-  {({handleSubmit,handleChange,values})=>(
-   <div style={{padding:20,height:600}}>
+  {({handleBlur,handleSubmit,handleChange,values})=>(
+   <div style={{height:500,padding:10}}>
      <h3 style={{color:'white',textAlign:'center'}}>
        Make Investment
      </h3>
-      <form>
-        <div className='pair-container'>
-        <select onChange={handleChange('pair')} className='pair-drop' name='pair' id='pair' defaultValue='BTC'>
-              <option value='BTC'>BTC</option>
+     <div></div>
+      <Form>
+        <div style={{}} className='pair-container'>
+        <Field as='select' setFieldValue='BTC' onBlur={handleBlur} onChange={handleChange('pair')} placeholder='coin' className='pair-drop' name='pair' id='pair' value={values.pair} >
+              <option hidden>Coin</option>
+              <option selected value='BTC'>BTC</option>
               <option value='ETH'>ETH</option>
-            </select>
+            </Field>
                
         </div>
         <Row>
-          <Col md={8} className='invest-group'>
+          <Col xs={12} md={12} className='invest-group'>
             <div className=''>
       <input 
       className='input invest'
@@ -466,6 +512,7 @@ function UserProfile({data}) {
       type='number'
       onChange={handleChange('investment')}
       value={values.investment}
+      required
       >
 
       </input>
@@ -501,17 +548,13 @@ function UserProfile({data}) {
           </div>
          
         </Row>
-    </form>
+    </Form>
    </div>
         )}
       </Formik> 
-           </CardBody>
-         </Card>
-         )}>
-           <Button>
-             invest
-           </Button>
-         </Popover>
+           
+         </div>
+        </Modal>
       </div>
     )
   }
@@ -565,9 +608,9 @@ function UserProfile({data}) {
 
   return (
     <>
-      <div className="content">
+      <div style={{backgroundColor:' #050124'}} className="content">
         <Row>
-            <Col>
+            <Col md={8}>
               <Row>
                 <Col md={12}>
                 <Card className="card-chart">
@@ -575,7 +618,7 @@ function UserProfile({data}) {
                 <Row>
                   <Col className="text-left" sm="6">
                     <h5 className="card-category">Total Shipments</h5>
-                    <CardTitle tag="h2">Performance</CardTitle>
+                    <CardTitle tag="h2">Activity</CardTitle>
                   </Col>
                   <Col sm="6">
                     <ButtonGroup
@@ -651,9 +694,9 @@ function UserProfile({data}) {
                 <Col md={12}>
                 <Card className="card-chart">
               <CardHeader>
-                <h5 className="card-category">Total Shipments</h5>
+                <h5 className="card-category">Asset gain</h5>
                 <CardTitle tag="h3">
-                  <i className="tim-icons icon-bell-55 text-info" /> 763,215
+                  <i className="tim-icons icon-bell-55 text-info" /> {info.balance-500 || ''}
                 </CardTitle>
               </CardHeader>
               <CardBody>
@@ -672,7 +715,7 @@ function UserProfile({data}) {
                 <h5 className="card-category">Daily Sales</h5>
                 <CardTitle tag="h3">
                   <i className="tim-icons icon-delivery-fast text-primary" />{" "}
-                  3,500€
+                  $3,500
                 </CardTitle>
               </CardHeader>
               <CardBody>
@@ -695,7 +738,7 @@ function UserProfile({data}) {
 
 
 
-          <Col md="4" className='profile-card'>
+          <Col md={4} className='profile-card'>
             <Card className="card-user profile-card ">
               <CardBody>
                 <CardText />
@@ -716,44 +759,48 @@ function UserProfile({data}) {
                 </div>
                 <Container>
                   <Row>
-                    <Col xs={4} md={3}>
+                    <Col xs={3} md={3}>
                         <AccountBalanceWalletIcon className='wallet-icon' style={{width:80,height:80,color:'white'}} />
                     </Col>
-                    <Col xs={8} md={9}>
+                    <Col xs={9} md={9}>
                 
                           <Container className='balance'>
-                            <Row style={{}} >
+                           <div style={{marginTop:-35}}>
+                           <Row style={{}} >
                              <h3 style={{marginLeft:10}}>
                               Total Balance
                              </h3>
                             </Row>
                             <Row className='balance-figure'>
-                              <div>
-                              <AttachMoneyIcon style={{width:50,height:30,marginTop:-5}} className='' />
+                              <div style={{color:'#9a7801'}}>
+                              <AttachMoneyIcon style={{width:50,height:30,marginTop:-5,marginLeft:-7,marginRight:-17,color:" #9a7801"}} className='' />
                                 {info.balance || 0}.00
                               </div>
                             </Row>
+                           </div>
                           </Container>
                       
                     </Col>
                   </Row>
                   <Row>
-                    <Col xs={4} md={3}>
+                    <Col xs={3} md={3}>
                         <BarChartIcon className='wallet-icon' style={{width:100,height:100,color:'white'}} />
                     </Col>
-                    <Col xs={8} md={9}>
+                    <Col xs={9} md={9}>
                     <Container className='balance'>
-                            <Row style={{}} >
+                           <div style={{marginTop:-35}}>
+                           <Row style={{}} >
                              <h3 style={{marginLeft:10}}>
                                Total investment
                              </h3>
                             </Row>
                             <Row className='balance-figure'>
-                              <div>
-                              <AttachMoneyIcon style={{width:50,height:30,marginTop:-5}} className='' />
+                              <div style={{color:' #9a7801'}}>
+                              <AttachMoneyIcon style={{width:50,height:30,marginTop:-5,marginLeft:-7,marginRight:-17,color:' #9a7801'}} className='' />
                                 {user.investment || 0}.00
                               </div>
                             </Row>
+                           </div>
                           </Container>
                       
                     </Col>
@@ -768,13 +815,14 @@ function UserProfile({data}) {
                        </Col>
                        
                        <Col className='transaction-buttons' xs={6} md={6}>
-                          {showWithdraw ? withdraw() : toggleWithdraw()}
+                          {withdraw()}
                        </Col>
                      </Row>
                     </Container>
-
-                  <div>
-                    <Table columns={columns} data={info.investment} />
+                        
+                  <div style={{marginTop:50}}>
+                  <h3 style={{marginBottom:-40,textAlign:'center'}}>Pending Investments</h3>
+                    <Table className='invest-table' tableLayout='auto' useFixedHeader={false} scroll={{y:true,x:true}} columns={columns} data={info.investment} />
                     
                   </div>
                 

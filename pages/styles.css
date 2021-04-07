@@ -1,9 +1,7 @@
 .first {
     
 }
-.paralax {
-    height: 400px;
-}
+
 .second-row {
     /*margin-top: 100px;*/
 }
@@ -59,20 +57,26 @@
     /*background:rgb(255,255,255,0.2);*/
     
     border-radius: 5px;
-    background-color: black;
-    padding: 10px;
+    
+    
     border-left: 10px solid #9a7801;
     display: flex;
     align-items: center;
-    padding: 20px;
+    
     flex-direction: column;
     margin: 0 auto;
 
 }
 .second-card {
-    margin-left: 30px;
+    margin-left: 45px;
     margin-top: 30px;
     margin-bottom: 30px;
+    display: flex;
+    align-items: center;
+    
+    flex-direction: column;
+    
+    
 }
 .plans {
     border-radius: 7px;
@@ -108,7 +112,7 @@
 }
 .converter-body {
     height: 500px;;
-    background-color: #9a7801;
+    background-color:#9a7801;
     margin-top: 50px;
     border-radius: 5px;
 }
@@ -188,14 +192,15 @@
 }
 .active-talk {
     text-align: center;
-    font-size: 20px;
+    font-size: 25px;
+    margin-top: 50px;
     
 }
 .active-values {
- margin-top: 20px;
+ margin-top: -15px;
  
- font-size: 40px;
- 
+ font-size: 50px;
+ margin-bottom: 40px;
  font-family: monospace;
  color:#eff59a;
  text-align: center;
@@ -205,30 +210,29 @@
 }
 .active-worth {
     text-align: center;
-    font-size: 33px;    
+    font-size: 50px;    
     font-family: monospace;
     
     color:#eff59a;
     margin-top: -20px;
+    margin-bottom: 40px;
 }
 .active-worth-talk {
     text-align: center;
-    font-size: 20px;
-    
+    font-size: 25px;
+    margin-top: 70px;
 }
 .password-error {
     margin-bottom: 20px;
 }
 .logo {
-    height: 90px;
+    height: 100px;
     width: 200px;
-    margin-top: -200px;
-   margin-left: -10px;
+    margin-top: -160px;
+    margin-left: -10px;
 }
 .slider {
     height: 290px;
-    
-
 }
 .plans-col {
     margin-top: 30px;
@@ -237,8 +241,7 @@
 }
 .plans-co {
     margin-left: 20px;
-    margin-top:-20px;
-    
+    margin-top:-20px;  
 }
 .product-logo {
     height:200px;
@@ -255,12 +258,11 @@
     margin:10px;
 }
 .active-icon {
- display: flex;
- text-align: center;
- color: white;
- flex-direction: column;
- align-items: center;
- margin-left: 60px;
+    position: absolute;
+    left: 50%;
+    top: 50%;
+    transform: translate(-50%, -50%);
+    margin-top: 120px;
  
  margin-top:-10px;
  margin-bottom: -10px;
@@ -348,19 +350,21 @@
     margin-left: -20px;
 }
 .balance {
-    background:linear-gradient(#9a7801 50%,#9a7801 40%,#050124);
-    height: 90px;
+    background-color: #050124;
+    height: 100px;
     border-radius: 5px;
+    border:5px solid #9a7801;
+    margin-top: 30px;
     
-   
-
+    
 }
 .profile-card {
     width:800px;
-    height: 700px;
+    height: 1500px;
 }
 .wallet-icon {
     margin-bottom: -150px;
+    margin-left: -20px;
 
 }
 .balance-figure {
@@ -368,16 +372,187 @@
     margin-top:-35px;
     margin-left: -50px;
     color: white;
-    font-size: 25px;
-
-    
+    font-size: 25px; 
 }
 .balance-value {
     margin-left: 30px;
     font-size: 30px;
     color: white;
 }
+.login-butto {
+    margin-right: -100px;
+}
+.invest {
+    margin-top:20px;
+    
+    border: #9a7801 solid 5px;
+    background-color: #050124;
+    color: white;
+    
+    
+}
+.crypto-icon {
+    position: absolute;
+    left: 50%;
+    top: 50%;
+    transform: translate(-50%, -50%);
+    margin-top: 20px;
+}
+.invest-group {
+    
+    display: grid;
+    place-items: center;
+    margin-top:-30px;
 
+}
+.invest-button {
+  display: grid;
+  place-items: center;
+  margin-bottom: -150px;
+}
+
+.inv-btn {
+    background-Color:"#9a7801";
+    
+}
+
+.address-card {
+    
+    border-radius: 10px;
+    margin-top: 50px;
+    
+
+}
+.pair-placeholder {
+    
+}
+.pair-drop {
+   
+    height: 40px;
+    background-color: #9a7801;
+    color: white;
+}
+.withdraw-pair {
+    display: grid;
+    place-items: center;
+    margin-top:25px;
+}
+.withdraw-button {
+    display: grid;
+    place-items: center;
+    
+    margin-top: 30px;
+}
+.pair-container {
+    display: grid;
+    place-items: center;
+    margin-top: 100px;
+    
+}
+.parallax-top {
+    
+    background-size: contain;
+}
+.asset-icon {
+    position: absolute;
+    left: 50%;
+    top: 50%;
+    transform: translate(-50%, -50%);
+    
+}
+.jay {
+    background-image: url('../assets/img/faces/jay.jpg');
+    background-color: rgba(0,0,0,0.5);
+    
+    background-repeat: no-repeat;
+    background-size: cover ;
+    position:relative;
+    z-index:1;
+    font-size:25px;
+    color:white;
+    height: 200px;
+}
+.camp {
+    background-image: url('../assets/img/faces/camp.jpg');
+    background-color: rgba(0,0,0,0.5);
+    
+    background-repeat: no-repeat;
+    background-size: cover ;
+    position:relative;
+    z-index:1;
+    font-size:25px;
+    color:white;
+    height: 200px;
+}
+.jules {
+    background-image: url('../assets/img/faces/jules.jpg');
+    background-color: rgba(0,0,0,0.5);
+    
+    background-repeat: no-repeat;
+    background-size: cover ;
+    position:relative;
+    z-index:1;
+    font-size:25px;
+    color:white;
+    height: 200px;
+}
+.withdraw-spinner {
+    position: absolute;
+    left: 50%;
+    top: 50%;
+    transform: translate(-50%, -50%);
+    margin-top: 3px;
+}
+.withdraw-group {
+    display: grid;
+    place-items: center;
+    
+}
+.transaction-buttons {
+   display: flex;
+   flex-direction: column;
+   align-items: center;
+    margin-top: 3px;
+}
+.pop {
+    
+    height: 600px;
+    border-radius: 10px;
+    background-color: #050124;
+   
+ 
+    
+}
+.pop-content{
+    background-color: #050124;
+    width: 300px;
+    margin-top: 20px;
+    border-radius: 10px;
+
+
+    
+}
+.invest-table {
+    width: 400px;
+    font-size: 15px;
+    margin-top: 60px;
+}
+.landing-parallax {
+    
+}
+.head-title {
+    font-size: 30px;
+    margin-bottom: -20px;
+    
+}
+.parallax-button {
+    margin-bottom: -30px;
+    display: grid;
+    place-items: center;
+}
+.para-btn {
+    
+}
 
 
 
@@ -517,7 +692,7 @@
         background-color: #050124 ;;
     }
     .content {
-        background-color: rgba(255, 255, 255, 0.1);
+        /*background-color: rgba(255, 255, 255, 0.1);*/
     }
     .plans-card {
         display: flex;
@@ -599,7 +774,7 @@
     .active-users {
         background-size: cover;
         background-repeat: no-repeat;
-        height: 400px;
+        height: 600px;
         width: 1000px;
         display: flex;
         flex-direction: column;
@@ -611,17 +786,17 @@
         margin-top: 100px;
     }
     .active-talk {
-        margin-top: -20px;
-        font-size: 30px;
+        margin-top: 30px;
+        font-size: 50px;
         margin-bottom: -50px;
         text-align: center;
         
     }
     .active-values {
-      margin-top: -5px;
+      margin-top: -20px;
       
       font-family: monospace;
-      font-size: 70px;
+      font-size: 100px;
       text-align: center;
       font-family: monospace;
     }
@@ -630,7 +805,7 @@
     }
     .active-worth {
         margin-bottom: -20px;
-        font-size: 70px;
+        font-size: 100px;
         margin-top: 30px;
         
         font-family: monospace;
@@ -639,18 +814,18 @@
         
     }
     .active-worth-talk {
-        font-size: 30px;
+        font-size: 50px;
         text-align: center;
        
 
     }
     .logo {
-        height: 150px;
-        width: 400px;
-        margin-top: -80px;
+        height: 200px;
+        width: 450px;
+        margin-top: -300px;
         margin-left:-100px;
         font-size: 70px;
-        margin-bottom: 50px;
+        
        
     }
     
@@ -667,8 +842,13 @@
     }
     
     .active-icon {
-        margin-left: 130px;
-        margin-bottom: 20px;
+        margin-left: 0px;
+        margin-bottom: 150px;
+        position: absolute;
+        left: 50%;
+        top: 50%;
+        
+        transform: translate(-50%, -50%);
     }
     .writing {
         background-image: url('../assets/img/writing.jpg');
@@ -757,8 +937,52 @@
     .login {
         height: 600px;
     }
+    .login-butto {
+        margin-right: -100px;
+    }
+    .crypto-icon {
+        margin-left: 100%;
+        
+    }
+    .invest-button {
+        margin-left: 0px;
     
-    
+    }
+    .invest-group {
+        display: grid;
+        place-items: center;
+    }
+    .withdraw-group {
+
+    }
+    .head-title {
+        font-size: 60px;
+        margin-bottom: -70px;
+        display: flex;
+        flex-direction: column;
+    }
+    .parallax-top {
+        height: 200px;
+    }
+    .asset-icon {
+        margin-top: 40px;
+        position: absolute;
+        left: 50%;
+        top: 50%;
+        transform: translate(-50%, -50%);
+        
+    }
+    .parallax-button {
+        display: grid;
+        place-items: center;
+        margin-right: -700px;
+        margin-top: -100px;
+    }
+    .para-btn {
+        width: 200px;
+        height: 100px;
+        font-size: 40px;
+    }
     
 
 }

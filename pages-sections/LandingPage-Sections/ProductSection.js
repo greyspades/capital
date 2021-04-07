@@ -53,6 +53,13 @@ export default function ProductSection() {
         </GridItem>
       </GridContainer>
       <div>
+      <h5 className='talk' style={{}}>
+              We precisely provide value in those areas that matter. We assist portfolio companies in developing and 
+                executing strategic growth, building the board and executive management team, exploring capitalization
+                 structures, pursuing growth mergers and acquisitions, and enhancing market presence.
+              </h5>
+      </div>
+      <div>
         <GridContainer className='product-grid'>
         <GridItem xs={12} sm={12} md={3}>
               <Popover trigger='click' content={()=>(<div className='modal-content'>We offer loans for buissnesses, students, and the like to enable fast productivity, our interest rates are reasonable and without worry</div>)}>

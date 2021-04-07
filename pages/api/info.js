@@ -4,11 +4,18 @@ import users from '../../middleware/models';
 //const users =require('../../middleware/models')
 
 const info = async (req, res) => {
-        
-        users.findOne({username:req.body.user.username})
+        //const data=JSON.stringify(req.body.item)
+        const data=req.body.item
+        console.log(data.username)
+        console.log('gotten')
+        users.findOne({username:data.username})
         .then((item)=>{
-          console.log(item)
+         
           res.send(item)
+        })
+        .catch((err)=>{
+          console.log(err)
+          res.send(err)
         })
 }
 export default connectDB(info);

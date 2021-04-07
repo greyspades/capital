@@ -51,35 +51,27 @@ export default function Footer(props) {
             </ListItem>
             <ListItem className={classes.inlineBlock}>
               <a
-                href="http://blog.creative-tim.com/?ref=njsmk-footer"
+                href="/landing"
                 className={classes.block}
                 target="_blank"
               >
                 Contact
               </a>
             </ListItem>
-            <ListItem className={classes.inlineBlock}>
-              <a
-                href="https://www.creative-tim.com/license?ref=njsmk-footer"
-                className={classes.block}
-                target="_blank"
-              >
-                Licenses
-              </a>
-            </ListItem>
+            
           </List>
         </div>
         <div className={classes.right}>
-          &copy; {1900 + new Date().getYear()}
-          <Favorite className={classes.icon} /> by{" "}
+          &copy; {2013}
+
           <a
-            href="https://www.creative-tim.com?ref=njsmk-footer"
+            href="/landing"
             className={aClasses}
             target="_blank"
           >
-            Winster Invest
+            Capital Investment
           </a>{" "}
-          for a better you.
+            It all starts with You.
           
         </div>
       </div>

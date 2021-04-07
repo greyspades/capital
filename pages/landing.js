@@ -1,4 +1,4 @@
-import React from "react";
+import React,{useState,useEffect} from "react";
 // nodejs library that concatenates classes
 import classNames from "classnames";
 // @material-ui/core components
@@ -21,6 +21,7 @@ import styles from "assets/jss/nextjs-material-kit/pages/landingPage.js";
 import Converter from '../pages-sections/LandingPage-Sections/converter'
 import rc from '../assets/img/RC.png'
 import Slider from "../pages-sections/LandingPage-Sections/slider"
+import Testimonials from '../pages-sections/LandingPage-Sections/testimonials'
 
 
 import {
@@ -49,6 +50,23 @@ const useStyles = makeStyles(styles);
 export default function LandingPage(props,{data}) {
   const classes = useStyles();
   const { ...rest } = props;
+  //const [windowWidth,setWindowWidth]=useState(window.innerWidth)
+  const [parallax,setParallax]=useState(false)
+
+  useEffect(()=>{
+    /*const handleResize=()=>{
+      setWindowSize(window.innerWidth)
+    }
+    console.log(windowSize)
+    window.addEventListener('resize',handleResize)
+    return ()=>window.removeEventListener('resize',handleResize)*/
+    let width=window.innerWidth
+    if(width<400){
+      setParallax(true)
+    }
+    console.log(window.innerWidth)
+    
+  },[])
 
   //const user=cookieCutter.get('person')
   return (
@@ -65,20 +83,22 @@ export default function LandingPage(props,{data}) {
         }}
         {...rest}
       />
-      <Parallax filter responsive image={require("assets/img/header.jpg")}  >
+      <Parallax className='parallax-top landing-parallax' small={parallax}  filter  image={require("assets/img/header.jpg")}  >
         <div className={classes.container} style={{}}>
           <GridContainer>
             <GridItem xs={12} sm={12} md={6}>
               <img src={rc} className='logo' />
-              <h1 className={classes.title}>Your Story Starts With Us.</h1>
-              <h5 className='talk' style={{}}>
-              We precisely provide value in those areas that matter. We assist portfolio companies in developing and 
-                executing strategic growth, building the board and executive management team, exploring capitalization
-                 structures, pursuing growth mergers and acquisitions, and enhancing market presence.
-              </h5>
+              <h1 className={classes,'head-title'}>Your Story Starts With Us.</h1>
+
               <br />
+              <div className='parallax-button'>
+            <a href='/Register'>
+            <Button className='para-btn' style={{backgroundColor:'#050124',border:'#9a7801 solid 5px',borderRadius:7,fontSize:25}}>Join now</Button>
+            </a>
+            </div>
             
             </GridItem>
+          
           </GridContainer>
         </div>
       </Parallax>
@@ -92,6 +112,8 @@ export default function LandingPage(props,{data}) {
           <Converter />
           <Plans />
           <TeamSection />
+
+          <Testimonials />
           <WorkSection />
 
         </div>

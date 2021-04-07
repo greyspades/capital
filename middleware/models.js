@@ -1,5 +1,5 @@
 import mongoose from 'mongoose';
-import 'mongoose-type-email'
+//import 'mongoose-type-email'
 var Schema = mongoose.Schema;
 
 var user = new Schema({
@@ -12,7 +12,7 @@ var user = new Schema({
     required:false
   },
   email: {
-    type: mongoose.SchemaTypes.Email,
+    type:String,
     required: false
   },
   password: {
@@ -31,6 +31,18 @@ var user = new Schema({
     type:Number,
     required:false,
   },
+  investment:{
+    type:Array,
+    required:false
+  },
+  pending:{
+    type:Array,
+    required:false
+  },
+  withdrawal:{
+    type:Array,
+    required:false,
+  }
 
 });
 

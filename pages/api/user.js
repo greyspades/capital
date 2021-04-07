@@ -14,20 +14,22 @@ const Register = async (req, res) => {
       lastname:req.body.user.lastname,
       phone:req.body.user.phone,
       balance:req.body.user.balance,
+      username:req.body.user.username
   
     })
     //console.log(req.body.user)
-   users.exists({email:req.body.user.email})
+   users.exists({email:req.body.user.email, username:req.body.user.username })
    .then((exists)=>{
      if(exists){
-       res.send('THAT EMAIL ADDRESS IS TAKEN')
+       res.send('THAT EMAILL ADDRESS IS TAKEN')
        
      }
      else {
       newUser.save()
-      .then(()=>{
+      .then((item)=>{
         console.log('user saved')
         res.send('SAVED')
+        //console.log(item)
       })
       .catch((error)=>{
         console.log(error);

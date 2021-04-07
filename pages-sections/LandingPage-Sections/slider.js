@@ -28,9 +28,7 @@ const images = [
      
     ];
 
-    const OpacityCarousel=dynamic(()=>import('react-opacity-carousel'),
-  {ssr:false}
-)
+ 
 
 
 
@@ -45,9 +43,10 @@ const Slider=()=>{
       const settings = {
        arrows:false,
         infinite: true,
-        speed: 500,
+        
         slidesToShow: 1,
         slidesToScroll: 1,
+        speed:400,
         
         
       };
@@ -75,45 +74,43 @@ const Slider=()=>{
               <Row>
                 <Col md={8}>
                 <Slide autoplay={true} className='slider' {...settings}>
-          <div className='writing' style={{height:50,width:200,backgroundColor:'blue',backgroundImage:`url(${writing})`}}>
-              <div className='overlay'>
-              ludex gundyr
+          <div className='writing' style={{position:'relative',height:50,width:200,backgroundColor:'blue',backgroundImage:`url(${writing})`}}>
+              <div style={{fontSize:20,bottom:0,left:0,}} className='overlay'>
+              <p style={{marginTop:130,position:'absolute',}}>
+              Collect personal loans with marginal interest rates at an investment of 45%
+              </p>
               </div>
           </div>
           <div className='save' style={{height:50,width:200,backgroundColor:'blue',backgroundImage:`url(${loan})`}}>
           <div className='overlay'>
-              ludex gundyr
+              
               </div>
           </div>
           <div className='stack' style={{height:50,width:200,backgroundColor:'blue',backgroundImage:`url(${writing})`}}>
                           <div className='overlay'>
-              ludex gundyr
+              
               </div>
           </div>
           <div className='holding' style={{height:50,width:200,backgroundColor:'blue',backgroundImage:`url(${stack})`}}>
                           <div className='overlay'>
-              ludex gundyr
+              
               </div>
           </div>
           <div className='loan' style={{height:50,width:200,backgroundColor:'blue',backgroundImage:`url(${save})`}}>
                           <div className='overlay'>
-              ludex gundyr
+              
               </div>
           </div>
           <div className='slide'>
                           <div className='overlay'>
-              ludex gundyr
+              
               </div>
           </div>
         </Slide>
                 </Col>
 
                 <Col md={4}>
-                  <Card>
-                    <CardBody className='gold-card'>
-                      ludex gundyr
-                    </CardBody>
-                  </Card>
+                  
                 </Col>
               </Row>
 

@@ -64,7 +64,7 @@ export default function LoginPage(props) {
       <Header
         absolute
         color="transparent"
-        brand="Winster invest"
+        brand="Capital Investment"
         rightLinks={<HeaderLinks />}
         {...rest}
       />
@@ -83,36 +83,7 @@ export default function LoginPage(props) {
                
                   <CardHeader  style={{backgroundColor:"#050124"}} className={classes.cardHeader}>
                     <h4 style={{color:'white'}}>Login</h4>
-                    <div className={classes.socialLine}>
-                      <Button
-                        justIcon
-                        href="#pablo"
-                        target="_blank"
-                        color="primary"
-                        onClick={e => e.preventDefault()}
-                      >
-                       
-                        <i className={"fab fa-twitter"} />
-                      </Button>
-                      <Button
-                        justIcon
-                        href="#pablo"
-                        target="_blank"
-                        color="primary"
-                        onClick={e => e.preventDefault()}
-                      >
-                        <i className={"fab fa-facebook"} />
-                      </Button>
-                      <Button
-                        justIcon
-                        href="#pablo"
-                        target="_blank"
-                        color="primary"
-                        onClick={e => e.preventDefault()}
-                      >
-                        <i className={"fab fa-google-plus-g"} />
-                      </Button>
-                    </div>
+                    
                   </CardHeader>
                   <p className={classes.divider}>Or Be Classical</p>
                   <CardBody style={{}}>
@@ -187,8 +158,17 @@ export default function LoginPage(props) {
                            </Col>
                         </Row>
                       </Container>
-                      <CardFooter className={classes.cardFooter}>
-                    <Button size="lg" onClick={handleSubmit} style={{width:50,height:30,backgroundColor:'#050124'}}>
+                     <div style={{textAlign:'center',marginBottom:30}}>
+                     <p style={{color:'blue',}}>
+                        Not yet a member? 
+                      </p>
+                      <div style={{marginTop:20}}>
+                      <a href='/Register'>Sign up now</a>
+                      </div>
+                     </div>
+                      <CardFooter  className={classes.cardFooter}>
+                    <Button size="lg" onClick={handleSubmit}
+                     style={{width:50,height:30,backgroundColor:'#050124',}}>
                       Login
                     </Button>
                   </CardFooter>

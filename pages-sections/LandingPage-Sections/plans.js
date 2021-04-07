@@ -21,6 +21,8 @@ import {
     UncontrolledTooltip,
     Row,
     Col,
+    Card,
+    CardBody,
     NavbarBrand,
     Navbar,
     NavItem,
@@ -31,11 +33,12 @@ import {
 const Plans=()=>{
     return (
         <div>
-            <Container fluid style={{backgroundColor:'white',backgroundSize:'contain',backgroundRepeat:'no-repeat',}} className='plans'>
+            <Container fluid style={{}} className='plans'>
                 <Row className='tales' style={{}}>
-                    <Col xs={12} md={3} style={{}} className='plans-c'>
-                       <a href='' style={{textDecoration:'none'}}>
-                        <motion.div whileHover={{scale:1.2,borderColor:'goldenrod'}} className='plans-card' style={{}}>
+                    <Col xs={12} md={3} style={{}} className='plans-cs'>
+                      <div className='plans-card'>
+                      <Card  className='plans-card'>
+                       <CardBody whileHover={{scale:1.2,borderColor:'goldenrod'}}  style={{}}>
                             <Filter1Icon style={{height:70,width:70,color:'white'}} className='plans-icon' />
                             <h4 style={{color:"white"}}>
                                 STARTER
@@ -44,13 +47,15 @@ const Plans=()=>{
                             <p style={{color:"white"}}>Minimum:$100</p>
                             <p style={{color:"white"}}>Maximum:$999</p>
                             </div>
-                        </motion.div>
-                       </a>
+                        </CardBody>
+                       </Card>
+                      </div>
                     </Col>
                     <a>
                     <Col xs={12} md={3} style={{}} className='plans-c'>
-                       <a href=''>
-                       <motion.div whileHover={{scale:1.2,borderColor:'goldenrod'}} className='plans-card second-card'>
+                       <div  className='plans-card second-card'>
+                           <Card className='plans-card' >
+                           <CardBody whileHover={{scale:1.2,borderColor:'goldenrod'}} className=''>
                            <Filter2Icon style={{height:70,width:70,color:'#c6c5c8'}} className='plans-icon'  />
                        <h4 style={{color:"silver",}}>
                                 SILVER
@@ -60,14 +65,16 @@ const Plans=()=>{
                            <p style={{color:'white'}}>Minimum:$1000</p>
                            <p style={{color:'white'}}>Maximum:$9999.00</p>
                            </div>
-                        </motion.div>
-                       </a>
+                        </CardBody>
+                           </Card>
+                       </div>
                     </Col>
                     
                     </a>
                     <Col xs={12} md={3} className='plans-c'>
-                       <a href=''>
-                       <motion.div whileHover={{scale:1.2,borderColor:'goldenrod'}} className='plans-card third-card'>
+                       <div  className='plans-card'>
+                           <Card  className='plans-card'>
+                           <CardBody whileHover={{scale:1.2,borderColor:'goldenrod'}} className='third-card'>
                            <Filter3Icon style={{height:70,width:70,color:'goldenrod'}} className='plans-icon'  />
                        <h4 style={{color:"gold",}}>
                             Gold    
@@ -77,8 +84,9 @@ const Plans=()=>{
                            
                             <p style={{color:'white'}}>Maximum:$29999.00</p>
                            </div>
-                        </motion.div>
-                       </a>
+                        </CardBody>
+                           </Card>
+                       </div>
                     </Col>
                 </Row>
                 <Row>

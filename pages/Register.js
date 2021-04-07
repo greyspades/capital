@@ -99,7 +99,7 @@ export default function Registration(props) {
       <Header
         absolute
         color="transparent"
-        brand="Winster invest"
+        brand="Capital Investment"
         rightLinks={<HeaderLinks />}
         {...rest}
       />
@@ -150,7 +150,7 @@ export default function Registration(props) {
                       //console.log(userdetail)
                       
                     })
-                    //console.log(user)
+                    console.log(user)
                     
                    
                   }
@@ -167,42 +167,18 @@ export default function Registration(props) {
                     <form className={classes.form,'login'}>
                     <CardHeader  style={{backgroundColor:"#050124"}} className={classes.cardHeader}>
                       <h4 style={{color:'white'}}>Sign Up</h4>
-                      <div className={classes.socialLine}>
-                        <Button
-                          justIcon
-                          href="#pablo"
-                          target="_blank"
-                          color="primary"
-                          onClick={e => e.preventDefault()}
-                        >
-                         
-                          <i className={"fab fa-twitter"} />
-                        </Button>
-                        <Button
-                          justIcon
-                          href="#pablo"
-                          target="_blank"
-                          color="primary"
-                          onClick={e => e.preventDefault()}
-                        >
-                          <i className={"fab fa-facebook"} />
-                        </Button>
-                        <Button
-                          justIcon
-                          href="#pablo"
-                          target="_blank"
-                          color="primary"
-                          onClick={e => e.preventDefault()}
-                        >
-                          <i className={"fab fa-google-plus-g"} />
-                        </Button>
-                      </div>
+                      
                     </CardHeader>
                     <p className={classes.divider}>Or Be Classical</p>
                       <div style={{}}>
                       <CardBody style={{}}>
                       
                       <Container>
+                        <Row style={{marginTop:-30,textAlign:'center'}}>
+                          <Col style={{textAlign:'center'}}>
+                          Already member? <a style={{color:'blue',marginLeft:10}} href='/login'> Log in</a>
+                          </Col>
+                        </Row>
                           <Row>
                               <Col md={2} xs={2}>
                   

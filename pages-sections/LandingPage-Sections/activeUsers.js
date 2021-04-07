@@ -13,6 +13,8 @@ import {Waypoint} from 'react-waypoint'
 import {FontAwesomeIcon} from '@fortawesome/react-fontawesome'
 import {faUsers} from '@fortawesome/free-solid-svg-icons'
 import {faPlus} from '@fortawesome/free-solid-svg-icons'
+import AccountBalance from '@material-ui/icons/AccountBalance'
+
 
 const ActiveUsers =()=>{
     const [main,setmain]=useState()
@@ -33,11 +35,11 @@ const ActiveUsers =()=>{
                            
                         <CountUp
   start={1}
-  end={164.449}
+  end={164}
   duration={1.3}
   separator=" "
-  decimals={4}
-  
+  decimals={0}
+  suffix={'K+'}
   
   
   onEnd={() => console.log('Ended! 👏')}
@@ -68,13 +70,13 @@ const ActiveUsers =()=>{
                           
                            <CountUp
   start={1}
-  end={836052}
+  end={836}
   duration={1.75}
   separator=" "
   decimals={0}
   decimal=","
   prefix='$'
-  suffix='M +'
+  suffix='M+'
   
   onEnd={() => console.log('Ended! 👏')}
   onStart={() => console.log('Started! 💨')}
@@ -88,6 +90,9 @@ const ActiveUsers =()=>{
       <Col md={12} xs={12} style={{fontWeight:'bold'}} className='active-worth'>
                                 <span style={{textAlign:'center'}} ref={countUpRef} />
                             </Col>
+                            <Col md={12} xs={12}>
+          <AccountBalance style={{height:60,width:60}} className='asset-icon fa-align-center' />
+          </Col>
                            
                             <Col md={12} xs={12} style={{fontWeight:'bold',}} className='active-worth-talk'>
                                 Worth of assets earned

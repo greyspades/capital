@@ -39,6 +39,8 @@ import "assets/css/black-dashboard-react.min.css"
 import "assets/css/black-dashboard-react.css"
 //import "assets/demo/demo.css";
 //import "assets/css/nucleo-icons.css";
+import 'react-dropdown/style.css'
+import 'react-responsive-modal/styles.css';
 
 
 Router.events.on("routeChangeStart", url => {
