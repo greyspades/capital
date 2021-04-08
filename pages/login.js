@@ -96,11 +96,13 @@ export default function LoginPage(props) {
                       
                       Axios.post('/api/login',{user})
                       .then((res)=>{
-                        console.log(res.data)
+                        if(res.data.status=='LOG IN'){
+                          console.log(res.data)
                         cookieCutter.set('logged-in', 'true')
                         cookieCutter.set('key',JSON.stringify(res.data.info))
                         setMain(res.data.info)
-                        
+                        window.location.replace("/UserProfile");
+                        }
                       })
                     }}  >
                       {({handleChange,handleSubmit,values})=>(

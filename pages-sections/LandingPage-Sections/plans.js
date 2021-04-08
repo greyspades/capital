@@ -35,35 +35,35 @@ const Plans=()=>{
         <div>
             <Container fluid style={{}} className='plans'>
                 <Row className='tales' style={{}}>
-                    <Col xs={12} md={3} style={{}} className='plans-cs'>
+                    <Col xs={12} md={3} style={{}} className='plans-co'>
                       <div className='plans-card'>
-                      <Card  className='plans-card'>
-                       <CardBody whileHover={{scale:1.2,borderColor:'goldenrod'}}  style={{}}>
+                      <Card  className='plans-col'>
+                       <CardBody   style={{}}>
                             <Filter1Icon style={{height:70,width:70,color:'white'}} className='plans-icon' />
                             <h4 style={{color:"white"}}>
                                 STARTER
                             </h4>
                             <div className='plans-text'>
-                            <p style={{color:"white"}}>Minimum:$100</p>
-                            <p style={{color:"white"}}>Maximum:$999</p>
+                            <p style={{color:"white"}}>Minimum:$100.0</p>
+                            <p style={{color:"white"}}>Maximum:$999.0</p>
                             </div>
                         </CardBody>
                        </Card>
                       </div>
                     </Col>
                     <a>
-                    <Col xs={12} md={3} style={{}} className='plans-c'>
-                       <div  className='plans-card second-card'>
-                           <Card className='plans-card' >
-                           <CardBody whileHover={{scale:1.2,borderColor:'goldenrod'}} className=''>
+                    <Col xs={12} md={3}  className='pla'>
+                       <div  className='plans-card second-card' >
+                           <Card  className='plans-col' >
+                           <CardBody  className=''>
                            <Filter2Icon style={{height:70,width:70,color:'#c6c5c8'}} className='plans-icon'  />
                        <h4 style={{color:"silver",}}>
                                 SILVER
                             </h4>
                             
                            <div className='plans-text'>
-                           <p style={{color:'white'}}>Minimum:$1000</p>
-                           <p style={{color:'white'}}>Maximum:$9999.00</p>
+                           <p style={{color:'white'}}>Minimum:$1000.0</p>
+                           <p style={{color:'white'}}>Maximum:$9999.0</p>
                            </div>
                         </CardBody>
                            </Card>
@@ -71,18 +71,18 @@ const Plans=()=>{
                     </Col>
                     
                     </a>
-                    <Col xs={12} md={3} className='plans-c'>
+                    <Col xs={12} md={3} className='plans-co'>
                        <div  className='plans-card'>
-                           <Card  className='plans-card'>
+                           <Card  className='plans-col'>
                            <CardBody whileHover={{scale:1.2,borderColor:'goldenrod'}} className='third-card'>
                            <Filter3Icon style={{height:70,width:70,color:'goldenrod'}} className='plans-icon'  />
                        <h4 style={{color:"gold",}}>
                             Gold    
                             </h4>
                            <div className='plans-text'>
-                           <p style={{color:'white'}}>Minimum:$10000.00</p>
+                           <p style={{color:'white'}}>Minimum:$10000.0</p>
                            
-                            <p style={{color:'white'}}>Maximum:$29999.00</p>
+                            <p style={{color:'white'}}>Maximum:$29999.0</p>
                            </div>
                         </CardBody>
                            </Card>

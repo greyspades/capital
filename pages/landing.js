@@ -19,7 +19,7 @@ import Parallax from "components/Parallax/Parallax.js";
 import Plans from '../pages-sections/LandingPage-Sections/plans.js'
 import styles from "assets/jss/nextjs-material-kit/pages/landingPage.js";
 import Converter from '../pages-sections/LandingPage-Sections/converter'
-import rc from '../assets/img/RC.png'
+import rc from '../assets/img/rc.jpg'
 import Slider from "../pages-sections/LandingPage-Sections/slider"
 import Testimonials from '../pages-sections/LandingPage-Sections/testimonials'
 
@@ -109,7 +109,7 @@ export default function LandingPage(props,{data}) {
             
       
           <ActiveUsers />
-          <Converter />
+         
           <Plans />
           <TeamSection />
 

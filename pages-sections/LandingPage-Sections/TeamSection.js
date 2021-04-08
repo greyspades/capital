@@ -45,12 +45,7 @@ export default function TeamSection() {
                 <small className={classes.smallTitle}>Marketing Manager</small>
               </h4>
               <CardBody>
-                <p className={classes.description}>
-                  You can write here details about one of your team members. You
-                  can give more details about what they do. Feel free to add
-                  some <a href="#pablo">links</a> for people to be able to
-                  follow them outside the site.
-                </p>
+               
               </CardBody>
               <CardFooter className={classes.justifyCenter}>
                 <Button
@@ -88,12 +83,7 @@ export default function TeamSection() {
                 <small className={classes.smallTitle}>Buissness Development Representative</small>
               </h4>
               <CardBody>
-                <p className={classes.description}>
-                  You can write here details about one of your team members. You
-                  can give more details about what they do. Feel free to add
-                  some <a href="#pablo">links</a> for people to be able to
-                  follow them outside the site.
-                </p>
+                
               </CardBody>
               <CardFooter className={classes.justifyCenter}>
                 <Button
@@ -121,15 +111,10 @@ export default function TeamSection() {
               <h4 className={classes.cardTitle}>
                 Kendall Jenner
                 <br />
-                <small className={classes.smallTitle}>Model</small>
+                <small className={classes.smallTitle}>Financial Analyst</small>
               </h4>
               <CardBody>
-                <p className={classes.description}>
-                  You can write here details about one of your team members. You
-                  can give more details about what they do. Feel free to add
-                  some <a href="#pablo">links</a> for people to be able to
-                  follow them outside the site.
-                </p>
+                
               </CardBody>
               <CardFooter className={classes.justifyCenter}>
                 <Button

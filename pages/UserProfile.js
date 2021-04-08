@@ -27,7 +27,11 @@ import {CircularProgress} from '@material-ui/core'
 import AttachMoneyIcon from '@material-ui/icons/AttachMoney'
 import BarChartIcon from '@material-ui/icons/BarChart'
 //import Axios from 'axios'
+import Header from "components/Header/Header.js";
+import HeaderLinks from "components/Header/HeaderLinks.js";
+import Footer from "components/Footer/Footer.js";
 import { Modal } from 'react-responsive-modal';
+import PersonOutlineIcon from '@material-ui/icons/PersonOutline';
 import {
   Button,
   Container,
@@ -40,14 +44,7 @@ import {
   CardBody,
   CardTitle,
   
-  DropdownToggle,
-  DropdownMenu,
-  DropdownItem,
-  UncontrolledDropdown,
-  Label,
-  FormGroup,
-  Input,
-  Spinner,
+  
   
   Row,
   Col,
@@ -62,6 +59,7 @@ import cookieCutter from 'cookie-cutter'
 import bitcoinIcon from '../assets/img/bitcoin.svg'
 //import cookies from 'cookies'
 // core components
+import StarBorderIcon from '@material-ui/icons/StarBorder';
 import {
   chartExample1,
   chartExample2,
@@ -72,7 +70,7 @@ import dynamic from 'next/dynamic'
 import {Formik,Field,Form} from 'formik'
 import Axios from "axios";
 import { parseCookies } from "./api/cookies.js";
-import HyperModal from 'react-hyper-modal'
+
 import Table from 'rc-table'
 import { faYenSign } from "@fortawesome/free-solid-svg-icons";
 import 'react-dropdown/style.css'
@@ -87,7 +85,7 @@ const Popover=dynamic(()=>import('@idui/react-popover'),
 
 
 
-function UserProfile({data}) {
+function UserProfile({data},props) {
   //const [main,setMain]=useContext(UserContext)
   const [user,setUser]=useState(()=>JSON.parse(data.key))
   const [info,setInfo]=useState('')
@@ -604,11 +602,20 @@ function UserProfile({data}) {
     )
    }
   }
-
+  const { ...rest } = props;
 
   return (
     <>
-      <div style={{backgroundColor:' #050124'}} className="content">
+      <div style={{backgroundColor:' #050124',marginTop:50}} className="content">
+      <Header
+        absolute
+        color="github"
+        brand="Capital Investment"
+        rightLinks={<HeaderLinks />}
+        {...rest}
+   
+      />
+
         <Row>
             <Col md={8}>
               <Row>
@@ -748,16 +755,21 @@ function UserProfile({data}) {
                   <div className="block block-three" />
                   <div className="block block-four" />
                   <a href="#pablo" onClick={(e) => e.preventDefault()}>
-                    <img
-                      alt="..."
-                      className="avatar"
-                     
-                    />
-                    <h3 className="title">{user.username}</h3>
+                        <PersonOutlineIcon style={{width:100,height:100,color:'#9a7801',marginTop:50,marginBottom:-30}}  />
+                    <h3 className="titl username">{user.username}</h3>
                   </a>
-                  <p className="description">Ceo/Co-Founder</p>
+                  <Row>
+                    <Col style={{}} md={6} xs={12}>
+                   <div className='star'>
+                   <StarBorderIcon style={{width:60,height:60,color:'#9a7801',marginTop:-20}} />
+                   </div>
+                    </Col>
+                    <Col style={{color:'white'}} className='level-talk' md={6} xs={12}>
+                    Level 1 investor
+                    </Col>
+                  </Row>
                 </div>
-                <Container>
+                <Container style={{marginTop:-50}}>
                   <Row>
                     <Col xs={3} md={3}>
                         <AccountBalanceWalletIcon className='wallet-icon' style={{width:80,height:80,color:'white'}} />
@@ -845,6 +857,7 @@ function UserProfile({data}) {
           </Col>
             
         </Row>
+        <Footer />
       </div>
     </>
   );

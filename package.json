@@ -1,7 +1,7 @@
 {
-  "name": "next-material-kit",
+  "name": "Capital-Investment",
   "version": "1.1.0",
-  "description": "NextJS Version of Material Kit React by Creative Tim (https://creative-tim.com)",
+  "description": "Crypto currency Investment platform",
   "main": "index.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
@@ -12,26 +12,23 @@
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/creativetimofficial/nextjs-material-kit.git"
+    "url": "git+https://github.com/pedro-ludex/capital_investment.git"
   },
   "keywords": [
-    "next",
-    "nextjs",
-    "react",
-    "reactjs",
-    "npx",
-    "material",
-    "material-design",
-    "material-kit",
-    "material-kit-react",
-    "next-material-kit"
+    "invest",
+    "investment",
+    "crypto",
+    "crypto currency",
+    "bitcoin",
+    "ethereum",
+    "loans"
   ],
-  "author": "Creative Tim",
+  "author": "pedro",
   "license": "MIT",
   "bugs": {
     "url": "https://github.com/creativetimofficial/nextjs-material-kit/issues"
   },
-  "homepage": "https://demos.creative-tim.com/nextjs-material-kit",
+  "homepage": "/landing",
   "dependencies": {
     "@fortawesome/fontawesome-svg-core": "^1.2.35",
     "@fortawesome/free-solid-svg-icons": "^5.15.3",

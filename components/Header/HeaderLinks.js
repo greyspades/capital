@@ -52,7 +52,7 @@ export default function HeaderLinks(props) {
         
         <ListItem className={classes.listItem}>
         <Button
-          href="https://www.creative-tim.com/product/nextjs-material-kit-pro?ref=njsmk-navbar"
+          href="/landing"
           color="transparent"
           target="_blank"
           className={classes.navLink}
@@ -62,7 +62,7 @@ export default function HeaderLinks(props) {
       </ListItem>
       <ListItem className={classes.listItem}>
         <Button
-          href="https://www.creative-tim.com/product/nextjs-material-kit-pro?ref=njsmk-navbar"
+          href=""
           color="transparent"
           target="_blank"
           className={classes.navLink}
@@ -73,7 +73,7 @@ export default function HeaderLinks(props) {
       </ListItem>
       <ListItem className={classes.listItem}>
         <Button
-          href="https://www.creative-tim.com/product/nextjs-material-kit-pro?ref=njsmk-navbar"
+          href="/login"
           color="transparent"
           target="_blank"
           className={classes.navLink}
@@ -83,7 +83,7 @@ export default function HeaderLinks(props) {
       </ListItem>
       <ListItem className={classes.listItem}>
         <Button
-          href="https://www.creative-tim.com/product/nextjs-material-kit?ref=njsmk-navbar"
+          href="/Register"
           color="transparent"
           target="_blank"
           className={classes.navLink}
@@ -104,7 +104,7 @@ export default function HeaderLinks(props) {
           classes={{ tooltip: classes.tooltip }}
         >
           <Button
-            href="https://twitter.com/CreativeTim?ref=creativetim"
+            href=""
             target="_blank"
             color="transparent"
             className={classes.navLink}
@@ -122,7 +122,7 @@ export default function HeaderLinks(props) {
         >
           <Button
             color="transparent"
-            href="https://www.facebook.com/CreativeTim?ref=creativetim"
+            href=""
             target="_blank"
             className={classes.navLink}
           >
@@ -139,7 +139,7 @@ export default function HeaderLinks(props) {
         >
           <Button
             color="transparent"
-            href="https://www.instagram.com/CreativeTimOfficial?ref=creativetim"
+            href=""
             target="_blank"
             className={classes.navLink}
           >

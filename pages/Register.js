@@ -143,9 +143,12 @@ export default function Registration(props) {
                     //setMain({name:'maximus'})
                     Axios.post('/api/user',{user})
                     .then((res)=>{
+                     if(res.data=='SAVED'){
                       console.log('sent')
                       console.log(res)
                       cookie.set('key',JSON.stringify(user))
+                      window.location.replace("/UserProfile");
+                     }
                       
                       //console.log(userdetail)
                       
