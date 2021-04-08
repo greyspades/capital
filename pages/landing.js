@@ -22,7 +22,7 @@ import Converter from '../pages-sections/LandingPage-Sections/converter'
 import rc from '../assets/img/rc.jpg'
 import Slider from "../pages-sections/LandingPage-Sections/slider"
 import Testimonials from '../pages-sections/LandingPage-Sections/testimonials'
-
+import {CircularProgress} from '@material-ui/core'
 
 import {
   
@@ -52,6 +52,7 @@ export default function LandingPage(props,{data}) {
   const { ...rest } = props;
   //const [windowWidth,setWindowWidth]=useState(window.innerWidth)
   const [parallax,setParallax]=useState(false)
+  const [loading,setLoading]=useState(true)
 
   useEffect(()=>{
     /*const handleResize=()=>{
@@ -65,62 +66,83 @@ export default function LandingPage(props,{data}) {
       setParallax(true)
     }
     console.log(window.innerWidth)
+    setLoading(false)
     
   },[])
 
-  //const user=cookieCutter.get('person')
-  return (
-    <div>
-      <Header
-        color="transparent"
-        routes={dashboardRoutes}
-        
-        rightLinks={<HeaderLinks />}
-        fixed
-        changeColorOnScroll={{
-          height: 400,
-          color: "white"
-        }}
-        {...rest}
-      />
-      <Parallax className='parallax-top landing-parallax' small={parallax}  filter  image={require("assets/img/header.jpg")}  >
-        <div className={classes.container} style={{}}>
-          <GridContainer>
-            <GridItem xs={12} sm={12} md={6}>
-              <img src={rc} className='logo' />
-              <h1 className={classes,'head-title'}>Your Story Starts With Us.</h1>
-
-              <br />
-              <div className='parallax-button'>
-            <a href='/Register'>
-            <Button className='para-btn' style={{backgroundColor:'#050124',border:'#9a7801 solid 5px',borderRadius:7,fontSize:25}}>Join now</Button>
-            </a>
-            </div>
-            
-            </GridItem>
+  const showLanding=()=>{
+    return (
+      <div>
+        <Header
+          color="transparent"
+          routes={dashboardRoutes}
           
-          </GridContainer>
-        </div>
-      </Parallax>
-      <div className={classNames(classes.main, classes.mainRaised)} style={{backgroundColor:'#050124'}}>
-        <div className={classes.container}>
-          <ProductSection />
-          <Slider />
+          rightLinks={<HeaderLinks />}
+          fixed
+          changeColorOnScroll={{
+            height: 400,
+            color: "white"
+          }}
+          {...rest}
+        />
+        <Parallax className='parallax-top landing-parallax' small={parallax}  filter  image={require("assets/img/header.jpg")}  >
+          <div className={classes.container} style={{}}>
+            <GridContainer>
+              <GridItem xs={12} sm={12} md={6}>
+                <img src={rc} className='logo' />
+                <h1 className={classes,'head-title'}>Your Story Starts With Us.</h1>
+  
+                <br />
+                <div className='parallax-button'>
+              <a href='/Register'>
+              <Button className='para-btn' style={{backgroundColor:'#050124',border:'#9a7801 solid 5px',borderRadius:7,fontSize:25}}>Join now</Button>
+              </a>
+              </div>
+              
+              </GridItem>
             
-      
-          <ActiveUsers />
-         
-          <Plans />
-          <TeamSection />
-
-          <Testimonials />
-          <WorkSection />
-
+            </GridContainer>
+          </div>
+        </Parallax>
+        <div className={classNames(classes.main, classes.mainRaised)} style={{backgroundColor:'#050124'}}>
+          <div className={classes.container}>
+            <ProductSection />
+            <Slider />
+              
+        
+            <ActiveUsers />
+           
+            <Plans />
+            <TeamSection />
+  
+            <Testimonials />
+            <WorkSection />
+  
+          </div>
         </div>
+        <Footer />
       </div>
-      <Footer />
+    );
+  }
+
+  const showSpinner=()=>{
+    return (
+      <div className='opening-spinner'>
+        <CircularProgress  style={{height:200,width:200,color:' #9a7801'}}  thickness={10} />
+      </div>
+    ) 
+  }
+
+  return (
+    <div >
+      {loading ? showSpinner() : showLanding()}
     </div>
-  );
+  )
+
+ 
+
+  //const user=cookieCutter.get('person')
+  
 }
 /*LandingPage.getInitialValues=async ({req,res})=>{
   const cookieData=parseCookies(req)
