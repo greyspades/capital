@@ -38,19 +38,22 @@ import {
   CardFooter,
   
   ButtonGroup,
-  Card,
+  
   CardText,
   CardHeader,
-  CardBody,
+  
   CardTitle,
   
-  
+  Card,
+  CardBody,
   
   Row,
   Col,
   UncontrolledTooltip,
 } from "reactstrap";
 
+//import Card from '../components/Card/Card'
+//import CardBody from '../components/Card/CardBody'
 //import LoadingButton from '@material-ui/lab';
 import info from './api/info'
 import {motion} from 'framer-motion'

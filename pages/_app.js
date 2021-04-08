@@ -100,7 +100,7 @@ export default class MyApp extends App {
           <GoogleReCaptchaProvider reCaptchaKey='AIzaSyDtwQRXmpTZd6d7ioJcVhJp_C-zAdQOynE'>
             <CookiesProvider>
             <Head>
-          <title>Winstor Invest</title>
+          <title>Capital Investment</title>
           </Head>
           
         <Component {...pageProps} />
