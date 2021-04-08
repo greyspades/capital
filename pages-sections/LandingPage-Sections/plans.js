@@ -4,7 +4,7 @@ import PolicyIcon from '@material-ui/icons/Policy';
 import {useRouter} from 'next/router'
 //import tech1 from "assets/img/tech1"
 import {motion} from 'framer-motion'
-import Footer from 'components/footer/footer.js'
+
 import AssignmentTurnedInIcon from  '@material-ui/icons/AssignmentTurnedIn'
 import LockIcon from '@material-ui/icons/Lock'
 import Filter1Icon from '@material-ui/icons/Filter1'
@@ -12,22 +12,14 @@ import Filter2Icon from '@material-ui/icons/Filter2'
 import Filter3Icon from '@material-ui/icons/Filter3'
 //import LibraryAddCheck from 'material-ui'
 import {
-    Button,
-    Input,
-    InputGroupAddon,
-    InputGroupText,
-    InputGroup,
+    
     Container,
     UncontrolledTooltip,
     Row,
     Col,
     Card,
     CardBody,
-    NavbarBrand,
-    Navbar,
-    NavItem,
-    NavLink,
-    Nav,
+   
 } from "reactstrap"
 
 const Plans=()=>{

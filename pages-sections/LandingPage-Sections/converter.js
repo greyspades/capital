@@ -2,20 +2,9 @@ import React,{useState,useContext,useEffect} from 'react'
 import {MyContext} from '../../components/context'
 //import {Graph} from 'react-crypto-graph';
 import {
-    Button,
-    Input,
-    InputGroupAddon,
-    InputGroupText,
-    InputGroup,
+   
     Container,
-    UncontrolledTooltip,
-    Row,
-    Col,
-    NavbarBrand,
-    Navbar,
-    NavItem,
-    NavLink,
-    Nav,
+   
 } from "reactstrap"
 //import ReactDom from 'react-dom'
 //import TradingViewWidget from 'react-tradingview-widget';
