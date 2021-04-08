@@ -6,6 +6,7 @@ import Icon from "@material-ui/core/Icon";
 // @material-ui/icons
 import Email from "@material-ui/icons/Email";
 import People from "@material-ui/icons/People";
+import Router from "next/router";
 // core components
 import Header from "components/Header/Header.js";
 import HeaderLinks from "components/Header/HeaderLinks.js";
@@ -147,7 +148,7 @@ export default function Registration(props) {
                       console.log('sent')
                       console.log(res)
                       cookie.set('key',JSON.stringify(user))
-                      window.location.replace("/UserProfile");
+                      Router.push('/UserProfile')
                      }
                       
                       //console.log(userdetail)

@@ -29,7 +29,7 @@ import BarChartIcon from '@material-ui/icons/BarChart'
 //import Axios from 'axios'
 import Header from "components/Header/Header.js";
 import HeaderLinks from "components/Header/HeaderLinks.js";
-import Footer from "components/Footer/Footer.js";
+
 import { Modal } from 'react-responsive-modal';
 import PersonOutlineIcon from '@material-ui/icons/PersonOutline';
 import {
@@ -594,7 +594,7 @@ function UserProfile({data},props) {
       <Card style={{marginTop:100,backgroundColor:'#9a7801'}} className='address-card'>
       <CardBody>
       <div style={{fontSize:20,color:'white',padding:5}}>
-    You are required to pay the sum of   which is equivalent to {} 
+    You are required to pay the sum of   which is equivalent to 
     to this wallet address   and upload proof of payment
   </div>
       </CardBody>
@@ -801,15 +801,15 @@ function UserProfile({data},props) {
                     <Col xs={9} md={9}>
                     <Container className='balance'>
                            <div style={{marginTop:-35}}>
-                           <Row style={{}} >
+                           <Row>
                              <h3 style={{marginLeft:10}}>
                                Total investment
                              </h3>
                             </Row>
                             <Row className='balance-figure'>
-                              <div style={{color:' #9a7801'}}>
+                            <div style={{color:' #9a7801'}}>
                               <AttachMoneyIcon style={{width:50,height:30,marginTop:-5,marginLeft:-7,marginRight:-17,color:' #9a7801'}} className='' />
-                                {user.investment || 0}.00
+                               0.00
                               </div>
                             </Row>
                            </div>
@@ -857,7 +857,6 @@ function UserProfile({data},props) {
           </Col>
             
         </Row>
-        <Footer />
       </div>
     </>
   );

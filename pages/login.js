@@ -30,6 +30,7 @@ import cookieCutter from 'cookie-cutter'
 import image from "assets/img/bg7.jpg";
 import LockIcon from '@material-ui/icons/Lock'
 import { Container,Col,Row } from "reactstrap";
+import Router from "next/router";
 
 const useStyles = makeStyles(styles);
 
@@ -101,7 +102,7 @@ export default function LoginPage(props) {
                         cookieCutter.set('logged-in', 'true')
                         cookieCutter.set('key',JSON.stringify(res.data.info))
                         setMain(res.data.info)
-                        window.location.replace("/UserProfile");
+                        Router.push('/UserProfile')
                         }
                       })
                     }}  >
