@@ -29,6 +29,8 @@ import {UserContext} from '../components/userContext'
 //import useCookies from 'next-cookies'
 import {parseCookies} from './api/cookies'
 import Axios from 'axios'
+import {Check} from '@material-ui/icons/Check'
+import {CircularProgress} from '@material-ui/core'
 import {
   useGoogleReCaptcha,
   GoogleReCaptcha
@@ -50,6 +52,7 @@ import {
     NavItem,
     NavLink,
     Nav,
+    Spinner
 } from "reactstrap"
 
 import cookie from 'js-cookie'
@@ -70,6 +73,10 @@ export default function Registration(props) {
   const [visible,setVisible]=useState('')
   //const [cookie, setCookie]=useCookies(['user'])
   const {executeRecaptcha}=useGoogleReCaptcha()
+  const [spinner,setSpinner]=useState({
+    pending:false,
+    done:false,
+  })
 
   setTimeout(function() {
     setCardAnimation("");
@@ -77,7 +84,33 @@ export default function Registration(props) {
   const classes = useStyles();
   const { ...rest } = props;
   
-
+  
+  const submit=(handleSubmit)=>{
+    if(spinner.pending==false && spinner.done==false){
+      return (
+        <div className='get-started' style={{width:160,height:50,backgroundColor:'#050124'
+                     ,borderRadius:5,textAlign:'center',padding:5}} onClick={handleSubmit}>
+                      <p style={{color:'white',marginTop:6,fontSize:20}}>
+                      Get Started
+                      </p>
+                     </div>
+      )
+    }
+    else if(spinner.pending==true && spinner.done==false){
+      return (
+        <div>
+          <Spinner />
+      </div>
+      )
+    }
+    else if(spinner.pending==false && spinner.done==true){
+      return (
+        <div>
+          <Check />
+        </div>
+      )
+    }
+  }
 
   
   const showEye=()=>{
@@ -142,12 +175,20 @@ export default function Registration(props) {
                       //balance:0,
                     })
                     //setMain({name:'maximus'})
+                    setSpinner({
+                      pending:true,
+                      done:false
+                    })
                     Axios.post('/api/user',{user})
                     .then((res)=>{
                      if(res.data=='SAVED'){
                       console.log('sent')
                       console.log(res)
                       cookie.set('key',JSON.stringify(user))
+                      setSpinner({
+                        pending:false,
+                        done:true,
+                      })
                       Router.push('/UserProfile')
                      }
                       
@@ -350,12 +391,9 @@ export default function Registration(props) {
                       </div>
                     <CardFooter className={classes.cardFooter}>
 
-                     <div className='get-started' style={{width:160,height:50,backgroundColor:'#050124'
-                     ,borderRadius:5,textAlign:'center',padding:5}} onClick={handleSubmit}>
-                      <p style={{color:'white',marginTop:6,fontSize:20}}>
-                      Get Started
-                      </p>
-                     </div>
+                     <Button color='transparent'>
+                            {submit(handleSubmit)}
+                     </Button>
                      
                     </CardFooter>
                   </form>

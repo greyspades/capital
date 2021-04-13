@@ -31,7 +31,7 @@ const ActiveUsers =()=>{
         <div className='active-users-body'>
             
                    <Container fluid style={{backgroundImage:`url(${particle})`,}} className='active-users'>
-                        <Row className='active-user-row'>
+                        <Row className='active-user-ro'>
                            
                         <CountUp
   start={1}
@@ -55,9 +55,9 @@ const ActiveUsers =()=>{
           <span style={{textAlign:'center'}} ref={countUpRef} />
           </Col>
           <Col md={12} xs={12}>
-          <FontAwesomeIcon icon={faUsers} style={{height:60,width:60}} className='active-icon fa-align-center' />
+          <FontAwesomeIcon icon={faUsers} style={{height:80,width:80,color:'white'}} className='active-icon' />
           </Col>
-           <Col md={12} xs={12} style={{fontWeight:'bold'}} className='active-talk'>
+           <Col md={12} xs={12} style={{fontWeight:'bold',color:'white'}} className='active-talk'>
                                
              Active users
           </Col>
@@ -91,10 +91,10 @@ const ActiveUsers =()=>{
                                 <span style={{textAlign:'center'}} ref={countUpRef} />
                             </Col>
                             <Col md={12} xs={12}>
-          <AccountBalance style={{height:60,width:60}} className='asset-icon fa-align-center' />
+          <AccountBalance style={{height:80,width:80,color:'white'}} className='asset-icon fa-align-center' />
           </Col>
                            
-                            <Col md={12} xs={12} style={{fontWeight:'bold',}} className='active-worth-talk'>
+                            <Col md={12} xs={12} style={{fontWeight:'bold',color:'white'}} className='active-worth-talk'>
                                 Worth of assets earned
                             </Col>
     </div>

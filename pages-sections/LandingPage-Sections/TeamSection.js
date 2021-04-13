@@ -30,19 +30,19 @@ export default function TeamSection() {
     classes.imgFluid
   );
   return (
-    <div className={classes.section}>
-      <h2 className={classes.title}>Here is our team</h2>
+    <div style={{color:'white',backgroundColor:'#26253d',marginTop:50}} className='team-container'  className={classes.section}>
+      <h2 style={{color:'white'}} className={classes.title}>Here is our team</h2>
       <div>
-        <GridContainer>
+        <GridContainer style={{}}>
           <GridItem xs={12} sm={12} md={4}>
             <Card plain>
               <GridItem xs={12} sm={12} md={6} className={classes.itemGrid}>
                 <img src={team1} alt="..." className={imageClasses} />
               </GridItem>
-              <h4 className={classes.cardTitle}>
+              <h4 style={{color:'white'}} className={classes.cardTitle}>
                 Maria Kylie Stone
                 <br />
-                <small className={classes.smallTitle}>Marketing Manager</small>
+                <small style={{color:'white'}} className={classes.smallTitle}>Marketing Manager</small>
               </h4>
               <CardBody>
                
@@ -50,21 +50,21 @@ export default function TeamSection() {
               <CardFooter className={classes.justifyCenter}>
                 <Button
                   justIcon
-                  color="transparent"
+                  color="blue"
                   className={classes.margin5}
                 >
                   <i className={classes.socials + " fab fa-twitter"} />
                 </Button>
                 <Button
                   justIcon
-                  color="transparent"
+                  color="blue"
                   className={classes.margin5}
                 >
                   <i className={classes.socials + " fab fa-instagram"} />
                 </Button>
                 <Button
                   justIcon
-                  color="transparent"
+                  color="blue"
                   className={classes.margin5}
                 >
                   <i className={classes.socials + " fab fa-facebook"} />
@@ -77,10 +77,10 @@ export default function TeamSection() {
               <GridItem xs={12} sm={12} md={6} className={classes.itemGrid}>
                 <img src={team2} alt="..." className={imageClasses} />
               </GridItem>
-              <h4 className={classes.cardTitle}>
+              <h4 style={{color:'white'}}className={classes.cardTitle}>
                 Aiden Sambel
                 <br />
-                <small className={classes.smallTitle}>Buissness Development Representative</small>
+                <small style={{color:'white'}} className={classes.smallTitle}>Buissness Development Representative</small>
               </h4>
               <CardBody>
                 
@@ -88,14 +88,14 @@ export default function TeamSection() {
               <CardFooter className={classes.justifyCenter}>
                 <Button
                   justIcon
-                  color="transparent"
+                  color="blue"
                   className={classes.margin5}
                 >
                   <i className={classes.socials + " fab fa-twitter"} />
                 </Button>
                 <Button
                   justIcon
-                  color="transparent"
+                  color="blue"
                   className={classes.margin5}
                 >
                   <i className={classes.socials + " fab fa-linkedin"} />
@@ -108,10 +108,10 @@ export default function TeamSection() {
               <GridItem xs={12} sm={12} md={6} className={classes.itemGrid}>
                 <img src={team3} alt="..." className={imageClasses} />
               </GridItem>
-              <h4 className={classes.cardTitle}>
+              <h4 style={{color:'white'}} className={classes.cardTitle}>
                 Kendall Jenner
                 <br />
-                <small className={classes.smallTitle}>Financial Analyst</small>
+                <small style={{color:'white'}} className={classes.smallTitle}>Financial Analyst</small>
               </h4>
               <CardBody>
                 
@@ -119,21 +119,21 @@ export default function TeamSection() {
               <CardFooter className={classes.justifyCenter}>
                 <Button
                   justIcon
-                  color="transparent"
+                  color="blue"
                   className={classes.margin5}
                 >
                   <i className={classes.socials + " fab fa-twitter"} />
                 </Button>
                 <Button
                   justIcon
-                  color="transparent"
+                  color="blue"
                   className={classes.margin5}
                 >
                   <i className={classes.socials + " fab fa-instagram"} />
                 </Button>
                 <Button
                   justIcon
-                  color="transparent"
+                  color="blue"
                   className={classes.margin5}
                 >
                   <i className={classes.socials + " fab fa-facebook"} />

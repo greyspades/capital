@@ -31,14 +31,25 @@ import image from "assets/img/bg7.jpg";
 import LockIcon from '@material-ui/icons/Lock'
 import { Container,Col,Row } from "reactstrap";
 import Router from "next/router";
+import {Check} from '@material-ui/icons/Check'
 
+import {
+  Spinner,
+  
+}
+from 'reactstrap'
 const useStyles = makeStyles(styles);
 
 export default function LoginPage(props) {
   const [visible,setVisible]=useState('')
   const [eye,setEye]=useState(false)
   const [main,setMain]=useContext(UserContext)
+  const [error,setError]=useState('')
   const [cardAnimaton, setCardAnimation] = React.useState("cardHidden");
+  const [spinner,setSpinner]=useState({
+    pending:false,
+    done:false,
+  })
   setTimeout(function() {
     setCardAnimation("");
   }, 700);
@@ -56,6 +67,32 @@ export default function LoginPage(props) {
       setVisible('password')
       return(
         <VisibilityOffIcon style={{width:40,height:40}} />
+      )
+    }
+  }
+  const submit=(handleSubmit)=>{
+    if(spinner.pending==false && spinner.done==false){
+      return (
+        <div className='get-started' style={{width:160,height:50,backgroundColor:'#050124'
+                     ,borderRadius:5,textAlign:'center',padding:5}} onClick={handleSubmit}>
+                      <p style={{color:'white',marginTop:6,fontSize:20}}>
+                      Get Started
+                      </p>
+                     </div>
+      )
+    }
+    else if(spinner.pending==true && spinner.done==false){
+      return (
+        <div>
+          <Spinner />
+      </div>
+      )
+    }
+    else if(spinner.pending==false && spinner.done==true){
+      return (
+        <div>
+          <Check />
+        </div>
       )
     }
   }
@@ -95,15 +132,33 @@ export default function LoginPage(props) {
                         password:values.password
                       }
                       
+                      setSpinner({
+                        pending:true,
+                        done:false
+                      })
+
+
                       Axios.post('/api/login',{user})
                       .then((res)=>{
                         if(res.data.status=='LOG IN'){
                           console.log(res.data)
                         cookieCutter.set('logged-in', 'true')
                         cookieCutter.set('key',JSON.stringify(res.data.info))
+                        setSpinner({
+                          pending:false,
+                          done:true,
+                        })
                         setMain(res.data.info)
                         Router.push('/UserProfile')
                         }
+                      })
+                      .catch((err)=>{
+                        console.log(err)
+                        setError('Unnable to connect to the server please try again later')
+                        setSpinner({
+                          pending:false,
+                          done:false
+                        })
                       })
                     }}  >
                       {({handleChange,handleSubmit,values})=>(
@@ -170,9 +225,12 @@ export default function LoginPage(props) {
                       </div>
                      </div>
                       <CardFooter  className={classes.cardFooter}>
+                        <div style={{color:'red'}}>
+                          {error}
+                        </div>
                     <Button size="lg" onClick={handleSubmit}
                      style={{width:50,height:30,backgroundColor:'#050124',}}>
-                      Login
+                     {submit(handleSubmit)}
                     </Button>
                   </CardFooter>
                         </form>

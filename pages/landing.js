@@ -90,7 +90,9 @@ export default function LandingPage(props,{data}) {
             <GridContainer>
               <GridItem xs={12} sm={12} md={6}>
                 <img src={rc} className='logo' />
-                <h1 className={classes,'head-title'}>Your Story Starts With Us.</h1>
+                <div className='intro-talk'>
+                <h1 className={classes.title}>Your Story Starts With Us.</h1>
+                </div>
   
                 <br />
                 <div className='parallax-button'>
@@ -105,19 +107,21 @@ export default function LandingPage(props,{data}) {
           </div>
         </Parallax>
         <div className={classNames(classes.main, classes.mainRaised)} style={{backgroundColor:'#050124'}}>
-          <div className={classes.container}>
+          <div  className={classes.container}>
             <ProductSection />
-            <Slider />
+
+          </div>
+          <div>
+          <div className={classes.containerFluid}>
+          <Slider />
               
-        
-            <ActiveUsers />
-           
-            <Plans />
-            <TeamSection />
-  
-            <Testimonials />
-            <WorkSection />
-  
+          </div>
+          <ActiveUsers />
+           <Plans />
+           <TeamSection />
+ 
+           <Testimonials />
+           <WorkSection />
           </div>
         </div>
         <Footer />

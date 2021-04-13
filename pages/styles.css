@@ -52,8 +52,8 @@
    
 }
 .plans-card {
-    width: 200px;
-    height: 250px;
+    width: 250px;
+    height: 450px;
     /*background:rgb(255,255,255,0.2);*/
     
     border-radius: 5px;
@@ -73,13 +73,13 @@
     
     margin-top: 50px;
     margin-bottom: 50px;
-    margin-left: 28px;
+
 }
 .plans {
     border-radius: 7px;
     padding-top: 20px;
-    height: 900px;
-    
+    height: 1500px;
+    margin-bottom: 300px;
 }
 .second {
 
@@ -97,11 +97,15 @@
 .plans-icon {
    
     margin-bottom: 20px;
+    display: grid;
+    place-items: center;
+    margin-left: 80px;
     
 }
 .plans-text {
-    text-align: center;
+    
     margin-bottom: 30px;
+    text-align: center;
 }
 .converter {
     margin-top: 100px;
@@ -175,13 +179,14 @@
     margin-top: 30px;
 }
 .active-users {
-    background-size: cover;
+    
     background-repeat: no-repeat;
     height: 500px;
-    width: 500px;
+    width: 1000px;
     display: flex;
     flex-direction: column;
     align-items: center;
+    
     
 }
 .active-users-body {
@@ -223,10 +228,11 @@
     margin-bottom: 20px;
 }
 .logo {
-    height: 100px;
-    width: 200px;
-    margin-top: -160px;
+    height: 300px;
+    width: 300px;
+    margin-top:-80px;
     margin-left: -10px;
+    margin-bottom: -20px;
 }
 .slider {
     height: 290px;
@@ -235,8 +241,7 @@
     
 }
 .plans-co {
-   display: grid;
-   place-items: center;
+
 }
 .product-logo {
     height:200px;
@@ -250,6 +255,7 @@
 }
 .product-card {
     border: #9a7801 solid 5px;
+    border-bottom: #9a7801 solid 0px;
     margin:10px;
 }
 .active-icon {
@@ -340,6 +346,7 @@
     top:0;right:0;left:0;bottom:0;
     background-color:rgba(0,0,0,0.5);
     z-index:0;
+    height: 420px;
 }
 .login-name-icon {
     margin-left: -20px;
@@ -541,12 +548,15 @@
     
 }
 .parallax-button {
-    margin-bottom: -30px;
-    display: grid;
-    place-items: center;
+    margin-top:-30px;
+    margin-left: 200px;
+    margin-bottom: 40px;
+    
+  
 }
 .para-btn {
-    
+    width: 150px;
+    height: 70px;
 }
 .username {
     margin-bottom: 50px;
@@ -560,7 +570,85 @@
     place-content: center;
     margin-top: 100px;
 }
+.talk-2{
+    
+    border-bottom:#9a7801 solid 5px;
+    border-left: #9a7801 solid 5px;
+    border-right: #9a7801 solid 5px;
+    border-top: #9a7801 solid 0px;
+   
+    margin-top: -60px;
+    margin-bottom: 50px;
+    padding:10px
+    
+}
+.slider-container {
+    background-color: #26253d;
+}
+.team-container {
+    height: 1000px;
+}
+.about-us {
+    margin-top: 50px;
+    font-family: Arial, Helvetica, sans-serif;
+    font-size: 20px;
+}
+.gold-line {
+    height: 5px;
+    background-color: #9a7801;
+    margin-top: 10px;
+    margin-bottom: 10px;
+}
+.crypto-loan-icon {
+    height: 150px;
+    width: 150px;
+    margin-left: 70px;
+    display: grid;
+    place-items: center;
+   
+    margin-top: -100px;
+    
+}
+.afiliate-icon {
+    height: 150px;
+    width: 150px;
+    margin-left: 80px;
+    margin-top: 1px;
+    display: grid;
+    place-items: center;
+    margin-bottom: 30px;
+   
+}
+.loan-container {
+  
+}
+.afiliate-ctd {
+    border-top: #9a7801 5px solid;
+    border-bottom: #9a7801 5px solid;
+    color: white;
+    padding: 15px;
+    
+}
 
+
+.getting-started {
+    margin-top: 60px;
+}
+.intro-talk {
+    font-size: 20px;
+    margin-top: -90px;
+    margin-bottom: -40px;
+    
+}
+.loan-talk {
+    border-bottom:#9a7801 solid 5px;
+    border-top: #9a7801 solid 5px;
+    
+    border-left: #9a7801 solid 0px;
+    margin-top: 30px;
+    
+    
+}
 
 
 
@@ -573,8 +661,9 @@
         height: 500px;
     }
     .plans {
-        height: 500px;
+        height: 600px;
         width: 1500px;
+        margin-bottom: 300px;
     }
     .title {
         margin-top: 50px;
@@ -609,9 +698,7 @@
     margin-left: 50px; 
     }
 
-    .plans {
-       
-    }
+   
     .side-group {
         margin-top: 5px;
        
@@ -781,7 +868,7 @@
         display: flex;
         flex-direction: column;
         align-items: center;
-        border-radius: 10px;
+        
         
     }
     .active-users-body {
@@ -822,10 +909,10 @@
 
     }
     .logo {
-        height: 200px;
-        width: 450px;
-        margin-top: -300px;
-        margin-left:-100px;
+        height: 550px;
+        width: 700px;
+        margin-top: 5px;
+        margin-left:-200px;
         font-size: 70px;
         
        
@@ -862,8 +949,11 @@
         z-index:1;
         font-size:25px;
         color:white;
-        height: 350px;
+        height: 390px;
+        border-top:10px solid #9a7801;
+        border-bottom:solid 10px #9a7801;
         width:500px;
+        border-left:solid 10px #9a7801
     }
     .stack {
         background-image: url('../assets/img/stack.jpg');
@@ -875,8 +965,11 @@
         z-index:1;
         font-size:25px;
         color:white;
-        height: 350px;
+        height: 390px;
+        border-top:10px solid #9a7801;
+        border-bottom:solid 10px #9a7801;
         width:500px;
+        border-left:solid 10px #9a7801
     }
     .holding {
         background-image: url('../assets/img/holdcoin.jpg');
@@ -888,8 +981,11 @@
         z-index:1;
         font-size:25px;
         color:white;
-        height: 350px;
+        height: 390px;
+        border-top:10px solid #9a7801;
+        border-bottom:solid 10px #9a7801;
         width:500px;
+        border-left:solid 10px #9a7801
     }
     .save {
         background-image: url('../assets/img/save2.jpg');
@@ -901,8 +997,11 @@
         z-index:1;
         font-size:25px;
         color:white;
-        height: 350px;
+        height: 390px;
+        border-top:10px solid #9a7801;
+        border-bottom:solid 10px #9a7801;
         width:500px;
+        border-left:solid 10px #9a7801
     }
     .loan {
         background-image: url('../assets/img/loan.jpg');
@@ -914,13 +1013,17 @@
         z-index:1;
         font-size:25px;
         color:white;
-        height: 350px;
+        height: 390px;
+        border-top:10px solid #9a7801;
+        border-bottom:solid 10px #9a7801;
         width:500px;
+        border-left:solid 10px #9a7801
     }
     .slider {
         width: 700px;
         margin-bottom: 200px;
-        
+        margin-left: 150px;
+        height: 500px;
     }
     .gold-card {
         height: 300px;
@@ -959,7 +1062,8 @@
     }
     .head-title {
         font-size: 60px;
-        margin-bottom: -70px;
+        margin-top: -100px;
+        margin-bottom: 250px;
         display: flex;
         flex-direction: column;
     }
@@ -977,8 +1081,9 @@
     .parallax-button {
         display: grid;
         place-items: center;
-        margin-right: -700px;
-        margin-top: -100px;
+        margin-right: -640px;
+        margin-top: -270px;
+        margin-bottom: 170px;
     }
     .para-btn {
         width: 200px;
@@ -991,8 +1096,102 @@
     .level-talk {
         margin-left: -60px;
     }
+    .talk-2{
     
-
+        border-bottom:#9a7801 solid 5px;
+        border-top: #9a7801 solid 5px;
+        border-right: #9a7801 solid 5px;
+        border-left: #9a7801 solid 0px;
+        margin-top:60px;
+        width: 390px;
+    }
+    .affiliate {
+        
+    }
+    .why-choose{
+        margin-top: 200px;
+    }
+    .plans-container {
+        background-color: #26253d;
+        height: 600px;
+        margin-top: 100px;
+        
+    }
+    .slider-container {
+        
+        background-size: contain;
+        background-repeat: no-repeat;
+        padding: 20px;
+        
+        height: 900px;
+        
+    }
+    .plans-one {
+        margin-left: 60px;
+    }
+    .about-us {
+        margin-top: 100px;
+    }
+    .gold-line {
+        height: 0px;
+        
+        margin-top: 0px;
+        margin-bottom: 0px;
+    }
+    .loan-image {
+        height: 360px;
+        width: 580px;
+        margin-left: 90px;
+        margin-top: 150px;
+        border: #9a7801 5px solid;
+    }
+    .loan-talk {
+        border-bottom:#9a7801 solid 5px;
+        border-top: #9a7801 solid 5px;
+        
+        border-left: #9a7801 solid 0px;
+        
+        
+    }
+    .crypto-loan-icon {
+        height: 150px;
+        width: 150px;
+        margin-left: 60px;
+        border-bottom: 0px;
+        margin-top: 60px;
+    }
+    .afiliate-icon {
+        height: 150px;
+        width: 150px;
+        margin-left: 60px;
+        margin-top: 70px;
+        border-bottom: 0px;
+    }
+    .afiliate-ctd {
+        border-top: #9a7801 5px solid;
+        border-bottom: #9a7801 5px solid;
+        color: white;
+        padding: 15px;
+        width: 1000px;
+        display: grid;
+        place-items: center;
+        margin-left: 220px;
+        margin-top: 0px;
+    }
+    .plans-border {
+        height: 5px;
+        background-color: #26253d;
+        width: 1442px;
+        margin-top: 60px;
+    }
+    .intro-talk {
+        margin-top: -100px;
+        margin-bottom: 280px;
+        
+    }
+    .getting-started {
+        margin-top: -30px;
+    }
 }
 
 

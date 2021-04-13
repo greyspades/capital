@@ -54,9 +54,7 @@ export default function ProductSection() {
       </GridContainer>
       <div>
       <h5 className='talk' style={{}}>
-              We precisely provide value in those areas that matter. We assist portfolio companies in developing and 
-                executing strategic growth, building the board and executive management team, exploring capitalization
-                 structures, pursuing growth mergers and acquisitions, and enhancing market presence.
+     
               </h5>
       </div>
       <div>

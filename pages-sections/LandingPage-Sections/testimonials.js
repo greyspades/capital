@@ -38,8 +38,8 @@ const Testimonials =()=>{
        };
 
     return (
-        <div>
-            <Container style={{marginTop:-50}}>
+        <div style={{marginTop:500}}>
+            <Container style={{}}>
               <Row>
                 <div>
                   <h4>
@@ -47,7 +47,7 @@ const Testimonials =()=>{
                   </h4>
                 </div>
                 <Col md={8}>
-                <Slide autoplay={true} className='slider' {...settings}>
+                <Slide autoplay={true} className='slid' {...settings}>
           <div className='camp' style={{position:'relative',height:50,width:200,backgroundColor:'blue',backgroundImage:`url(${camp})`}}>
               <div style={{fontSize:20,bottom:0,left:0,}} className='overlay'>
               <p style={{marginTop:130,position:'absolute',}}>

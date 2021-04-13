@@ -41,6 +41,7 @@ import "assets/css/black-dashboard-react.css"
 //import "assets/css/nucleo-icons.css";
 import 'react-dropdown/style.css'
 import 'react-responsive-modal/styles.css';
+import {CircularProgress} from '@material-ui/core'
 
 
 Router.events.on("routeChangeStart", url => {

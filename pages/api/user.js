@@ -36,6 +36,10 @@ const Register = async (req, res) => {
       })
      }
    })
+   .catch((error)=>{
+    console.log(error);
+    res.send(err)
+  })
     //console.log(req.body)
   
 };
