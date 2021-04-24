@@ -72,7 +72,7 @@ export default function Registration(props) {
   const [error,setError]=useState('')
   const [visible,setVisible]=useState('')
   //const [cookie, setCookie]=useCookies(['user'])
-  const {executeRecaptcha}=useGoogleReCaptcha()
+  //const {executeRecaptcha}=useGoogleReCaptcha()
   const [spinner,setSpinner]=useState({
     pending:false,
     done:false,
@@ -127,7 +127,7 @@ export default function Registration(props) {
       )
     }
   }
-  const token = executeRecaptcha("Register");
+  //const token = executeRecaptcha("Register");
   return (
     <div>
       <Header
@@ -386,7 +386,7 @@ export default function Registration(props) {
                           </Row>
                       </Container>
                       
-                      <GoogleReCaptcha onVerify={()=>{console.log('verified')}} />
+                      {/*<GoogleReCaptcha onVerify={()=>{console.log('verified')}} />*/}
                      </CardBody>
                       </div>
                     <CardFooter className={classes.cardFooter}>
