@@ -31,10 +31,7 @@ import {parseCookies} from './api/cookies'
 import Axios from 'axios'
 import {Check} from '@material-ui/icons/Check'
 import {CircularProgress} from '@material-ui/core'
-import {
-  useGoogleReCaptcha,
-  GoogleReCaptcha
-} from 'react-google-recaptcha-v3';
+
 //import useLocalStorage from 'react-hook-uselocalStorage'
 //import useLocalStorage from '../hooks/localStorage'
 import {
@@ -191,7 +188,7 @@ export default function Registration(props) {
                       })
                       Router.push('/UserProfile')
                      }
-                      
+                    
                       //console.log(userdetail)
                       
                     })
