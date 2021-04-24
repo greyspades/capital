@@ -101,13 +101,13 @@ export default class MyApp extends App {
        <MainContext>
           <UseContext>
           
-            <CookiesProvider>
+           
             <Head>
           <title>Capital Investment Option</title>
           </Head>
           
         <Component {...pageProps} />
-            </CookiesProvider>
+           
           
         </UseContext>
        </MainContext>
