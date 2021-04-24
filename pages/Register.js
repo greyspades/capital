@@ -27,14 +27,11 @@ import VisibilityIcon from '@material-ui/icons/Visibility'
 import VisibilityOffIcon from '@material-ui/icons/VisibilityOff'
 import {UserContext} from '../components/userContext'
 //import useCookies from 'next-cookies'
-import {parseCookies} from './api/cookies'
+//mport {parseCookies} from './api/cookies'
 import Axios from 'axios'
 import {Check} from '@material-ui/icons/Check'
 import {CircularProgress} from '@material-ui/core'
-import {
-  useGoogleReCaptcha,
-  GoogleReCaptcha
-} from 'react-google-recaptcha-v3';
+
 //import useLocalStorage from 'react-hook-uselocalStorage'
 //import useLocalStorage from '../hooks/localStorage'
 import {
@@ -55,7 +52,7 @@ import {
     Spinner
 } from "reactstrap"
 
-import cookie from 'js-cookie'
+//import cookie from 'js-cookie'
 import cookies from 'next-cookies'
 import styles from "assets/jss/nextjs-material-kit/pages/loginPage.js";
 
@@ -72,7 +69,7 @@ export default function Registration(props) {
   const [error,setError]=useState('')
   const [visible,setVisible]=useState('')
   //const [cookie, setCookie]=useCookies(['user'])
-  const {executeRecaptcha}=useGoogleReCaptcha()
+  //const {executeRecaptcha}=useGoogleReCaptcha()
   const [spinner,setSpinner]=useState({
     pending:false,
     done:false,
@@ -127,7 +124,7 @@ export default function Registration(props) {
       )
     }
   }
-  const token = executeRecaptcha("Register");
+  //const token = executeRecaptcha("Register");
   return (
     <div>
       <Header
@@ -191,7 +188,7 @@ export default function Registration(props) {
                       })
                       Router.push('/UserProfile')
                      }
-                      
+                    
                       //console.log(userdetail)
                       
                     })
@@ -386,7 +383,7 @@ export default function Registration(props) {
                           </Row>
                       </Container>
                       
-                      <GoogleReCaptcha onVerify={()=>{console.log('verified')}} />
+                      {/*<GoogleReCaptcha onVerify={()=>{console.log('verified')}} />*/}
                      </CardBody>
                       </div>
                     <CardFooter className={classes.cardFooter}>
@@ -410,3 +407,4 @@ export default function Registration(props) {
     </div>
   );
 }
+

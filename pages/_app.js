@@ -42,28 +42,21 @@ import "assets/css/black-dashboard-react.css"
 import 'react-dropdown/style.css'
 import 'react-responsive-modal/styles.css';
 import {CircularProgress} from '@material-ui/core'
-import ProgressBar from '@badrap/bar-of-progress'
 
-const progress=new ProgressBar({
-  size:2,
-  color:'goldenrod',
-  className:'bar-of-progress',
-})
 
 
 Router.events.on("routeChangeStart", url => {
   console.log(`Loading: ${url}`);
-  /*document.body.classList.add("body-page-transition");
+  document.body.classList.add("body-page-transition");
   ReactDOM.render(
     <PageChange path={url} />,
     document.getElementById("page-transition")
-  );*/
-  progress.start
+  );
 });
 Router.events.on("routeChangeComplete", () => {
-  /*ReactDOM.unmountComponentAtNode(document.getElementById("page-transition"));
-  document.body.classList.remove("body-page-transition");*/
-  progress.finish
+  ReactDOM.unmountComponentAtNode(document.getElementById("page-transition"));
+  document.body.classList.remove("body-page-transition");
+  //progress.finish
 });
 Router.events.on("routeChangeError", () => {
   ReactDOM.unmountComponentAtNode(document.getElementById("page-transition"));
@@ -107,7 +100,7 @@ export default class MyApp extends App {
       <React.Fragment>
        <MainContext>
           <UseContext>
-          <GoogleReCaptchaProvider reCaptchaKey='AIzaSyDtwQRXmpTZd6d7ioJcVhJp_C-zAdQOynE'>
+          
             <CookiesProvider>
             <Head>
           <title>Capital Investment Option</title>
@@ -115,7 +108,7 @@ export default class MyApp extends App {
           
         <Component {...pageProps} />
             </CookiesProvider>
-          </GoogleReCaptchaProvider>
+          
         </UseContext>
        </MainContext>
       </React.Fragment>
