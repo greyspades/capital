@@ -152,6 +152,7 @@ export default function LoginPage(props) {
                         Router.push('/UserProfile')
                         }
                       })
+
                       .catch((err)=>{
                         console.log(err)
                         setError('Unnable to connect to the server please try again later')

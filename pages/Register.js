@@ -31,8 +31,10 @@ import {parseCookies} from './api/cookies'
 import Axios from 'axios'
 import {Check} from '@material-ui/icons/Check'
 import {CircularProgress} from '@material-ui/core'
-
-
+import {
+  useGoogleReCaptcha,
+  GoogleReCaptcha
+} from 'react-google-recaptcha-v3';
 //import useLocalStorage from 'react-hook-uselocalStorage'
 //import useLocalStorage from '../hooks/localStorage'
 import {
@@ -70,7 +72,7 @@ export default function Registration(props) {
   const [error,setError]=useState('')
   const [visible,setVisible]=useState('')
   //const [cookie, setCookie]=useCookies(['user'])
-  //const {executeRecaptcha}=useGoogleReCaptcha()
+  const {executeRecaptcha}=useGoogleReCaptcha()
   const [spinner,setSpinner]=useState({
     pending:false,
     done:false,
@@ -125,7 +127,7 @@ export default function Registration(props) {
       )
     }
   }
-  //const token = executeRecaptcha("Register");
+  const token = executeRecaptcha("Register");
   return (
     <div>
       <Header
@@ -189,7 +191,7 @@ export default function Registration(props) {
                       })
                       Router.push('/UserProfile')
                      }
-                    
+                      
                       //console.log(userdetail)
                       
                     })
@@ -384,7 +386,7 @@ export default function Registration(props) {
                           </Row>
                       </Container>
                       
-                      {/*<GoogleReCaptcha onVerify={()=>{console.log('verified')}} />*/}
+                      <GoogleReCaptcha onVerify={()=>{console.log('verified')}} />
                      </CardBody>
                       </div>
                     <CardFooter className={classes.cardFooter}>
@@ -408,4 +410,3 @@ export default function Registration(props) {
     </div>
   );
 }
-
