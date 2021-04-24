@@ -21,6 +21,7 @@ import {
     Col,
     Card,
     CardBody,
+    Button,
    
 } from "reactstrap"
 
@@ -101,6 +102,10 @@ Our affiliate rewards program offers earning at four levels and pays 8% of the d
                            <p style={{color:'white'}}>Max Loan:<span style={{color:'goldenrod',marginLeft:10}}>$38,000</span></p>
                            <p style={{color:'white'}}>Principal:<span style={{color:'goldenrod',marginLeft:10}}>Back</span></p>
                            <p style={{color:'white'}}>Profit:<span style={{color:'goldenrod',marginLeft:10}}>Calender Days</span></p>
+
+                            </div>
+                            <div className='plans-button'>
+                               
                             </div>
                         </div>
                        </div>

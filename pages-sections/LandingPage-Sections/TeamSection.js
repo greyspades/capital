@@ -109,7 +109,7 @@ export default function TeamSection() {
                 <img src={team3} alt="..." className={imageClasses} />
               </GridItem>
               <h4 style={{color:'white'}} className={classes.cardTitle}>
-                Kendall Jenner
+                   Rachael Fletcher
                 <br />
                 <small style={{color:'white'}} className={classes.smallTitle}>Financial Analyst</small>
               </h4>

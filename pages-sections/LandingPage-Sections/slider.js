@@ -9,6 +9,7 @@ import loan from "../../assets/img/loan.jpg"
 import save from "../../assets/img/save2.jpg"
 import stack from "../../assets/img/stack.jpg"
 import 'react-slideshow-image/dist/styles.css'
+import opening from '../../assets/img/opening.jpg'
 import dynamic from 'next/dynamic'
 //import {Fade} from 'react-slideshow-image'
 //import {OPacityCarousel} from 'react-opacity-carousel'
@@ -117,9 +118,9 @@ const Slider=()=>{
 
 
                   </div>
+                  {/*<div className='gold-line'></div>
                   <div className='gold-line'></div>
-                  <div className='gold-line'></div>
-                  <div className='gold-line'></div>
+  <div className='gold-line'></div>*/}
 
                
                 </Col>
@@ -134,7 +135,8 @@ To access the features and benefits being provided by *capitalinvestmentoption* 
 
             </Container>
             <Container className='about-us' style={{}}>
-              <h3>
+                <div style={{}} className='about-overlay'>
+                <h3>
                 About Capital Investment option
               </h3>
               <p style={{color:'white'}}>
@@ -144,6 +146,7 @@ To access the features and benefits being provided by *capitalinvestmentoption* 
 Meanwhile provision has been made by this platform to grant Crypto Loans in order to create a financial support to our clients  especially students and business owners as well as others active members in this platform.
 
               </p>
+                </div>
             </Container>
         
         </div>

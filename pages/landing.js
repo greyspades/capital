@@ -8,6 +8,8 @@ import {parseCookies} from '../middleware/cookies'
 import cookieCutter from 'cookie-cutter'
 // @material-ui/icons
 
+
+
 // core components
 import Header from "components/Header/Header.js";
 import Footer from "components/Footer/Footer.js";
@@ -25,7 +27,6 @@ import Testimonials from '../pages-sections/LandingPage-Sections/testimonials'
 import {CircularProgress} from '@material-ui/core'
 
 import {
-  
   Input,
   InputGroupAddon,
   InputGroupText,
@@ -40,6 +41,7 @@ import {
 import ProductSection from "pages-sections/LandingPage-Sections/ProductSection.js";
 import TeamSection from "pages-sections/LandingPage-Sections/TeamSection.js";
 import WorkSection from "pages-sections/LandingPage-Sections/WorkSection.js";
+
 import SectionCarousel from 'pages-sections/Components-Sections/SectionCarousel.js'
 import ActiveUsers from '../pages-sections/LandingPage-Sections/activeUsers'
 import cookies from "next-cookies";
@@ -53,6 +55,7 @@ export default function LandingPage(props,{data}) {
   //const [windowWidth,setWindowWidth]=useState(window.innerWidth)
   const [parallax,setParallax]=useState(false)
   const [loading,setLoading]=useState(true)
+  
 
   useEffect(()=>{
     /*const handleResize=()=>{
@@ -67,8 +70,12 @@ export default function LandingPage(props,{data}) {
     }
     console.log(window.innerWidth)
     setLoading(false)
-    
   },[])
+  const Review=()=>{
+    if(main==''){ 
+
+    }
+  }
 
   const showLanding=()=>{
     return (
@@ -81,27 +88,39 @@ export default function LandingPage(props,{data}) {
           fixed
           changeColorOnScroll={{
             height: 400,
-            color: "white"
+            color: "white",
           }}
           {...rest}
         />
         <Parallax className='parallax-top landing-parallax' small={parallax}  filter  image={require("assets/img/header.jpg")}  >
           <div className={classes.container} style={{}}>
             <GridContainer>
-              <GridItem xs={12} sm={12} md={6}>
+              <GridItem xs={12} sm={12} md={12}>
                 <img src={rc} className='logo' />
-                <div className='intro-talk'>
-                <h1 className={classes.title}>Your Story Starts With Us.</h1>
+                <div style={{}} className='intro-talk'>
+                  
                 </div>
   
                 <br />
-                <div className='parallax-button'>
-              <a href='/Register'>
-              <Button className='para-btn' style={{backgroundColor:'#050124',border:'#9a7801 solid 5px',borderRadius:7,fontSize:25}}>Join now</Button>
-              </a>
-              </div>
+             
               
               </GridItem>
+              <Row className='landing-buttons'>
+                 <Col md={6} xs={6}>
+              <div className='parallax-button' style={{}}>
+              <a href='/Register'>
+              <Button className='para-btn' style={{backgroundColor:'#050124',border:'#9a7801 solid 5px',borderRadius:7,fontSize:15,padding:5}}>Get started</Button>
+              </a>
+              </div>
+                 </Col>
+                 <Col md={6} xs={6}>
+                 <div className='parallax-button'>
+              <a href='/login'>
+              <Button className='para-btn' style={{backgroundColor:'#050124',border:'#9a7801 solid 5px',borderRadius:7,fontSize:15,padding:5}}>Log In</Button>
+              </a>
+              </div>
+                 </Col>
+               </Row>
             
             </GridContainer>
           </div>

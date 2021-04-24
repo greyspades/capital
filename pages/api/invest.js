@@ -15,7 +15,8 @@ const invest=async(req,res)=>{
     users.findOne({username:req.body.item.username})
    .then((user)=>{
      let newBalance=req.body.item.investment+user.balance
-    users.updateOne({username:req.body.item.username},{$push:{investment:{amount:req.body.item.investment,pair:req.body.item.pair,date:req.body.item.date,status:req.body.item.status}}}).then((da)=>{
+    users.updateOne({username:req.body.item.username},{$push:{investment:{amount:req.body.item.investment,
+      pair:req.body.item.pair,date:req.body.item.date,status:req.body.item.status}}}).then((da)=>{
       res.send('SUCCESS')
       console.log('invested')
       

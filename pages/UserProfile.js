@@ -29,7 +29,7 @@ import BarChartIcon from '@material-ui/icons/BarChart'
 //import Axios from 'axios'
 import Header from "components/Header/Header.js";
 import HeaderLinks from "components/Header/HeaderLinks.js";
-
+import DoneOutline from '@material-ui/icons/DoneOutline'
 import { Modal } from 'react-responsive-modal';
 import PersonOutlineIcon from '@material-ui/icons/PersonOutline';
 import {
@@ -41,7 +41,7 @@ import {
   
   CardText,
   CardHeader,
-  
+  Alert,
   CardTitle,
   
   Card,
@@ -62,6 +62,10 @@ import cookieCutter from 'cookie-cutter'
 import bitcoinIcon from '../assets/img/bitcoin.svg'
 //import cookies from 'cookies'
 // core components
+import Cookie from 'js-cookie'
+import ExitToAppIcon from '@material-ui/icons/ExitToAppOutlined'
+import CreditCardIcon from '@material-ui/icons/CreditCardOutlined'
+import LocalAtmIcon from '@material-ui/icons/LocalAtmOutlined'
 import StarBorderIcon from '@material-ui/icons/StarBorder';
 import {
   chartExample1,
@@ -77,11 +81,11 @@ import { parseCookies } from "./api/cookies.js";
 import Table from 'rc-table'
 import { faYenSign } from "@fortawesome/free-solid-svg-icons";
 import 'react-dropdown/style.css'
-
+import Router from "next/router";
 const Popover=dynamic(()=>import('@idui/react-popover'),
   {ssr:false}
 )
-
+//import {Alert} from '@material-ui/core'
 //import useLocalStorage from 'react-hook-uselocalstorage';
 
 //const cookieCutter=dynamic(()=>import('cookie-cutter'),{ssr:false})
@@ -90,7 +94,8 @@ const Popover=dynamic(()=>import('@idui/react-popover'),
 
 function UserProfile({data},props) {
   //const [main,setMain]=useContext(UserContext)
-  const [user,setUser]=useState(()=>JSON.parse(data.key))
+  const [showConfirm,setShowConfirm]=useState(false)
+  const [user,setUser]=useState(()=>JSON.parse(data.key) || '')
   const [info,setInfo]=useState('')
   const [bigChartData, setbigChartData] = React.useState("data1");
   const setBgChartData = (name) => {
@@ -101,6 +106,7 @@ function UserProfile({data},props) {
     cryptoPrice:'',
     investment:'',
   })
+  const [getOut,setGetOut]=useState(false)
   const [crypto,setCrypto]=useState()
   const [showInvest,setShowInvest]=useState(false)
   const [addressShow,setAddress]=useState(false)
@@ -190,6 +196,16 @@ function UserProfile({data},props) {
       type:'',
       item:''
     })
+  }
+
+  const logOut=()=>{
+    cookieCutter.set('logged-in','') 
+    cookieCutter.set('key','')
+    Router.push('/')
+    
+  }
+  const showGetout=()=>{
+    getOut ? setGetOut(false) : setGetOut(true)
   }
 
   const OpenWithdraw=()=>setShowWithdraw(true)
@@ -284,8 +300,8 @@ function UserProfile({data},props) {
     
       return (
         <div>
-          <Button onClick={OpenWithdraw}>
-            Withdraw
+          <Button style={{width:50}} onClick={OpenWithdraw}>
+            <LocalAtmIcon style={{width:40,height:40,marginLeft:-18,color:'#9a7801'}} />
           </Button>
           <Modal classNames={{
             modal:'pop',
@@ -418,13 +434,13 @@ function UserProfile({data},props) {
         </div>
       ) 
   }
-
+  const closeGetout=()=>setGetOut(false)
   
   const invest=()=>{
     return (
       <div>
-        <Button onClick={openInvest}>
-          Invest
+        <Button style={{width:50}} onClick={openInvest}>
+         <CreditCardIcon style={{width:40,height:40,marginLeft:-18,color:'#9a7801'}} />
         </Button>
         <Modal classNames={{
           modal:'pop'
@@ -618,7 +634,60 @@ function UserProfile({data},props) {
         {...rest}
    
       />
+        <Modal closeOnOverlayClick={true} closeIcon={false} center onClose={()=>setGetOut(false)} open={getOut} classNames={{
+          modal:'log-out',
+          overlay:'modal-overlay',
+          modalContainer:'',
+          closeIcon:'close-icon'
+        }}>
+           <div className='get-ou'  style={{color:'white',backgroundColor:' #050124',height:'100%',width:'100%',
+            margin:'auto',position:'absolute',top:0,left:0,textAlign:'center',right:0
+          }}>
+           <div  className='get-out'>
+             Log Out?
+            
+           </div>
+           
+           <div style={{marginTop:20}}>
+             <Button onClick={logOut} >
+                <div style={{}}>
+                  Yes
+                </div>
+             </Button>
+             <Button onClick={closeGetout}>
+                No
+             </Button>
+               
+           </div>
+           </div>
+        </Modal>
+        
 
+        <Modal closeOnOverlayClick={true} closeIcon={false} center onClose={()=>setShowConfirm(false)} open={showConfirm} classNames={{
+          modal:'confirmation',
+          overlay:'modal-overlay',
+          modalContainer:'',
+          closeIcon:'close-icon'
+        }}> 
+            <div className='get-ou'  style={{color:'white',backgroundColor:' #050124',height:'100%',width:'100%',
+            margin:'auto',position:'absolute',top:0,left:0,textAlign:'center',right:0
+          }}>
+            
+            
+            <h3>
+              Confirm Investment
+            </h3>
+            <p >
+              Please upload proof of payment using th box bellow
+            </p>
+            <div style={{borderRadius:5,height:30,width:60,backgroundColor:'goldenrod',display:'grid',placeItems:"center", marginBottom:40, marginTop:40,marginLeft:'40%'}}>
+
+            </div>
+            <p>
+              Your Deposit will be processed immediately it has been confirmed
+            </p>
+          </div>
+        </Modal>
         <Row>
             <Col md={8}>
               <Row>
@@ -690,6 +759,7 @@ function UserProfile({data},props) {
                   </Col>
                 </Row>
               </CardHeader>
+                 
               <CardBody>
                 <div className="chart-area">
                   <Line
@@ -719,36 +789,13 @@ function UserProfile({data},props) {
               </CardBody>
             </Card>  
                 </Col>
-                <Col md={12}>
-                <Card className="card-chart">
-              <CardHeader>
-                <h5 className="card-category">Daily Sales</h5>
-                <CardTitle tag="h3">
-                  <i className="tim-icons icon-delivery-fast text-primary" />{" "}
-                  $3,500
-                </CardTitle>
-              </CardHeader>
-              <CardBody>
-                <div className="chart-area">
-                  <Bar
-                    data={chartExample3.data}
-                    options={chartExample3.options}
-                  />
-                </div>
-              </CardBody>
-            </Card>
-                </Col>
+               
 
               </Row>
             
             </Col>
 
-
-
-
-
-
-          <Col md={4} className='profile-card'>
+          <Col md={4} className=''>
             <Card className="card-user profile-card ">
               <CardBody>
                 <CardText />
@@ -758,7 +805,7 @@ function UserProfile({data},props) {
                   <div className="block block-three" />
                   <div className="block block-four" />
                   <a href="#pablo" onClick={(e) => e.preventDefault()}>
-                        <PersonOutlineIcon style={{width:100,height:100,color:'#9a7801',marginTop:50,marginBottom:-30}}  />
+                        <PersonOutlineIcon className='profile-icon' style={{width:100,height:100,color:'#9a7801',marginTop:50,marginBottom:-30}}   />
                     <h3 className="titl username">{user.username}</h3>
                   </a>
                   <Row>
@@ -806,7 +853,7 @@ function UserProfile({data},props) {
                            <div style={{marginTop:-35}}>
                            <Row>
                              <h3 style={{marginLeft:10}}>
-                               Total investment
+                               Total Invested
                              </h3>
                             </Row>
                             <Row className='balance-figure'>
@@ -823,15 +870,31 @@ function UserProfile({data},props) {
 
                 </Container>
                     
-                    <Container>
-                     <Row>
-                       <Col className='transaction-buttons' xs={6} md={6}>
+                    <Container className='transaction-group' style={{marginTop:20}}>
+                     <Row style={{backgroundColor:'#050124',borderRadius:5}}>
+                       <Col className='transaction-button' xs={5} md={3}>
                           {invest()}
+                          Invest
                        </Col>
                        
-                       <Col className='transaction-buttons' xs={6} md={6}>
+                       <Col className='transaction-button' xs={5} md={3}>
                           {withdraw()}
+                          Withdraw
                        </Col>
+                        <Col className='transaction-button' xs={5} md={3}>
+                          <Button style={{width:50}} onClick={()=>{setShowConfirm(true)}}>
+                           <DoneOutline style={{width:40,height:40,marginLeft:-18,color:'#9a7801'}} color='#9a7801' />
+                           
+                          </Button>
+                          <span style={{}}>Confirmation</span>
+                        </Col>
+                        <Col className='transaction-button bottom-button' xs={5} md={3}>
+                          <Button style={{width:40}} >
+                           <ExitToAppIcon style={{width:40,height:40,marginLeft:-18,color:'#9a7801'}} color='#9a7801' />
+                          
+                          </Button>
+                          Sign out
+                        </Col>
                      </Row>
                     </Container>
                         
@@ -844,17 +907,7 @@ function UserProfile({data},props) {
                 
               </CardBody>
               <CardFooter>
-                <div className="button-container">
-                  <Button className="btn-icon btn-round" color="facebook">
-                    <i className="fab fa-facebook" />
-                  </Button>
-                  <Button className="btn-icon btn-round" color="twitter">
-                    <i className="fab fa-twitter" />
-                  </Button>
-                  <Button className="btn-icon btn-round" color="google">
-                    <i className="fab fa-google-plus" />
-                  </Button>
-                </div>
+                
               </CardFooter>
             </Card>
           </Col>
@@ -889,7 +942,7 @@ UserProfile.getInitialProps=async ({req})=>{
   //info(user)
   
   return {
-    data:user
+    data:user || ''
   }
 }
 
