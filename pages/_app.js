@@ -112,8 +112,9 @@ export default class MyApp extends App {
           <title>Capital Investment Option</title>
           </Head>
           
+        
         <Component {...pageProps} />
-           
+        
         </UseContext>
        </MainContext>
       </React.Fragment>

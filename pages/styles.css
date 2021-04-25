@@ -914,7 +914,7 @@
         margin-left: 30px;
     }
     .policy-agreement {
-        margin-top: -30px;
+        margin-top: 30px;
         text-align: center;
     }
     .reg-username {
@@ -969,10 +969,11 @@
 
     }
     .logo {
-        height: 700px;
-        width: 700px;
-        margin-top: 100px;
+        height: 500px;
+        width: 500px;
+        margin-top: 20px;
         margin-left:-200px;
+    
         font-size: 70px;
         
        
@@ -1143,9 +1144,8 @@
         display: grid;
         place-items: center;
        margin-left: 50%;
-        margin-top: -350px;
-        margin-bottom: 170px;
-      
+        margin-top: -250px;
+        
     }
     .para-btn {
         width: 200px;

@@ -196,6 +196,10 @@ function UserProfile({data},props) {
       type:'',
       item:''
     })
+    setInvested({
+      done:false,
+      pending:false
+    })
   }
 
   const logOut=()=>{

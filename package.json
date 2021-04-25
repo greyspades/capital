@@ -83,6 +83,7 @@
     "react-dom": "16.13.1",
     "react-dropdown": "^1.9.2",
     "react-google-charts": "^3.0.15",
+    "react-google-recaptcha": "^2.1.0",
     "react-google-recaptcha-v3": "^1.8.0",
     "react-hook-uselocalstorage": "^1.0.3",
     "react-hyper-modal": "^1.2.11",
@@ -99,6 +100,7 @@
     "slick-carousel": "^1.8.1",
     "styled-components": "5.1.0",
     "use-local-storage": "^2.0.1",
+    "uuid": "^8.3.2",
     "webpack": "4.43.0"
   }
 }

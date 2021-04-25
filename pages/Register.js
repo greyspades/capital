@@ -1,4 +1,4 @@
-import React,{useState,useContext} from "react";
+import React,{useState,useContext,useRef} from "react";
 // @material-ui/core components
 import { makeStyles } from "@material-ui/core/styles";
 import InputAdornment from "@material-ui/core/InputAdornment";
@@ -51,7 +51,7 @@ import {
     Nav,
     Spinner
 } from "reactstrap"
-
+import ReCaptcha from 'react-google-recaptcha'
 //import cookie from 'js-cookie'
 import cookies from 'next-cookies'
 import styles from "assets/jss/nextjs-material-kit/pages/loginPage.js";
@@ -70,6 +70,8 @@ export default function Registration(props) {
   const [visible,setVisible]=useState('')
   //const [cookie, setCookie]=useCookies(['user'])
   //const {executeRecaptcha}=useGoogleReCaptcha()
+  const reRef=useRef()
+  
   const [spinner,setSpinner]=useState({
     pending:false,
     done:false,
@@ -82,6 +84,7 @@ export default function Registration(props) {
   const { ...rest } = props;
   
   
+
   const submit=(handleSubmit)=>{
     if(spinner.pending==false && spinner.done==false){
       return (
@@ -142,6 +145,9 @@ export default function Registration(props) {
           backgroundPosition: "top center"
         }}
       >
+        <div>
+        
+        </div>
         <div className={classes.container}>
           <GridContainer justify="center" >
             <GridItem xs={12} sm={6} md={8}>
@@ -157,10 +163,12 @@ export default function Registration(props) {
                     balance:0.00
                    
                   }
+                 
+                  //reRef.current.execute();
                   //cookie.set('details',user)
                   //console.log(props.token.firstname)
                   //console.log('me')
-                  
+                  //const token=await reRef.current.executeAsync()
                   if(values.password==values.nextPassword&&values.password.length>=8&&values.firstname&&values.lastname&&values.phone&&values.email&&values.username){
                     setUserDetails({
                       firstname:values.firstname,
@@ -207,6 +215,13 @@ export default function Registration(props) {
                 }}>
                   {({handleChange,handleSubmit,values})=>((
                     <form className={classes.form,'login'}>
+                        <ReCaptcha sitekey={process.env.NEXT_PUBLIC_RECAPTCHA_SITE_KEY}
+          ref={reRef}
+          size='invisible'
+          onChange={handleSubmit}
+          
+          
+          />
                     <CardHeader  style={{backgroundColor:"#050124"}} className={classes.cardHeader}>
                       <h4 style={{color:'white'}}>Sign Up</h4>
                       

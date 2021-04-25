@@ -8,11 +8,16 @@ import {
 } from 'reactstrap'
 import Admin from '../pages/api/admin'
 import Axios from 'axios'
+import Check from '@material-ui/icons/Check'
 
 const OverLord=({data})=>{
 
     const[main,setMain]=useState()
     const [mounted,setMounted]=useState(false)
+    const [spinner,setSpinner]=useState({
+        done:false,
+        pending:false
+    })
 useEffect(()=>{
    //console.log(JSON.serialise(data))
    Axios.get('/api/admin')
@@ -33,11 +38,42 @@ useEffect(()=>{
        }
    })
    },[])
-   function confirm(user){
-       let name='tim'
+
+   const spin=(key)=>{
+       if(spinner.pending==true && spinner.done==false ){
+        return(
+            <div>
+                <Spinner />
+            </div>
+        )
+       }
+       else if(spinner.pending=false && spinner.done==true){
+           return(
+               <div>
+                   <Check />
+               </div>
+           )
+       }
+   }
+   function confirm(name,id,amount){
+       //let name='tim'
+       let user={
+            username:name,
+            key:id,
+            amount:amount
+       }
+       setSpinner({
+           pending:true,
+           done:false
+       })
     Axios.post('/api/confirm',{user})
     .then((res)=>{
-        console.log(res.data)
+        if(res.data=='SUCCESS'){
+            setSpinner({
+                pending:false,
+                done:true
+            })
+        }
     })
    }
     if(mounted){
@@ -46,45 +82,46 @@ useEffect(()=>{
                 <Container>
                     <Row>
                         <h1>
-                            Admin 
+                            Overlord
                         </h1>
-                        <Button onClick={()=>{console.log(main[0].investment)}} >
-                            click
-                        </Button>
+                     
                     </Row>
                     <Row>
                         <Col>
-                        <h2>
+                        <div>
                         {main.map((data)=>(
                             <Container>
-                                <Row>
+                                <Row style={{backgroundColor:' #26253d'}}>
                                     <Col md={4} xs={4}>
                                         {data.username}
                                     </Col>
-                                    <Col md={4} xs={4}>
+                                    {spin()}
+                                    <Col md={4} xs={8} >
                                       {data.investment.map((req)=>(
-                                          <div>
-                                              {req.amount}
-                                          </div>
-                                      ))}
-                                    </Col>
-                                    <Col md={4} xs={4}>
-                                      {data.investment.map((req)=>(
-                                          <div>
+                                          <Row style={{backgroundColor:'black'}}>
+                                              <Col>
+                                              <Button onClick={(user)=>{confirm(data.username,req.key,req.amount)}}>
+                                                {req.amount}
+                                              
+                                             </Button>
+                                              </Col>
+                                              <Col>
                                               {req.pair}
-                                          </div>
+                                              </Col>
+                                            
+                                             
+                                          </Row>
+                                          
                                       ))}
                                     </Col>
+                                   
+
                                     
                                 </Row>
-                                <Row>
-                                    <Button onClick={(user)=>{confirm(data)}}>
-                                        Confirm?
-                                    </Button>
-                                </Row>
+                                
                             </Container>
                         ))}
-                        </h2> 
+                        </div> 
                         </Col>
                         
                     </Row>
