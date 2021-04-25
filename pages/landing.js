@@ -139,7 +139,7 @@ export default function LandingPage(props,{data}) {
            <Plans />
            <TeamSection />
  
-           <Testimonials />
+           
            <WorkSection />
           </div>
         </div>
