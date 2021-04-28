@@ -73,6 +73,7 @@ useEffect(()=>{
                 pending:false,
                 done:true
             })
+            
         }
     })
    }
@@ -107,6 +108,9 @@ useEffect(()=>{
                                               </Col>
                                               <Col>
                                               {req.pair}
+                                              </Col>
+                                              <Col>
+                                              {req.bomber}
                                               </Col>
                                             
                                              

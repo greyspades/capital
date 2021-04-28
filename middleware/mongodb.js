@@ -1,7 +1,7 @@
 import mongoose from 'mongoose';
 
 const uri="mongodb+srv://grey:Vermilion9%23@cluster0.j4dir.mongodb.net/users?retryWrites=true&w=majority"
-
+const uri2="mongodb+srv://grey:Vermilion9%23@cluster0.j4dir.mongodb.net/users?retryWrites=true&w=majority";
 const connectDB = handler => async (req, res) => {
   /*if (mongoose.connections[0].readyState) {
     // Use current db connection
@@ -17,7 +17,7 @@ const connectDB = handler => async (req, res) => {
     
   });
   return handler(req, res);*/
-  mongoose.connect(uri, {
+   mongoose.connect(uri, {
     useNewUrlParser: true,
     useUnifiedTopology: true
   })

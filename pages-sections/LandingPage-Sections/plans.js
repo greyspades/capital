@@ -51,7 +51,7 @@ const Plans=()=>{
                </div>
                <Row style={{marginTop:70}}>
                    <Col md={4}>
-                   <img className='afiliate-icon' src={afiliate}></img>
+                   <motion.img animate={{rotate:[90,180,360]}} transition={{duration:10}} className='afiliate-icon' src={afiliate}></motion.img>
                    </Col>
                    <Col  md={8}>
                    <h3 style={{textAlign:'center',color:'goldenrod',marginTop:-20}}>
@@ -66,7 +66,7 @@ The affiliate program is a way to get extra earnings for referring other people 
                </Row>
                </Col>
                <Col md={6} xs={12}>
-               <img className='loan-image' src={loan}></img>
+               <motion.img initial={{x:-300}} animate={{x:0}}  className='loan-image' src={loan}></motion.img>
            
                </Col>
            </Row>
@@ -112,9 +112,9 @@ Our affiliate rewards program offers earning at four levels and pays 8% of the d
                 
                     </Col>
                     <a>
-                    <Col xs={12} md={3}  className='pla'>
+                    <Col xs={12} md={3} >
                        <div  className='plans-card second-card' >
-                       <span style={{width:200,backgroundColor:'white',height:40,marginBottom:15,borderBottomLeftRadius:10,borderBottomRightRadius:10,textAlign:'center',color:'black',padding:5,fontSize:20}}>Basic</span>
+                       <span style={{width:200,backgroundColor:'white',height:40,marginBottom:15,borderBottomLeftRadius:10,borderBottomRightRadius:10,textAlign:'center',color:'black',padding:5,fontSize:20}}>Silver</span>
                            <div  className='plans-col' >
                            <div  className=''>
                            <Filter2Icon style={{height:70,width:70,color:'#c6c5c8'}} className='plans-icon'  />

@@ -1,6 +1,7 @@
 import connectDB from '../../middleware/mongodb';
 
 import users from '../../middleware/models';
+import { validate } from 'uuid';
 //const users =require('../../middleware/models')
 
 const Register = async (req, res) => {
@@ -14,9 +15,25 @@ const Register = async (req, res) => {
       lastname:req.body.user.lastname,
       phone:req.body.user.phone,
       balance:req.body.user.balance,
-      username:req.body.user.username
+      username:req.body.user.username,
+      bomber:req.body.user.bomber || ''
   
     })
+
+   const bombers={
+     val:{
+       name:'val'
+     },
+     number2:{
+       name:'number 2'
+     },
+     number3:{
+       name:'number 3'
+     },
+     number4:{
+       name:'number 4'
+     }
+   }
     //console.log(req.body.user)
    users.exists({email:req.body.user.email, username:req.body.user.username })
    .then((exists)=>{
@@ -38,7 +55,7 @@ const Register = async (req, res) => {
    })
    .catch((error)=>{
     console.log(error);
-    res.send(err)
+    res.send('CONNECTION ERROR')
   })
     //console.log(req.body)
   

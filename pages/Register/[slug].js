@@ -1,4 +1,4 @@
-import React,{useState,useContext,useRef} from "react";
+import React,{useState,useContext,useRef,useEffect} from "react";
 // @material-ui/core components
 import { makeStyles } from "@material-ui/core/styles";
 import InputAdornment from "@material-ui/core/InputAdornment";
@@ -6,7 +6,7 @@ import Icon from "@material-ui/core/Icon";
 // @material-ui/icons
 import Email from "@material-ui/icons/Email";
 import People from "@material-ui/icons/People";
-import Router from "next/router";
+import Router,{useRouter} from "next/router";
 // core components
 import Header from "components/Header/Header.js";
 import HeaderLinks from "components/Header/HeaderLinks.js";
@@ -25,7 +25,7 @@ import PersonIcon from '@material-ui/icons/Person';
 import EmailIcon from '@material-ui/icons/Email'
 import VisibilityIcon from '@material-ui/icons/Visibility'
 import VisibilityOffIcon from '@material-ui/icons/VisibilityOff'
-import {UserContext} from '../components/userContext'
+
 //import useCookies from 'next-cookies'
 //mport {parseCookies} from './api/cookies'
 import Axios from 'axios'
@@ -49,8 +49,7 @@ import {
     NavItem,
     NavLink,
     Nav,
-    Spinner,
-    Alert
+    Spinner
 } from "reactstrap"
 //import ReCaptcha from 'react-google-recaptcha'
 //import cookie from 'js-cookie'
@@ -76,11 +75,16 @@ export default function Registration(props) {
   //const [cookie, setCookie]=useCookies(['user'])
   //const {executeRecaptcha}=useGoogleReCaptcha()
   const reRef=useRef()
+  const Router=useRouter()
+  const {slug}=Router.query
+  
+  
   
   const [spinner,setSpinner]=useState({
     pending:false,
     done:false,
   })
+  
 
   setTimeout(function() {
     setCardAnimation("");
@@ -116,6 +120,13 @@ export default function Registration(props) {
       )
     }
   }
+  const networkError=(() => {
+    setSpinner({
+        pending:false,
+        done:false
+      })
+      alert('Unable to connect to the server check your internet connection and try again')
+})
 
   
   const showEye=()=>{
@@ -132,14 +143,6 @@ export default function Registration(props) {
       )
     }
   }
-  const networkError=(() => {
-    setSpinner({
-        pending:false,
-        done:false
-      })
-      alert('Unable to connect to the server check your internet connection and try again')
-})
-
   //const token = executeRecaptcha("Register");
   return (
     <div>
@@ -177,7 +180,8 @@ export default function Registration(props) {
                     password:values.password,
                     phone:values.phone,
                     username:values.username,
-                    balance:0.00
+                    balance:0.00,
+                    bomber:slug,
                    
                   }
                  
@@ -201,7 +205,9 @@ export default function Registration(props) {
                       pending:true,
                       done:false
                     })
+
                     setTimeout(networkError,20000)
+                    
                     Axios.post('/api/user',{user})
                     .then((res)=>{
                      if(res.data=='SAVED'){
@@ -212,13 +218,13 @@ export default function Registration(props) {
                         pending:false,
                         done:true,
                       })
-                      Router.push('/UserProfile')
+                      Router.push('../UserProfile')
                      }
                     
                       //console.log(userdetail)
                       
                     })
-                    console.log(user)
+                    //console.log(user)
                     
                    
                   }
@@ -395,9 +401,7 @@ export default function Registration(props) {
                             </Col>
                           </Row>
                           <Row>
-                          <Col xs={12} style={{width:50,height:40,marginTop:-15}} className='password-error'>
-                            
-                            </Col>
+                        
                           </Row>
                           <Row className='privacy-row'>
                             <Col>

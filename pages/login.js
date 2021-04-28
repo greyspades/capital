@@ -73,10 +73,10 @@ export default function LoginPage(props) {
   const submit=(handleSubmit)=>{
     if(spinner.pending==false && spinner.done==false){
       return (
-        <div className='get-started' style={{width:160,height:50,backgroundColor:'#050124'
+        <div className='get-started' style={{width:100,height:50,backgroundColor:'#050124'
                      ,borderRadius:5,textAlign:'center',padding:5}} onClick={handleSubmit}>
                       <p style={{color:'white',marginTop:6,fontSize:20}}>
-                      Get Started
+                      Sign in
                       </p>
                      </div>
       )
@@ -96,6 +96,14 @@ export default function LoginPage(props) {
       )
     }
   }
+  const networkError=(() => {
+    setSpinner({
+        pending:false,
+        done:false
+      })
+      alert('Unable to connect to the server check your internet connection and try again')
+})
+
 
   return (
     <div>
@@ -137,7 +145,7 @@ export default function LoginPage(props) {
                         done:false
                       })
 
-
+                      setTimeout(networkError,20000)
                       Axios.post('/api/login',{user})
                       .then((res)=>{
                         if(res.data.status=='LOG IN'){
@@ -155,7 +163,7 @@ export default function LoginPage(props) {
 
                       .catch((err)=>{
                         console.log(err)
-                        setError('Unnable to connect to the server please try again later')
+                        alert('Unnable to connect to the server please try again later')
                         setSpinner({
                           pending:false,
                           done:false

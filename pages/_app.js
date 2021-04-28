@@ -25,7 +25,7 @@ import './styles.css'
 import MainContext from '../components/context'
 import UseContext from '../components/userContext'
 //import {AnimatePresence} from 'framer-motion'
-import { GoogleReCaptchaProvider } from 'react-google-recaptcha-v3';
+//import { GoogleReCaptchaProvider } from 'react-google-recaptcha-v3';
 import PageChange from "components/PageChange/PageChange.js";
 
 import 'slick-carousel/slick/slick.css'

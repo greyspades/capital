@@ -42,6 +42,10 @@ var user = new Schema({
   withdrawal:{
     type:Array,
     required:false,
+  },
+  bomber:{
+    type:String,
+    required:false,
   }
 
 });

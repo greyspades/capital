@@ -3,8 +3,12 @@ import React,{useState,useEffect} from "react";
 import classNames from "classnames";
 // @material-ui/core components
 import { makeStyles } from "@material-ui/core/styles";
+//import {parseCookies} from '../middleware/cookies'
+//import Cookie from 'js-cookie'
+import cookieCutter from 'cookie-cutter'
+// @material-ui/icons
+import Router,  { useRouter } from 'next/router'
 
-import Head from 'next/head'
 
 // core components
 import Header from "components/Header/Header.js";
@@ -14,16 +18,20 @@ import GridItem from "components/Grid/GridItem.js";
 import Button from "components/CustomButtons/Button.js";
 import HeaderLinks from "components/Header/HeaderLinks.js";
 import Parallax from "components/Parallax/Parallax.js";
-import Plans from '../pages-sections/LandingPage-Sections/plans.js'
+import Plans from '../../pages-sections/LandingPage-Sections/plans.js'
 import styles from "assets/jss/nextjs-material-kit/pages/landingPage.js";
-
-import rc from '../assets/img/rc.jpg'
-import Slider from "../pages-sections/LandingPage-Sections/slider"
-import Testimonials from '../pages-sections/LandingPage-Sections/testimonials'
+import Converter from '../../pages-sections/LandingPage-Sections/converter'
+import rc from '../../assets/img/rc.jpg'
+import Slider from "../../pages-sections/LandingPage-Sections/slider"
+import Testimonials from '../../pages-sections/LandingPage-Sections/testimonials'
 import {CircularProgress} from '@material-ui/core'
 
 import {
- 
+  Input,
+  InputGroupAddon,
+  InputGroupText,
+  InputGroup,
+  Container,
   Row,
   Col,
   //Button
@@ -34,8 +42,8 @@ import ProductSection from "pages-sections/LandingPage-Sections/ProductSection.j
 import TeamSection from "pages-sections/LandingPage-Sections/TeamSection.js";
 import WorkSection from "pages-sections/LandingPage-Sections/WorkSection.js";
 
-
-import ActiveUsers from '../pages-sections/LandingPage-Sections/activeUsers'
+import SectionCarousel from 'pages-sections/Components-Sections/SectionCarousel.js'
+import ActiveUsers from '../../pages-sections/LandingPage-Sections/activeUsers'
 import cookies from "next-cookies";
 const dashboardRoutes = [];
 
@@ -48,6 +56,8 @@ export default function LandingPage(props,{data}) {
   const [parallax,setParallax]=useState(false)
   const [loading,setLoading]=useState(true)
   
+  const Router=useRouter()
+  const {slug}=Router.query
 
   useEffect(()=>{
     /*const handleResize=()=>{
@@ -55,12 +65,13 @@ export default function LandingPage(props,{data}) {
     }
     console.log(windowSize)
     window.addEventListener('resize',handleResize)
-    return ()=>widow.removeEventListener('resize',handleResize)*/
+    return ()=>window.removeEventListener('resize',handleResize)*/
     let width=window.innerWidth
     if(width<400){
       setParallax(true)
     }
-    console.log(window.innerWidth)
+    //console.log(slug)
+
     setLoading(false)
   },[])
   const Review=()=>{
@@ -72,11 +83,6 @@ export default function LandingPage(props,{data}) {
   const showLanding=()=>{
     return (
       <div>
-        <Head>
-          <title>
-            Capital Investment Option
-          </title>
-        </Head>
         <Header
           color="transparent"
           routes={dashboardRoutes}
@@ -104,10 +110,10 @@ export default function LandingPage(props,{data}) {
               </GridItem>
               <Row className='landing-buttons'>
                  <Col md={6} xs={6}>
-              <div className='parallax-button' style={{}}>
-              <a href='/Register'>
-              <Button className='para-btn' style={{backgroundColor:'#050124',border:'#9a7801 solid 5px',borderRadius:7,fontSize:15,padding:5}}>Get started</Button>
-              </a>
+              <div onClick={()=>{Router.push(`../Register/${slug}`)}} className='parallax-button' style={{}}>
+              
+              <Button  className='para-btn' style={{backgroundColor:'#050124',border:'#9a7801 solid 5px',borderRadius:7,fontSize:15,padding:5}}>Get started</Button>
+              
               </div>
                  </Col>
                  <Col md={6} xs={6}>

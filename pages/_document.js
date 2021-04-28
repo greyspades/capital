@@ -13,12 +13,15 @@ class MyDocument extends Document {
             content="width=device-width, initial-scale=1, shrink-to-fit=no"
           />
           <meta name="theme-color" content="#000000" />
-          <link rel="shortcut icon" href={require("assets/img/favicon.png")} />
+          <meta name='description' content='A Crypto Currency Investment Platform With over 6 years in the Finance world' />
+          <link sizes="180x180"  rel="shortcut icon" href={require("assets/img/rc.jpg")} />
+          <link sizes="180x180"  rel="icon" href={require("assets/img/rc.jpg")} />
           <link
             rel="apple-touch-icon"
-            sizes="76x76"
-            href={require("assets/img/apple-icon.png")}
+            sizes="90x90"
+            href={require("assets/img/rc.jpg")}
           />
+
           {/* Fonts and icons */}
           <link
             rel="stylesheet"
