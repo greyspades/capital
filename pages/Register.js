@@ -8,8 +8,8 @@ import Email from "@material-ui/icons/Email";
 import People from "@material-ui/icons/People";
 import Router from "next/router";
 // core components
-import Header from "components/Header/Header.js";
-import HeaderLinks from "components/Header/HeaderLinks.js";
+//import Header from "components/Header/Header.js";
+//import HeaderLinks from "components/Header/HeaderLinks.js";
 import Footer from "components/Footer/Footer.js";
 import GridContainer from "components/Grid/GridContainer.js";
 import GridItem from "components/Grid/GridItem.js";
@@ -143,13 +143,13 @@ export default function Registration(props) {
   //const token = executeRecaptcha("Register");
   return (
     <div>
-      <Header
+      {/*<Header
         absolute
         color="transparent"
         brand="Capital Investment"
         rightLinks={<HeaderLinks />}
         {...rest}
-      />
+      />*/}
       <div
         className={classes.pageHeader}
         style={{
