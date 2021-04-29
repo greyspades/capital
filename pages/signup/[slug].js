@@ -8,17 +8,17 @@ import Email from "@material-ui/icons/Email";
 import People from "@material-ui/icons/People";
 import Router,{useRouter} from "next/router";
 // core components
-import Header from "components/Header/Header.js";
-import HeaderLinks from "components/Header/HeaderLinks.js";
-import Footer from "components/Footer/Footer.js";
-import GridContainer from "components/Grid/GridContainer.js";
-import GridItem from "components/Grid/GridItem.js";
-import Button from "components/CustomButtons/Button.js";
-import Card from "components/Card/Card.js";
-import CardBody from "components/Card/CardBody.js";
-import CardHeader from "components/Card/CardHeader.js";
-import CardFooter from "components/Card/CardFooter.js";
-import CustomInput from "components/CustomInput/CustomInput.js";
+import Header from "./node_modules/components/Header/Header.js.js";
+import HeaderLinks from "./node_modules/components/Header/HeaderLinks.js.js";
+import Footer from "./node_modules/components/Footer/Footer.js.js";
+import GridContainer from "./node_modules/components/Grid/GridContainer.js.js";
+import GridItem from "./node_modules/components/Grid/GridItem.js.js";
+import Button from "./node_modules/components/CustomButtons/Button.js.js";
+import Card from "./node_modules/components/Card/Card.js.js";
+import CardBody from "./node_modules/components/Card/CardBody.js.js";
+import CardHeader from "./node_modules/components/Card/CardHeader.js.js";
+import CardFooter from "./node_modules/components/Card/CardFooter.js.js";
+import CustomInput from "./node_modules/components/CustomInput/CustomInput.js.js";
 import {Formik, validateYupSchema} from 'formik';
 import {motion} from 'framer-motion';
 import PersonIcon from '@material-ui/icons/Person';
@@ -54,7 +54,7 @@ import {
 //import ReCaptcha from 'react-google-recaptcha'
 //import cookie from 'js-cookie'
 import cookies from 'next-cookies'
-import styles from "assets/jss/nextjs-material-kit/pages/loginPage.js";
+import styles from "./node_modules/assets/jss/nextjs-material-kit/pages/loginPage.js.js";
 import ReCaptcha from 'react-google-recaptcha'
 import image from "assets/img/bg7.jpg";
 import PhoneIcon from '@material-ui/icons/Phone'

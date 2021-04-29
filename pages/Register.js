@@ -56,7 +56,7 @@ import {
 //import cookie from 'js-cookie'
 import cookies from 'next-cookies'
 import styles from "assets/jss/nextjs-material-kit/pages/loginPage.js";
-import ReCaptcha from 'react-google-recaptcha'
+//import ReCaptcha from 'react-google-recaptcha'
 import image from "assets/img/bg7.jpg";
 import PhoneIcon from '@material-ui/icons/Phone'
 //import { Container } from "@material-ui/core";
@@ -75,7 +75,7 @@ export default function Registration(props) {
   const [visible,setVisible]=useState('')
   //const [cookie, setCookie]=useCookies(['user'])
   //const {executeRecaptcha}=useGoogleReCaptcha()
-  const reRef=useRef()
+  //const reRef=useRef()
   
   const [spinner,setSpinner]=useState({
     pending:false,
@@ -159,11 +159,11 @@ export default function Registration(props) {
         }}
       >
         <div>
-        <ReCaptcha sitekey={process.env.NEXT_PUBLIC_RECAPTCHA_SITE_KEY}
+        {/*<ReCaptcha sitekey={process.env.NEXT_PUBLIC_RECAPTCHA_SITE_KEY}
           ref={reRef}
           size='invisible'
           
-          />
+      />*/}
         </div>
         <div className={classes.container}>
           <GridContainer justify="center" >
