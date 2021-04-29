@@ -11,12 +11,12 @@ import Router,  { useRouter } from 'next/router'
 
 
 // core components
-import Header from "../Register/node_modules/components/Header/Header.js.js.js";
-import Footer from "../Register/node_modules/components/Footer/Footer.js.js.js";
-import GridContainer from "../Register/node_modules/components/Grid/GridContainer.js.js.js";
-import GridItem from "../Register/node_modules/components/Grid/GridItem.js.js.js";
-import Button from "../Register/node_modules/components/CustomButtons/Button.js.js.js";
-import HeaderLinks from "../Register/node_modules/components/Header/HeaderLinks.js.js.js";
+import Header from "components/Header/Header.js";
+import Footer from "components/Footer/Footer.js";
+import GridContainer from "components/Grid/GridContainer.js";
+import GridItem from "components/Grid/GridItem.js";
+import Button from "components/CustomButtons/Button.js";
+import HeaderLinks from "components/Header/HeaderLinks.js";
 import Parallax from "components/Parallax/Parallax.js";
 import Plans from '../../pages-sections/LandingPage-Sections/plans.js'
 import styles from "assets/jss/nextjs-material-kit/pages/landingPage.js";
