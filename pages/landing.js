@@ -137,7 +137,7 @@ export default function LandingPage(props,{data}) {
            <TeamSection />
  
            
-           <WorkSection />
+           
           </div>
         </div>
         <Footer />

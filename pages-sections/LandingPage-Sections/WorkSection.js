@@ -7,7 +7,7 @@ import { makeStyles } from "@material-ui/core/styles";
 // core components
 import GridContainer from "components/Grid/GridContainer.js";
 import GridItem from "components/Grid/GridItem.js";
-import CustomInput from ".omponents/CustomInput/CustomInput.js";
+//import CustomInput from ".components/CustomInput/CustomInput.js";
 //import Button from "components/CustomButtons/Button.js";
 import {Button} from 'reactstrap'
 import styles from "assets/jss/nextjs-material-kit/pages/landingPageSections/workStyle.js";
@@ -18,7 +18,7 @@ export default function WorkSection() {
   const classes = useStyles();
   return (
     <div className={classes.section}>
-      <GridContainer justify="center">
+      {/*<GridContainer justify="center">
         <GridItem cs={12} sm={12} md={8}>
           <h2 className={classes.title}>Contact Us</h2>
           
@@ -60,7 +60,7 @@ export default function WorkSection() {
             </GridContainer>
           </form>
         </GridItem>
-      </GridContainer>
+              </GridContainer>*/}
     </div>
   );
 }
