@@ -5,9 +5,9 @@ import { makeStyles } from "@material-ui/core/styles";
 // @material-ui/icons
 
 // core components
-import GridContainer from "../../pages/Register/node_modules/components/Grid/GridContainer.js.js.js";
-import GridItem from "../../pages/Register/node_modules/components/Grid/GridItem.js.js.js";
-import CustomInput from "../../pages/Register/node_modules/components/CustomInput/CustomInput.js.js.js";
+import GridContainer from "components/Grid/GridContainer.js";
+import GridItem from "components/Grid/GridItem.js";
+import CustomInput from ".omponents/CustomInput/CustomInput.js";
 //import Button from "components/CustomButtons/Button.js";
 import {Button} from 'reactstrap'
 import styles from "assets/jss/nextjs-material-kit/pages/landingPageSections/workStyle.js";
