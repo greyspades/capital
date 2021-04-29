@@ -53,7 +53,7 @@ import {
     Alert
 } from "reactstrap"
 //import ReCaptcha from 'react-google-recaptcha'
-//import cookie from 'js-cookie'
+import cookie from 'js-cookie'
 import cookies from 'next-cookies'
 import styles from "assets/jss/nextjs-material-kit/pages/loginPage.js";
 //import ReCaptcha from 'react-google-recaptcha'

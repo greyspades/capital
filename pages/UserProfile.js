@@ -27,8 +27,8 @@ import {CircularProgress} from '@material-ui/core'
 import AttachMoneyIcon from '@material-ui/icons/AttachMoney'
 import BarChartIcon from '@material-ui/icons/BarChart'
 //import Axios from 'axios'
-import Header from "./Register/node_modules/components/Header/Header.js.js.js";
-import HeaderLinks from "./Register/node_modules/components/Header/HeaderLinks.js.js.js";
+import Header from "../components/Header/Header.js";
+import HeaderLinks from "components/Header/HeaderLinks.js";
 import DoneOutline from '@material-ui/icons/DoneOutline'
 import { Modal } from 'react-responsive-modal';
 import PersonOutlineIcon from '@material-ui/icons/PersonOutline';
