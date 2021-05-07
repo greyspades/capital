@@ -93,7 +93,7 @@ export default function Registration(props) {
   const { ...rest } = props;
   
   
-  const solve=()=>{
+  const solve=(user)=>{
     setSolved(true)
     Axios.post('/api/user',{user})
     .then((res)=>{
@@ -204,8 +204,24 @@ function captcha(value){
   console.log('captured',value)
 }
 
-const showCaptcha=(user)=>{
-  setCaptcha(true)
+const  showCaptcha=(user)=>{
+  //setCaptcha(true)
+  Axios.post('/api/user',{user})
+  .then((res)=>{
+   if(res.data=='SAVED'){
+    console.log('sent')
+    //console.log(res)
+    cookie.set('key',JSON.stringify(user))
+    /*setSpinner({
+      pending:false,
+      done:true,
+    })*/
+    Router.push('/UserProfile')
+   }
+  
+    //console.log(userdetail)
+  
+  })
   
 }
 
@@ -235,7 +251,7 @@ const showCaptcha=(user)=>{
             <GridItem xs={12} sm={6} md={8}>
               <Card className={classes[cardAnimaton],'register'}>
                 <Formik initialValues={{firstname:'',lastname:'',email:'',password:'',nextPassword:'',phone:'',username:'',}} onSubmit={(values)=>{
-                  /*let user={
+                  let user={
                     firstname:values.firstname,
                     lastname:values.lastname,
                     email:values.email,
@@ -244,12 +260,12 @@ const showCaptcha=(user)=>{
                     username:values.username,
                     balance:0.00
                    
-                  }*/
+                  }
                  
                   
                 
                   if(values.password==values.nextPassword&&values.password.length>=8 &&values.firstname&&values.lastname&&values.phone&&values.email&&values.username){
-                    setUser({
+                    /*setUser({
                       firstname:values.firstname,
                     lastname:values.lastname,
                     email:values.email,
@@ -257,7 +273,7 @@ const showCaptcha=(user)=>{
                     phone:values.phone,
                     username:values.username,
                     balance:0.00
-                    })
+                    })*/
                     showCaptcha(user)
                    
                     
