@@ -139,7 +139,7 @@ export default function LandingPage(props,{data}) {
               
           </div>
           <ActiveUsers />
-           <Plans />
+           <Plans bomber={slug} />
            <TeamSection />
  
            

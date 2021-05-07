@@ -20,21 +20,8 @@ const Register = async (req, res) => {
   
     })
 
-   const bombers={
-     val:{
-       name:'val'
-     },
-     number2:{
-       name:'number 2'
-     },
-     number3:{
-       name:'number 3'
-     },
-     number4:{
-       name:'number 4'
-     }
-   }
-    //console.log(req.body.user)
+  
+    console.log(req.body.user)
    users.exists({email:req.body.user.email, username:req.body.user.username })
    .then((exists)=>{
      if(exists){

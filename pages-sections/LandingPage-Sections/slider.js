@@ -114,7 +114,7 @@ const Slider=()=>{
                   <div className='talk-2' style={{color:'white'}}>
                     
 
-                  We are committed in creating wealth for you whenever, wherever. You can always trust us to deliver. *Capitalinvestmentoption* is always for their customers and will continually do our best to bring meaningful returns on investments as well as adopting an unlimited *CapitalLoan* protocol which is aimed at creating financial assistance to everyone across the platform.
+                  We are committed in creating wealth for you whenever, wherever. You can always trust us to deliver. Capital investment option is always for their customers and will continually do our best to bring meaningful returns on investments as well as adopting an unlimited *CapitalLoan* protocol which is aimed at creating financial assistance to everyone across the platform.
 
 
                   </div>
@@ -129,7 +129,7 @@ const Slider=()=>{
                       Getting Started
                     </h3>
                   <div className='afiliate-ctd'>
-To access the features and benefits being provided by *capitalinvestmentoption* kindly <span><a href='/Register'>sign up</a></span> with credentials and get started. It's quite easy and doesn't take much time, of which you get an offer to become an investor and earn profit. For that reason you mandated to complete the registration process. In order to register yourself as a member of capitalinvestmentoption.com, click on the "Create Account" button, fill in the registration form and press "Register". Your account is ready to use! You are obliged to provide only complete and accurate information about yourself (the "Registration Data") when registering as a Member.
+To access the features and benefits being provided by capital investment option kindly <span><a href='/Register'>sign up</a></span> with credentials and get started. It's quite easy and doesn't take much time, of which you get an offer to become an investor and earn profit. For that reason you mandated to complete the registration process. In order to register yourself as a member of capitalinvestmentoption.com, click on the "Create Account" button, fill in the registration form and press "Register". Your account is ready to use! You are obliged to provide only complete and accurate information about yourself (the "Registration Data") when registering as a Member.
 
                   </div>
 

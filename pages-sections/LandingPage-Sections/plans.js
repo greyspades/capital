@@ -13,6 +13,7 @@ import loan from '../../assets/img/loan.jpg'
 import cryptloan from '../../assets/img/cryptoloan.svg'
 import afiliate from '../../assets/img/afiliate.svg'
 //import LibraryAddCheck from 'material-ui'
+import Router from 'next/router'
 import {
     
     Container,
@@ -25,7 +26,11 @@ import {
    
 } from "reactstrap"
 
-const Plans=()=>{
+const Plans=(props)=>{
+    const Router=useRouter()
+    const {slug}=Router.query
+
+  
     return (
         <div className=''>
            <Row>
@@ -41,7 +46,7 @@ const Plans=()=>{
                     </h3>
                    <div className='loan-talk' style={{color:'white',padding:10}}>
                  
-                 Introducing Crypto Loans. With Capitalinvestmentoption.com, you can instantly borrow USD or EUR against your cryptocurrency assets. The loans range in size from $500 to $500,000 and in duration from a week to a year.
+                 Introducing Crypto Loans. With Capital investment option, you can instantly borrow USD or EUR against your cryptocurrency assets. The loans range in size from $500 to $500,000 and in duration from a week to a year.
                  </div>
                 
                    </Col>
@@ -86,7 +91,7 @@ Our affiliate rewards program offers earning at four levels and pays 8% of the d
                
                 <Row className='tales' style={{}}>
                     <Col xs={12} md={3} style={{}} className='plans-co'>
-                      <div className='plans-card plans-one'>
+                      <motion.div onClick={()=>{Router.push(`../Register/${props.bomber}`)}} whileHover={{scale:1.2}}  className='plans-card plans-one'>
                       <span style={{width:200,backgroundColor:'white',height:40,marginBottom:15,borderBottomLeftRadius:10,borderBottomRightRadius:10,textAlign:'center',color:'black',padding:5,fontSize:20}}>Basic</span>
                       <div  className='plans-col'>
                       
@@ -108,12 +113,12 @@ Our affiliate rewards program offers earning at four levels and pays 8% of the d
                                
                             </div>
                         </div>
-                       </div>
+                       </motion.div>
                 
                     </Col>
-                    <a>
+                    
                     <Col xs={12} md={3} >
-                       <div  className='plans-card second-card' >
+                       <motion.div onClick={()=>{Router.push(`../Register/${props.bomber}`)}} whileHover={{scale:1.2}}  className='plans-card second-card' >
                        <span style={{width:200,backgroundColor:'white',height:40,marginBottom:15,borderBottomLeftRadius:10,borderBottomRightRadius:10,textAlign:'center',color:'black',padding:5,fontSize:20}}>Silver</span>
                            <div  className='plans-col' >
                            <div  className=''>
@@ -133,12 +138,12 @@ Our affiliate rewards program offers earning at four levels and pays 8% of the d
                            </div>
                         </div>
                            </div>
-                       </div>
+                       </motion.div>
                     </Col>
                     
-                    </a>
+                    
                     <Col xs={12} md={3} className='plans-co'>
-                       <div  className='plans-card'>
+                       <motion.div onClick={()=>{Router.push(`../Register/${props.bomber}`)}} whileHover={{scale:1.2}}  className='plans-card'>
                        <span style={{width:200,backgroundColor:'white',height:40,marginBottom:15,borderBottomLeftRadius:10,borderBottomRightRadius:10,textAlign:'center',color:'black',padding:5,fontSize:20}}>Gold</span>
                            <div  className='plans-col'>
                            <div  className='' style={{marginTop:10}}>
@@ -157,7 +162,7 @@ Our affiliate rewards program offers earning at four levels and pays 8% of the d
                            </div>
                         </div>
                            </div>
-                       </div>
+                       </motion.div>
                     </Col>
                 </Row>
                

@@ -74,7 +74,8 @@ import {
   chartExample4,
 } from '../variables/charts'
 import dynamic from 'next/dynamic'
-import {Formik,Field,Form} from 'formik'
+import {Field,Form} from 'formik'
+import {Formik} from 'formik'
 import Axios from "axios";
 import { parseCookies } from "./api/cookies.js";
 
@@ -95,7 +96,7 @@ const Popover=dynamic(()=>import('@idui/react-popover'),
 function UserProfile({data},props) {
   //const [main,setMain]=useContext(UserContext)
   const [showConfirm,setShowConfirm]=useState(false)
-  const [user,setUser]=useState(()=>JSON.parse(data.key) || '')
+  //const [user,setUser]=useState(()=>JSON.parse(data.key) || '')
   const [info,setInfo]=useState('')
   const [bigChartData, setbigChartData] = React.useState("data1");
   const setBgChartData = (name) => {
@@ -131,7 +132,9 @@ function UserProfile({data},props) {
 
   
   useEffect((req)=>{
-   let item=user
+    const user=parseCookies(req)
+    let item=JSON.parse(user.key)
+    console.log(item)
    Axios.post('/api/info',{item})
    .then((res)=>{
      //console.log(res.data.balance)
@@ -322,7 +325,7 @@ function UserProfile({data},props) {
            let date=year+''+time
 
            let item={
-             username:user.username,
+             username:info.username,
              amount:value.amount,
              walletId:value.walletId,
              pair:value.pair,
@@ -465,7 +468,7 @@ function UserProfile({data},props) {
 
              let item={
               investment:value.investment,
-              username:user.username,
+              username:info.username,
               pair:value.pair,
               date:date,
               status:'pending'
@@ -810,7 +813,7 @@ function UserProfile({data},props) {
                   <div className="block block-four" />
                   <a href="#pablo" onClick={(e) => e.preventDefault()}>
                         <PersonOutlineIcon className='profile-icon' style={{width:100,height:100,color:'#9a7801',marginTop:50,marginBottom:-30}}   />
-                    <h3 className="titl username">{user.username}</h3>
+                    <h3 className="titl username">{info.username}</h3>
                   </a>
                   <Row>
                     <Col style={{}} md={6} xs={12}>
@@ -930,15 +933,16 @@ export default UserProfile;
   return {
     data:info
   }
-}*/
-UserProfile.getInitialProps=async ({req})=>{
+}
+
+export async function getStaticProps({req}) {
   /*let user=JSON.parse(cookieCutter.get('key'))
   Axios.post('/api/info',{user})
   .then((res)=>{
     return {
       data:res.data
     }
-  })*/
+  })
   
   const user=parseCookies(req)
   //const info=cookies.key
@@ -946,7 +950,7 @@ UserProfile.getInitialProps=async ({req})=>{
   //info(user)
   
   return {
-    data:user || ''
+    data:user.key || ''
   }
-}
+}*/
 

@@ -19,7 +19,7 @@ import CardBody from "components/Card/CardBody.js";
 import CardHeader from "components/Card/CardHeader.js";
 import CardFooter from "components/Card/CardFooter.js";
 import CustomInput from "components/CustomInput/CustomInput.js";
-import {Formik, validateYupSchema} from 'formik';
+import {Formik} from 'formik';
 import {motion} from 'framer-motion';
 import PersonIcon from '@material-ui/icons/Person';
 import EmailIcon from '@material-ui/icons/Email'
@@ -52,13 +52,14 @@ import {
     Spinner,
     Alert
 } from "reactstrap"
-//import ReCaptcha from 'react-google-recaptcha'
+import ReCaptcha from 'react-google-recaptcha'
 import cookie from 'js-cookie'
 import cookies from 'next-cookies'
 import styles from "assets/jss/nextjs-material-kit/pages/loginPage.js";
 //import ReCaptcha from 'react-google-recaptcha'
 import image from "assets/img/bg7.jpg";
 import PhoneIcon from '@material-ui/icons/Phone'
+import cookieCutter from "cookie-cutter";
 //import { Container } from "@material-ui/core";
 
 //dynamic import of google recaptcha
@@ -73,9 +74,12 @@ export default function Registration(props) {
   const [userDetails,setUserDetails]=useState(props || '')
   const [error,setError]=useState('')
   const [visible,setVisible]=useState('')
+  const [startCaptcha,setCaptcha]=useState(false)
   //const [cookie, setCookie]=useCookies(['user'])
   //const {executeRecaptcha}=useGoogleReCaptcha()
-  //const reRef=useRef()
+  const [solved,setSolved]=useState(false)
+  const reRef=useRef()
+  const [user,setUser]=useState()
   
   const [spinner,setSpinner]=useState({
     pending:false,
@@ -89,9 +93,31 @@ export default function Registration(props) {
   const { ...rest } = props;
   
   
+  const solve=()=>{
+    setSolved(true)
+    Axios.post('/api/user',{user})
+    .then((res)=>{
+     if(res.data=='SAVED'){
+      console.log('sent')
+      //console.log(res)
+      cookie.set('key',JSON.stringify(user))
+      setSpinner({
+        pending:false,
+        done:true,
+      })
+      Router.push('/UserProfile')
+     }
+    
+      //console.log(userdetail)
+    
+    })
+    
+    
+   
+  }
 
-  const submit=(handleSubmit)=>{
-    if(spinner.pending==false && spinner.done==false){
+  const submit=(handleSubmit,user)=>{
+    if(spinner.pending==false && spinner.done==false && startCaptcha==false){
       return (
         <div className='get-started' style={{width:160,height:50,backgroundColor:'#050124'
                      ,borderRadius:5,textAlign:'center',padding:5}} onClick={handleSubmit}>
@@ -115,8 +141,43 @@ export default function Registration(props) {
         </div>
       )
     }
+    else if(spinner.pending==false && spinner.done==false &&  startCaptcha==true){
+      return (
+        <div style={{display:'grid',placeItems:'center',}} className='captcha'>
+        <ReCaptcha sitekey={process.env.NEXT_PUBLIC_RECAPTCHA_SITE_KEY}
+  ref={reRef}
+  
+  onChange={captcha}
+  badge='inline'
+  onChange={solve}
+  
+  />
+        </div>
+      )
   }
-
+  
+  }
+  const registerUser=(user)=>{
+    console.log(user)
+    if(solved==true){
+      Axios.post('/api/user',{user})
+    .then((res)=>{
+     if(res.data=='SAVED'){
+      console.log('sent')
+      //console.log(res)
+      cookieCutter.set('key',JSON.stringify(user))
+      setSpinner({
+        pending:false,
+        done:true,
+      })
+      Router.push('/UserProfile')
+     }
+    
+      //console.log(userdetail)
+    
+    })
+    }
+  }
   
   const showEye=()=>{
     if(eye){
@@ -139,6 +200,14 @@ export default function Registration(props) {
       })
       alert('Unable to connect to the server check your internet connection and try again')
 })
+function captcha(value){
+  console.log('captured',value)
+}
+
+const showCaptcha=(user)=>{
+  setCaptcha(true)
+  
+}
 
   //const token = executeRecaptcha("Register");
   return (
@@ -159,18 +228,14 @@ export default function Registration(props) {
         }}
       >
         <div>
-        {/*<ReCaptcha sitekey={process.env.NEXT_PUBLIC_RECAPTCHA_SITE_KEY}
-          ref={reRef}
-          size='invisible'
-          
-      />*/}
+       
         </div>
         <div className={classes.container}>
           <GridContainer justify="center" >
             <GridItem xs={12} sm={6} md={8}>
               <Card className={classes[cardAnimaton],'register'}>
                 <Formik initialValues={{firstname:'',lastname:'',email:'',password:'',nextPassword:'',phone:'',username:'',}} onSubmit={(values)=>{
-                  let user={
+                  /*let user={
                     firstname:values.firstname,
                     lastname:values.lastname,
                     email:values.email,
@@ -179,47 +244,32 @@ export default function Registration(props) {
                     username:values.username,
                     balance:0.00
                    
-                  }
+                  }*/
                  
-                  //reRef.current.execute();
-                  //cookie.set('details',user)
-                  //console.log(props.token.firstname)
-                  //console.log('me')
-                  //const token=await reRef.current.executeAsync()
-                  if(values.password==values.nextPassword&&values.password.length>=8&&values.firstname&&values.lastname&&values.phone&&values.email&&values.username){
-                    setUserDetails({
+                  
+                
+                  if(values.password==values.nextPassword&&values.password.length>=8 &&values.firstname&&values.lastname&&values.phone&&values.email&&values.username){
+                    setUser({
                       firstname:values.firstname,
-                      lastname:values.lastname,
-                      username:values.username,
-                      email:values.email,
-                      phone:values.phone,
-                      password:values.password,
-                      //balance:0,
+                    lastname:values.lastname,
+                    email:values.email,
+                    password:values.password,
+                    phone:values.phone,
+                    username:values.username,
+                    balance:0.00
                     })
+                    showCaptcha(user)
+                   
+                    
+                    
                     //setMain({name:'maximus'})
-                    setSpinner({
+                    /*setSpinner({
                       pending:true,
                       done:false
-                    })
-                    setTimeout(networkError,20000)
-                    Axios.post('/api/user',{user})
-                    .then((res)=>{
-                     if(res.data=='SAVED'){
-                      console.log('sent')
-                      //console.log(res)
-                      cookie.set('key',JSON.stringify(user))
-                      setSpinner({
-                        pending:false,
-                        done:true,
-                      })
-                      Router.push('/UserProfile')
-                     }
-                    
-                      //console.log(userdetail)
-                      
-                    })
-                    console.log(user)
-                    
+                    })*/
+                    //setTimeout(networkError,30000)
+                   
+                    //registerUser(user)
                    
                   }
                   else if(values.password!=values.nextPassword&&values.firstname&&values.lastname&&values.email){
@@ -231,7 +281,7 @@ export default function Registration(props) {
                   else if(!values.firstname||!values.lastname||!values.email||!values.password||!values.phone)
                   alert('All fields are required')
                 }}>
-                  {({handleChange,handleSubmit,values})=>((
+                  {({handleChange,handleSubmit,values,user})=>((
                     <form className={classes.form,'login'}>
         
                     <CardHeader  style={{backgroundColor:"#050124"}} className={classes.cardHeader}>
@@ -241,7 +291,7 @@ export default function Registration(props) {
                     <p className={classes.divider}>Or Be Classical</p>
                       <div style={{}}>
                       <CardBody style={{}}>
-                      
+                     
                       <Container>
                         <Row style={{marginTop:-30,textAlign:'center'}}>
                           <Col style={{textAlign:'center'}}>
@@ -394,10 +444,10 @@ export default function Registration(props) {
                             </div>
                             </Col>
                           </Row>
-                          <Row>
-                          <Col xs={12} style={{width:50,height:40,marginTop:-15}} className='password-error'>
-                            
-                            </Col>
+                          <Row className='captcha-row' style={{width:'100%'}}>
+                         
+                          
+                          
                           </Row>
                           <Row className='privacy-row'>
                             <Col>
@@ -414,7 +464,7 @@ export default function Registration(props) {
                     <CardFooter className={classes.cardFooter}>
 
                      <Button color='transparent'>
-                            {submit(handleSubmit)}
+                            {submit(handleSubmit,user)}
                      </Button>
                      
                     </CardFooter>

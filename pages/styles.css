@@ -143,9 +143,7 @@
 .password-icon {
     
 }
-.second-card {
-    width: 300px;
-}
+
 .reg-mail-icon {
     margin-left: -29px;
     margin-bottom: -51px;
@@ -243,12 +241,8 @@
 .slider {
     height: 290px;
 }
-.plans-col {
-    
-}
-.plans-co {
 
-}
+
 .product-logo {
     height:200px;
     width: 200px;
@@ -714,6 +708,9 @@
     background-color: #050124;
     padding: 15px;
 }
+.captcha {
+    margin-left: 0px;
+}
 
 
 
@@ -794,9 +791,7 @@
     .blockquote {
         
     }
-    .plans-text {
-        
-    }
+    
     .tales {
         margin-left: 50px;
         
@@ -1279,6 +1274,14 @@
         margin-left: 0;
         display: grid;
         place-items: center;
+    }
+    .captcha {
+        display: grid;
+        place-items: center;
+       
+    }
+    .captcha-row {
+        width: 100%;
     }
     
 }

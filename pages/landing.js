@@ -105,7 +105,7 @@ export default function LandingPage(props,{data}) {
               <Row className='landing-buttons'>
                  <Col md={6} xs={6}>
               <div className='parallax-button' style={{}}>
-              <a href='/Register'>
+              <a href='/signup'>
               <Button className='para-btn' style={{backgroundColor:'#050124',border:'#9a7801 solid 5px',borderRadius:7,fontSize:15,padding:5}}>Get started</Button>
               </a>
               </div>
