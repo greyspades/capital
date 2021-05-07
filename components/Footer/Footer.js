@@ -69,7 +69,7 @@ export default function Footer(props) {
             className={aClasses}
             target="_blank"
           >
-            Capital Investment
+            Capital Investment Option
           </a>{" "}
             It all starts with You.
           
