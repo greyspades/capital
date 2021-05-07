@@ -31,7 +31,7 @@ useEffect(()=>{
        //let data=JSON.parse(res.data[0])
 
        setMain(res.data.info)
-       console.log(main)
+       console.log(res.data.info)
        setMounted(true)
        
        //console.log(main)
@@ -94,7 +94,9 @@ useEffect(()=>{
                             <Container>
                                 <Row style={{backgroundColor:' #26253d'}}>
                                     <Col md={4} xs={4}>
+                                    <div style={{fontSize:30}}>
                                         {data.username}
+                                        </div>
                                     </Col>
                                     {spin()}
                                     <Col md={4} xs={8} >
@@ -110,13 +112,21 @@ useEffect(()=>{
                                               {req.pair}
                                               </Col>
                                               <Col>
-                                              {req.bomber}
+                                              <div style={{fontSize:30}}>
+                                        {req.date}
+                                        </div>
                                               </Col>
+                                             
                                             
                                              
                                           </Row>
                                           
                                       ))}
+                                    </Col>
+                                    <Col>
+                                        <div style={{fontSize:30}}>
+                                        {data.bomber}
+                                        </div>
                                     </Col>
                                    
 

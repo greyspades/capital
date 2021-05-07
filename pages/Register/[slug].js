@@ -101,10 +101,10 @@ export default function Registration(props) {
       console.log('sent')
       //console.log(res)
       cookie.set('key',JSON.stringify(user))
-      setSpinner({
+      /*setSpinner({
         pending:false,
         done:true,
-      })
+      })*/
       Router.push('../UserProfile')
      }
     
@@ -259,7 +259,7 @@ const showCaptcha=(user)=>{
                     balance:0.00,
                     bomber:slug
                     })
-                    showCaptcha(user)
+                    showCaptcha()
                    
                     
                     

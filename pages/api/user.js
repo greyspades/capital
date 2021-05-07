@@ -16,7 +16,7 @@ const Register = async (req, res) => {
       phone:req.body.user.phone,
       balance:req.body.user.balance,
       username:req.body.user.username,
-      
+      bomber:req.body.user.bomber || ''
   
     })
 

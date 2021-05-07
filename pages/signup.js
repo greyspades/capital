@@ -93,7 +93,7 @@ export default function Registration(props) {
   const { ...rest } = props;
   
   
-  const solve=(user)=>{
+  const solve=()=>{
     setSolved(true)
     Axios.post('/api/user',{user})
     .then((res)=>{
@@ -101,10 +101,10 @@ export default function Registration(props) {
       console.log('sent')
       //console.log(res)
       cookie.set('key',JSON.stringify(user))
-      setSpinner({
+      /*setSpinner({
         pending:false,
         done:true,
-      })
+      })*/
       Router.push('/UserProfile')
      }
     
@@ -112,7 +112,7 @@ export default function Registration(props) {
     
     })
     
-    
+   
    
   }
 
@@ -204,25 +204,8 @@ function captcha(value){
   console.log('captured',value)
 }
 
-const  showCaptcha=(user)=>{
-  //setCaptcha(true)
-  Axios.post('/api/user',{user})
-  .then((res)=>{
-   if(res.data=='SAVED'){
-    console.log('sent')
-    //console.log(res)
-    cookie.set('key',JSON.stringify(user))
-    /*setSpinner({
-      pending:false,
-      done:true,
-    })*/
-    Router.push('/UserProfile')
-   }
-  
-    //console.log(userdetail)
-  
-  })
-  
+const showCaptcha=(user)=>{
+  setCaptcha(true) 
 }
 
   //const token = executeRecaptcha("Register");
@@ -265,7 +248,7 @@ const  showCaptcha=(user)=>{
                   
                 
                   if(values.password==values.nextPassword&&values.password.length>=8 &&values.firstname&&values.lastname&&values.phone&&values.email&&values.username){
-                    /*setUser({
+                    setUser({
                       firstname:values.firstname,
                     lastname:values.lastname,
                     email:values.email,
@@ -273,8 +256,8 @@ const  showCaptcha=(user)=>{
                     phone:values.phone,
                     username:values.username,
                     balance:0.00
-                    })*/
-                    showCaptcha(user)
+                    })
+                    showCaptcha()
                    
                     
                     

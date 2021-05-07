@@ -636,7 +636,7 @@ function UserProfile({data},props) {
       <Header
         absolute
         color="github"
-        brand="Capital Investment"
+        
         rightLinks={<HeaderLinks />}
         {...rest}
    
