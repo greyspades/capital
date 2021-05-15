@@ -273,9 +273,9 @@ const spin=()=>{
                     username:values.username,
                     balance:0.00
                     })
-                    console.log(user)
-                    setCaptcha(true)
-                    //solve()
+                    //console.log(user)
+                    //setCaptcha(true)
+                    solve()
                     setShowSpin(true)
                     //reRef.current.execute()
                     

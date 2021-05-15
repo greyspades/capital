@@ -277,9 +277,9 @@ const spin=()=>{
                     balance:0.00,
                     bomber:slug,
                     })
-                    console.log(user)
-                    setCaptcha(true)
-                    //solve()
+                    //console.log(user)
+                    //setCaptcha(true)
+                    solve()
                     setShowSpin(true)
                     //reRef.current.execute()
                     
@@ -289,7 +289,7 @@ const spin=()=>{
                       pending:true,
                       done:false
                     })*/
-                    setTimeout(networkError,60000)
+                    setTimeout(networkError,30000)
                    
                     //registerUser(user)
                    
