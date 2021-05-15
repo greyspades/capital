@@ -1,4 +1,4 @@
-import React,{useState,useContext,useRef,useEffect} from "react";
+import React,{useState,useContext,useRef} from "react";
 // @material-ui/core components
 import { makeStyles } from "@material-ui/core/styles";
 import InputAdornment from "@material-ui/core/InputAdornment";
@@ -6,10 +6,10 @@ import Icon from "@material-ui/core/Icon";
 // @material-ui/icons
 import Email from "@material-ui/icons/Email";
 import People from "@material-ui/icons/People";
-import Router,{useRouter} from "next/router";
+import Router from "next/router";
 // core components
-import Header from "components/Header/Header.js";
-import HeaderLinks from "components/Header/HeaderLinks.js";
+//import Header from "components/Header/Header.js";
+//import HeaderLinks from "components/Header/HeaderLinks.js";
 import Footer from "components/Footer/Footer.js";
 import GridContainer from "components/Grid/GridContainer.js";
 import GridItem from "components/Grid/GridItem.js";
@@ -19,19 +19,21 @@ import CardBody from "components/Card/CardBody.js";
 import CardHeader from "components/Card/CardHeader.js";
 import CardFooter from "components/Card/CardFooter.js";
 import CustomInput from "components/CustomInput/CustomInput.js";
-import {Formik, validateYupSchema} from 'formik';
+import {Formik} from 'formik';
 import {motion} from 'framer-motion';
 import PersonIcon from '@material-ui/icons/Person';
 import EmailIcon from '@material-ui/icons/Email'
 import VisibilityIcon from '@material-ui/icons/Visibility'
 import VisibilityOffIcon from '@material-ui/icons/VisibilityOff'
-
+//import {UserContext} from '../components/userContext'
 //import useCookies from 'next-cookies'
 //mport {parseCookies} from './api/cookies'
 import Axios from 'axios'
 import {Check} from '@material-ui/icons/Check'
 import {CircularProgress} from '@material-ui/core'
 import dynamic from 'next/dynamic'
+import Header from '../../components/Header/Header'
+import HeaderLinks from '../../components/Header/HeaderLinks'
 //import useLocalStorage from 'react-hook-uselocalStorage'
 //import useLocalStorage from '../hooks/localStorage'
 import {
@@ -49,17 +51,19 @@ import {
     NavItem,
     NavLink,
     Nav,
-    Spinner
+    Spinner,
+    Alert
 } from "reactstrap"
-//import ReCaptcha from 'react-google-recaptcha'
+import ReCaptcha from 'react-google-recaptcha'
 import cookie from 'js-cookie'
 import cookies from 'next-cookies'
 import styles from "assets/jss/nextjs-material-kit/pages/loginPage.js";
-import ReCaptcha from 'react-google-recaptcha'
+//import ReCaptcha from 'react-google-recaptcha'
 import image from "assets/img/bg7.jpg";
 import PhoneIcon from '@material-ui/icons/Phone'
+import cookieCutter from "cookie-cutter";
 //import { Container } from "@material-ui/core";
-import cookieCutter from 'cookie-cutter'
+import {useRouter} from 'next/router'
 //dynamic import of google recaptcha
 
 
@@ -79,12 +83,14 @@ export default function Registration(props) {
   const reRef=useRef()
   const [user,setUser]=useState()
   const Router=useRouter()
+
   const {slug}=Router.query
   
   const [spinner,setSpinner]=useState({
     pending:false,
     done:false,
   })
+  const [showSpin,setShowSpin]=useState(false)
 
   setTimeout(function() {
     setCardAnimation("");
@@ -94,8 +100,8 @@ export default function Registration(props) {
   
   
   const solve=()=>{
-    setSolved(true)
-    Axios.post('../api/user',{user})
+    //setSolved(true)
+    Axios.post('/api/user',{user})
     .then((res)=>{
      if(res.data=='SAVED'){
       console.log('sent')
@@ -112,19 +118,23 @@ export default function Registration(props) {
     
     })
     
-    
+   
    
   }
 
-  const submit=(handleSubmit,user)=>{
+  const submit=(handleSubmit)=>{
     if(spinner.pending==false && spinner.done==false && startCaptcha==false){
       return (
-        <div className='get-started' style={{width:160,height:50,backgroundColor:'#050124'
+        <div>
+          <button style={{border:0}}>
+          <div className='get-started' style={{width:160,height:50,backgroundColor:'#050124'
                      ,borderRadius:5,textAlign:'center',padding:5}} onClick={handleSubmit}>
                       <p style={{color:'white',marginTop:6,fontSize:20}}>
                       Get Started
                       </p>
                      </div>
+          </button>
+        </div>
       )
     }
     else if(spinner.pending==true && spinner.done==false){
@@ -141,13 +151,13 @@ export default function Registration(props) {
         </div>
       )
     }
-    else if(spinner.pending==false && spinner.done==false &&  startCaptcha==true){
+    else if(startCaptcha==true){
       return (
-        <div style={{display:'grid',placeItems:'center',}} className='captcha'>
+        <div style={{display:'grid',placeItems:'center',color:'red'}} className='captcha'>
         <ReCaptcha sitekey={process.env.NEXT_PUBLIC_RECAPTCHA_SITE_KEY}
   ref={reRef}
-  
-  onChange={captcha}
+  size='invisible'
+  //onChange={captcha}
   badge='inline'
   onChange={solve}
   
@@ -194,10 +204,8 @@ export default function Registration(props) {
     }
   }
   const networkError=(() => {
-    setSpinner({
-        pending:false,
-        done:false
-      })
+    setShowSpin(false)
+    setCaptcha(false)
       alert('Unable to connect to the server check your internet connection and try again')
 })
 function captcha(value){
@@ -205,20 +213,29 @@ function captcha(value){
 }
 
 const showCaptcha=(user)=>{
-  setCaptcha(true)
-  
+  setCaptcha(true) 
+}
+
+const spin=()=>{
+  if(showSpin==true){
+    return (
+      <div>
+          <Spinner />
+      </div>
+    )
+  }
 }
 
   //const token = executeRecaptcha("Register");
   return (
     <div>
-      {/*<Header
+      <Header
         absolute
         color="transparent"
-        brand="Capital Investment"
+        //brand="Capital Investment"
         rightLinks={<HeaderLinks />}
         {...rest}
-      />*/}
+      />
       <div
         className={classes.pageHeader}
         style={{
@@ -229,13 +246,14 @@ const showCaptcha=(user)=>{
       >
         <div>
        
+      
         </div>
         <div className={classes.container}>
           <GridContainer justify="center" >
             <GridItem xs={12} sm={6} md={8}>
               <Card className={classes[cardAnimaton],'register'}>
                 <Formik initialValues={{firstname:'',lastname:'',email:'',password:'',nextPassword:'',phone:'',username:'',}} onSubmit={(values)=>{
-                  /*let user={
+                  let user={
                     firstname:values.firstname,
                     lastname:values.lastname,
                     email:values.email,
@@ -244,7 +262,7 @@ const showCaptcha=(user)=>{
                     username:values.username,
                     balance:0.00
                    
-                  }*/
+                  }
                  
                   
                 
@@ -257,10 +275,13 @@ const showCaptcha=(user)=>{
                     phone:values.phone,
                     username:values.username,
                     balance:0.00,
-                    bomber:slug
+                    bomber:slug,
                     })
-                    showCaptcha()
-                   
+                    console.log(user)
+                    setCaptcha(true)
+                    //solve()
+                    setShowSpin(true)
+                    //reRef.current.execute()
                     
                     
                     //setMain({name:'maximus'})
@@ -268,7 +289,7 @@ const showCaptcha=(user)=>{
                       pending:true,
                       done:false
                     })*/
-                    //setTimeout(networkError,30000)
+                    setTimeout(networkError,60000)
                    
                     //registerUser(user)
                    
@@ -464,16 +485,24 @@ const showCaptcha=(user)=>{
                       </div>
                     <CardFooter className={classes.cardFooter}>
 
-                     <Button color='transparent'>
-                            {submit(handleSubmit,user)}
-                     </Button>
                      
+                          <div>
+                          {submit(handleSubmit)}
+                          </div>
+                     
+                    
                     </CardFooter>
                   </form>
                   ))}
                 </Formik>
                 
-                
+               <Container>
+                 <Row style={{width:'100%'}}>
+                 <div style={{display:'grid',alignItems:'center',marginLeft:'50%',marginTop:-60}}>
+                      {spin()}
+                     </div>
+                 </Row>
+               </Container>
               </Card>
             </GridItem>
           </GridContainer>

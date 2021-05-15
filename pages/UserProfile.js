@@ -114,6 +114,7 @@ function UserProfile({data},props) {
   const [pairIcon,setPairIcon]=useState(bitcoinIcon)
   const [pending,setPending]=useState(false)
   const [showWithdraw,setShowWithdraw]=useState(false)
+  const [walletId,setWalletId]=useState('')
   const [message,setMessage]=useState({
     item:{},
     show:false,
@@ -262,8 +263,8 @@ function UserProfile({data},props) {
         Your request is being processed
     </div>
     <div style={{color:'black',}}>
-      You are about to make an investment of {message.item.investment} which is equivalent to {crypto} to
-      the address  you will recieve an alert shortly, please inform us if you do not recieve your money within 24 hours
+      You are about to make an investment of {message.item.investment} which is equivalent to {crypto}
+      please pay the amount to the address <span style={{color:'blue'}}>{walletId}</span> please click the confirm button when done.
     </div>
         </CardBody>
         </Card>
@@ -484,10 +485,19 @@ function UserProfile({data},props) {
                  date:date,
                }
              })*/
+
+             if(value.pair=='ETH'){
+               setWalletId('19iDNESQnhrutam6WStfkPBQ2ANendYnm1')
+             }
+             else if(value.pair=='BTC'){
+               setWalletId('0x0eb64b011ac0c4F414f2A13eEAf32649A49E39A2')
+             }
+            
              setInvested({
                pending:true,
                done:false,
              })
+             
             Axios.post('/api/invest',{item})
              .then((res)=>{
                console.log(res.data)
@@ -635,7 +645,7 @@ function UserProfile({data},props) {
       <div style={{backgroundColor:' #050124',marginTop:50}} className="content">
       <Header
         absolute
-        color="github"
+        color="gold"
         
         rightLinks={<HeaderLinks />}
         {...rest}

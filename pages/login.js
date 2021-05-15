@@ -73,12 +73,16 @@ export default function LoginPage(props) {
   const submit=(handleSubmit)=>{
     if(spinner.pending==false && spinner.done==false){
       return (
-        <div className='get-started' style={{width:100,height:50,backgroundColor:'#050124'
+       <div>
+         <button style={{border:0}}>
+         <div className='get-started' style={{width:100,height:50,backgroundColor:'#050124'
                      ,borderRadius:5,textAlign:'center',padding:5}} onClick={handleSubmit}>
                       <p style={{color:'white',marginTop:6,fontSize:20}}>
                       Sign in
                       </p>
                      </div>
+         </button>
+       </div>
       )
     }
     else if(spinner.pending==true && spinner.done==false){
@@ -110,7 +114,7 @@ export default function LoginPage(props) {
       <Header
         absolute
         color="transparent"
-        brand="Capital Investment"
+        //brand="Capital Investment"
         rightLinks={<HeaderLinks />}
         {...rest}
       />
@@ -237,10 +241,9 @@ export default function LoginPage(props) {
                         <div style={{color:'red'}}>
                           {error}
                         </div>
-                    <Button size="lg" onClick={handleSubmit}
-                     style={{width:50,height:30,backgroundColor:'#050124',}}>
+                   
                      {submit(handleSubmit)}
-                    </Button>
+                  
                   </CardFooter>
                         </form>
                       )}

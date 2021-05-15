@@ -168,7 +168,8 @@
     margin-bottom:40px ;
 }
 .privacy-row {
-   margin-top: -40px;
+   margin-top: -60px;
+   margin-bottom: 30px;
 }
 .phone-icon {
     margin-left: -30px;
@@ -234,9 +235,9 @@
 .logo {
     height: 300px;
     width: 300px;
-    margin-top:-80px;
-    margin-left: -10px;
-    margin-bottom: -20px;
+    
+    margin-left: 7%;
+    margin-bottom: -35px;
 }
 .slider {
     height: 290px;
@@ -548,11 +549,12 @@
     
 }
 .parallax-button {
-    margin-top:10px;
+    
     display: grid;
     place-items: center;
-    margin-bottom: 40px;
+    margin-bottom: 35px;
     margin-left: 40%;
+    margin-top: -10px;
     
   
 }
@@ -856,7 +858,7 @@
     }
     .register {
         width: 700px;
-        height: 800px;
+        height: auto;
     }
     .mail {
         width: 220px;

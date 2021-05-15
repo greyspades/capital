@@ -32,6 +32,8 @@ import Axios from 'axios'
 import {Check} from '@material-ui/icons/Check'
 import {CircularProgress} from '@material-ui/core'
 import dynamic from 'next/dynamic'
+import Header from '../components/Header/Header'
+import HeaderLinks from '../components/Header/HeaderLinks'
 //import useLocalStorage from 'react-hook-uselocalStorage'
 //import useLocalStorage from '../hooks/localStorage'
 import {
@@ -85,6 +87,7 @@ export default function Registration(props) {
     pending:false,
     done:false,
   })
+  const [showSpin,setShowSpin]=useState(false)
 
   setTimeout(function() {
     setCardAnimation("");
@@ -94,7 +97,7 @@ export default function Registration(props) {
   
   
   const solve=()=>{
-    setSolved(true)
+    //setSolved(true)
     Axios.post('/api/user',{user})
     .then((res)=>{
      if(res.data=='SAVED'){
@@ -116,15 +119,19 @@ export default function Registration(props) {
    
   }
 
-  const submit=(handleSubmit,user)=>{
+  const submit=(handleSubmit)=>{
     if(spinner.pending==false && spinner.done==false && startCaptcha==false){
       return (
-        <div className='get-started' style={{width:160,height:50,backgroundColor:'#050124'
+        <div>
+          <button style={{border:0}}>
+          <div className='get-started' style={{width:160,height:50,backgroundColor:'#050124'
                      ,borderRadius:5,textAlign:'center',padding:5}} onClick={handleSubmit}>
                       <p style={{color:'white',marginTop:6,fontSize:20}}>
                       Get Started
                       </p>
                      </div>
+          </button>
+        </div>
       )
     }
     else if(spinner.pending==true && spinner.done==false){
@@ -141,13 +148,13 @@ export default function Registration(props) {
         </div>
       )
     }
-    else if(spinner.pending==false && spinner.done==false &&  startCaptcha==true){
+    else if(startCaptcha==true){
       return (
-        <div style={{display:'grid',placeItems:'center',}} className='captcha'>
+        <div style={{display:'grid',placeItems:'center',color:'red'}} className='captcha'>
         <ReCaptcha sitekey={process.env.NEXT_PUBLIC_RECAPTCHA_SITE_KEY}
   ref={reRef}
-  
-  onChange={captcha}
+  size='invisible'
+  //onChange={captcha}
   badge='inline'
   onChange={solve}
   
@@ -194,10 +201,8 @@ export default function Registration(props) {
     }
   }
   const networkError=(() => {
-    setSpinner({
-        pending:false,
-        done:false
-      })
+    setCaptcha(false)
+    setShowSpin(false)
       alert('Unable to connect to the server check your internet connection and try again')
 })
 function captcha(value){
@@ -208,16 +213,26 @@ const showCaptcha=(user)=>{
   setCaptcha(true) 
 }
 
+const spin=()=>{
+  if(showSpin==true){
+    return (
+      <div>
+          <Spinner />
+      </div>
+    )
+  }
+}
+
   //const token = executeRecaptcha("Register");
   return (
     <div>
-      {/*<Header
+      <Header
         absolute
         color="transparent"
-        brand="Capital Investment"
+        //brand="Capital Investment"
         rightLinks={<HeaderLinks />}
         {...rest}
-      />*/}
+      />
       <div
         className={classes.pageHeader}
         style={{
@@ -228,6 +243,7 @@ const showCaptcha=(user)=>{
       >
         <div>
        
+      
         </div>
         <div className={classes.container}>
           <GridContainer justify="center" >
@@ -257,8 +273,11 @@ const showCaptcha=(user)=>{
                     username:values.username,
                     balance:0.00
                     })
-                    showCaptcha()
-                   
+                    console.log(user)
+                    setCaptcha(true)
+                    //solve()
+                    setShowSpin(true)
+                    //reRef.current.execute()
                     
                     
                     //setMain({name:'maximus'})
@@ -266,7 +285,7 @@ const showCaptcha=(user)=>{
                       pending:true,
                       done:false
                     })*/
-                    //setTimeout(networkError,30000)
+                    setTimeout(networkError,60000)
                    
                     //registerUser(user)
                    
@@ -462,16 +481,22 @@ const showCaptcha=(user)=>{
                       </div>
                     <CardFooter className={classes.cardFooter}>
 
-                     <Button color='transparent'>
+                    
                             {submit(handleSubmit,user)}
-                     </Button>
-                     
+                    
+                    
                     </CardFooter>
                   </form>
                   ))}
                 </Formik>
                 
-                
+               <Container>
+                 <Row style={{width:'100%'}}>
+                 <div style={{display:'grid',alignItems:'center',marginLeft:'50%',marginTop:-60}}>
+                      {spin()}
+                     </div>
+                 </Row>
+               </Container>
               </Card>
             </GridItem>
           </GridContainer>
