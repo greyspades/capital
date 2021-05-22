@@ -9,6 +9,8 @@ import {
 import Admin from '../pages/api/admin'
 import Axios from 'axios'
 import Check from '@material-ui/icons/Check'
+import {CircularProgress} from '@material-ui/core'
+
 
 const OverLord=({data})=>{
 
@@ -18,6 +20,7 @@ const OverLord=({data})=>{
         done:false,
         pending:false
     })
+    const [showCheck,setCheck]=useState()
 useEffect(()=>{
    //console.log(JSON.serialise(data))
    Axios.get('/api/admin')
@@ -42,14 +45,23 @@ useEffect(()=>{
    const spin=(key)=>{
        if(spinner.pending==true && spinner.done==false ){
         return(
-            <div>
-                <Spinner />
+            <div style={{width:'100%'}}>
+               <CircularProgress style={{width:120,height:120,display:'grid',placeItems:'center',marginLeft:'40%'}} thickness={10} color='goldenrod' />
             </div>
         )
        }
        else if(spinner.pending=false && spinner.done==true){
            return(
-               <div>
+               <div style={{width:70,height:70,borderRadius:35,backgroundColor:'goldenrod'}}>
+                   <Check />
+               </div>
+           )
+       }
+   }
+   const check=()=>{
+       if(showCheck.pending==false && showCheck.done==true){
+           return (
+               <div style={{backgroundColor:'goldenrod'}}>
                    <Check />
                </div>
            )
@@ -88,23 +100,36 @@ useEffect(()=>{
                      
                     </Row>
                     <Row>
+                    {spin()}
+                    </Row>
+                    <Row>
                         <Col>
                         <div>
+                       
                         {main.map((data)=>(
                             <Container>
                                 <Row style={{backgroundColor:' #26253d'}}>
+                                
                                     <Col md={4} xs={4}>
-                                    <div style={{fontSize:30}}>
+                                    <div style={{fontSize:30,color:'white'}}>
                                         {data.username}
-                                        </div>
+                                    </div>
+                                    <div style={{fontSize:20,color:'white',marginTop:30,marginBottom:30}}>
+                                        {data.firstname} {data.lastname}
+                                    </div>
+                                    <div style={{fontSize:20,color:'white'}}>
+                                       Bal: ${data.balance}
+                                    </div>
                                     </Col>
-                                    {spin()}
+                                    
                                     <Col md={4} xs={8} >
                                       {data.investment.map((req)=>(
                                           <Row style={{backgroundColor:'black'}}>
-                                              <Col>
-                                              <Button onClick={(user)=>{confirm(data.username,req.key,req.amount)}}>
-                                                {req.amount}
+                                              <Col >
+                                              <Button style={{}} onClick={(user)=>{confirm(data.username,req.key,req.amount)}}>
+                                                <p style={{textAlign:'center',marginLeft:-30,padding:0,marginRight:-30}}>
+                                                    Confirm
+                                                </p>
                                               
                                              </Button>
                                               </Col>
@@ -112,10 +137,11 @@ useEffect(()=>{
                                               {req.pair}
                                               </Col>
                                               <Col>
-                                              <div style={{fontSize:30}}>
+                                              <div style={{}}>
                                         {req.date}
                                         </div>
                                               </Col>
+                                             
                                              
                                             
                                              
@@ -124,8 +150,8 @@ useEffect(()=>{
                                       ))}
                                     </Col>
                                     <Col>
-                                        <div style={{fontSize:30}}>
-                                        {data.bomber}
+                                        <div style={{color:'white',fontSize:20}}>
+                                        {data.bomber || 'no bomber'}
                                         </div>
                                     </Col>
                                    

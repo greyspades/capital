@@ -184,6 +184,7 @@ export default function Registration(props) {
         done:true,
       })
       Router.push('/UserProfile')
+      //console.log('your request is being processed')
      }
     
       //console.log(userdetail)

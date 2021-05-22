@@ -29,6 +29,7 @@ import BarChartIcon from '@material-ui/icons/BarChart'
 //import Axios from 'axios'
 import Header from "../components/Header/Header.js";
 import HeaderLinks from "components/Header/HeaderLinks.js";
+import Footer from '../components/Footer/Footer'
 import DoneOutline from '@material-ui/icons/DoneOutline'
 import { Modal } from 'react-responsive-modal';
 import PersonOutlineIcon from '@material-ui/icons/PersonOutline';
@@ -51,6 +52,7 @@ import {
   Col,
   UncontrolledTooltip,
 } from "reactstrap";
+
 
 //import Card from '../components/Card/Card'
 //import CardBody from '../components/Card/CardBody'
@@ -121,6 +123,7 @@ function UserProfile({data},props) {
     type:''
 
   })
+  const [loading,setLoad]=useState(true)
   const [response,setResponse]=useState()
   const [withdrawn, setWithdrawn]=useState({
     done:false,
@@ -140,6 +143,7 @@ function UserProfile({data},props) {
    .then((res)=>{
      //console.log(res.data.balance)
      setInfo(res.data)
+     setLoad(false)
      console.log(res.data.investment)
    })
   },[])
@@ -257,14 +261,14 @@ function UserProfile({data},props) {
     }
     else if(message.show && message.type=='invest'){
       return(
-        <Card style={{marginTop:50,backgroundColor:'white'}} className='address-card'>
-        <CardBody>
+        <Card style={{marginTop:50,backgroundColor:'white',width:320}} className='address-card'>
+    <CardBody style={{width:320}}>
         <div style={{fontSize:20,padding:5}}>
         Your request is being processed
     </div>
     <div style={{color:'black',}}>
       You are about to make an investment of {message.item.investment} which is equivalent to {crypto}
-      please pay the amount to the address <span style={{color:'blue'}}>{walletId}</span> please click the confirm button when done.
+      please pay the amount to the address <p style={{color:'blue'}}>{walletId}</p> please click the confirm button when done.
     </div>
         </CardBody>
         </Card>
@@ -303,6 +307,23 @@ function UserProfile({data},props) {
    
   }
 
+  const Load=()=>{
+    if(loading==true){
+      return (
+        <div>
+         <CircularProgress color='white' thickness={5} />
+        </div>
+      )
+    }
+    else if(loading==false){
+      return (
+        <div>
+          {info.username}
+        </div>
+      )
+    }
+  }
+
 
   const withdraw=()=>{
     
@@ -312,10 +333,14 @@ function UserProfile({data},props) {
             <LocalAtmIcon style={{width:40,height:40,marginLeft:-18,color:'#9a7801'}} />
           </Button>
           <Modal classNames={{
-            modal:'pop',
+            modal:'investment-modal',
+            overlay:'modal-overlay',
+            modalContainer:'',
+            closeIcon:'close-icon'
 
-          }} center open={showWithdraw} onClose={closeWithdraw}>
-          <div className='pop-content' style={{}}>
+          }} closeOnOverlayClick={true} center open={showWithdraw} onClose={closeWithdraw}>
+          <div className='pop-content' style={{color:'white',backgroundColor:' #050124',height:'100%',width:'100%',
+            margin:'auto',position:'absolute',top:0,left:0,textAlign:'center',right:0}}>
          
            
          <Formik initialValues={{amount:'',walletId:'',pair:''}} onSubmit={(value)=>{
@@ -450,10 +475,16 @@ function UserProfile({data},props) {
         <Button style={{width:50}} onClick={openInvest}>
          <CreditCardIcon style={{width:40,height:40,marginLeft:-18,color:'#9a7801'}} />
         </Button>
+        
         <Modal classNames={{
-          modal:'pop'
-        }} center open={showInvest} onClose={closeInvest}>
-        <div className='pop-content' >
+          
+          modal:'investment-modal',
+          overlay:'modal-overlay',
+          modalContainer:'',
+          closeIcon:'close-icon'
+        }} closeOnOverlayClick={true} center open={showInvest} onClose={closeInvest}>
+        <div className='pop-content' style={{color:'white',backgroundColor:' #050124',height:'100%',width:'100%',
+            margin:'auto',position:'absolute',top:0,left:0,textAlign:'center',right:0}} >
          
            
            <Formik initialValues={{investment:'',price:'',pair:''}} onSubmit={(value)=>{
@@ -474,7 +505,7 @@ function UserProfile({data},props) {
               date:date,
               status:'pending'
             }
-            console.log(date)
+            //console.log(date)
 
              /*setCoin(()=>{
                return {
@@ -528,6 +559,7 @@ function UserProfile({data},props) {
        Make Investment
      </h3>
      <div></div>
+     
       <Form>
         <div style={{}} className='pair-container'>
         <Field as='select' setFieldValue='BTC' onBlur={handleBlur} onChange={handleChange('pair')} placeholder='coin' className='pair-drop' name='pair' id='pair' value={values.pair} >
@@ -647,11 +679,13 @@ function UserProfile({data},props) {
 
   return (
     <>
-      <div style={{backgroundColor:' #050124',marginTop:50}} className="content">
+      <div style={{backgroundColor:' #050124',}} className="content">
       <Header
-        absolute
-        color="gold"
         
+        color="dark"
+        
+        changeColorOnScroll
+        style={{backgroundColor:"gold"}}
         rightLinks={<HeaderLinks />}
         {...rest}
    
@@ -711,114 +745,14 @@ function UserProfile({data},props) {
           </div>
         </Modal>
         <Row>
-            <Col md={8}>
-              <Row>
-                <Col md={12}>
-                <Card className="card-chart">
-              <CardHeader>
-                <Row>
-                  <Col className="text-left" sm="6">
-                    <h5 className="card-category">Total Shipments</h5>
-                    <CardTitle tag="h2">Activity</CardTitle>
-                  </Col>
-                  <Col sm="6">
-                    <ButtonGroup
-                      className="btn-group-toggle float-right"
-                      data-toggle="buttons"
-                    >
-                      <Button
-                        tag="label"
-                        className={classNames("btn-simple", {
-                          active: bigChartData === "data1",
-                        })}
-                        color="info"
-                        id="0"
-                        size="sm"
-                        onClick={() => setBgChartData("data1")}
-                      >
-                        <span className="d-none d-sm-block d-md-block d-lg-block d-xl-block">
-                          Accounts
-                        </span>
-                        <span className="d-block d-sm-none">
-                          <i className="tim-icons icon-single-02" />
-                        </span>
-                      </Button>
-                      <Button
-                        color="info"
-                        id="1"
-                        size="sm"
-                        tag="label"
-                        className={classNames("btn-simple", {
-                          active: bigChartData === "data2",
-                        })}
-                        onClick={() => setBgChartData("data2")}
-                      >
-                        <span className="d-none d-sm-block d-md-block d-lg-block d-xl-block">
-                          Purchases
-                        </span>
-                        <span className="d-block d-sm-none">
-                          <i className="tim-icons icon-gift-2" />
-                        </span>
-                      </Button>
-                      <Button
-                        color="info"
-                        id="2"
-                        size="sm"
-                        tag="label"
-                        className={classNames("btn-simple", {
-                          active: bigChartData === "data3",
-                        })}
-                        onClick={() => setBgChartData("data3")}
-                      >
-                        <span className="d-none d-sm-block d-md-block d-lg-block d-xl-block">
-                          Sessions
-                        </span>
-                        <span className="d-block d-sm-none">
-                          <i className="tim-icons icon-tap-02" />
-                        </span>
-                      </Button>
-                    </ButtonGroup>
-                  </Col>
-                </Row>
-              </CardHeader>
-                 
-              <CardBody>
-                <div className="chart-area">
-                  <Line
-                    data={chartExample1[bigChartData]}
-                    options={chartExample1.options}
-                  />
-                </div>
-              </CardBody>
-            </Card>
-                </Col>
-
-                <Col md={12}>
-                <Card className="card-chart">
-              <CardHeader>
-                <h5 className="card-category">Asset gain</h5>
-                <CardTitle tag="h3">
-                  <i className="tim-icons icon-bell-55 text-info" /> {info.balance-500 || ''}
-                </CardTitle>
-              </CardHeader>
-              <CardBody>
-                <div className="chart-area">
-                  <Line
-                    data={chartExample2.data}
-                    options={chartExample2.options}
-                  />
-                </div>
-              </CardBody>
-            </Card>  
-                </Col>
-               
-
-              </Row>
             
-            </Col>
 
           <Col md={4} className=''>
+          <h2 style={{marginTop:-30}}>
+                Dashboard
+              </h2>
             <Card className="card-user profile-card ">
+             
               <CardBody>
                 <CardText />
                 <div className="author">
@@ -828,7 +762,7 @@ function UserProfile({data},props) {
                   <div className="block block-four" />
                   <a href="#pablo" onClick={(e) => e.preventDefault()}>
                         <PersonOutlineIcon className='profile-icon' style={{width:100,height:100,color:'#9a7801',marginTop:50,marginBottom:-30}}   />
-                    <h3 className="titl username">{info.username}</h3>
+                    <h3 className="titl username">{Load()}</h3>
                   </a>
                   <Row>
                     <Col style={{}} md={6} xs={12}>
@@ -933,8 +867,119 @@ function UserProfile({data},props) {
               </CardFooter>
             </Card>
           </Col>
+          
+          <Col md={8}>
+          
+              <Row style={{}}>
+                <Col md={12}>
+                <h3 stle={{color:'white'}}>
+              Track Progress
+            </h3>
+                <Card className="card-chart">
+              <CardHeader>
+                <Row>
+                  <Col className="text-left" sm="6">
+                    <h5 className="card-category">Total Shipments</h5>
+                    <CardTitle tag="h2">Activity</CardTitle>
+                  </Col>
+                  <Col sm="6">
+                    <ButtonGroup
+                      className="btn-group-toggle float-right"
+                      data-toggle="buttons"
+                    >
+                      <Button
+                        tag="label"
+                        className={classNames("btn-simple", {
+                          active: bigChartData === "data1",
+                        })}
+                        color="info"
+                        id="0"
+                        size="sm"
+                        onClick={() => setBgChartData("data1")}
+                      >
+                        <span className="d-none d-sm-block d-md-block d-lg-block d-xl-block">
+                          Accounts
+                        </span>
+                        <span className="d-block d-sm-none">
+                          <i className="tim-icons icon-single-02" />
+                        </span>
+                      </Button>
+                      <Button
+                        color="info"
+                        id="1"
+                        size="sm"
+                        tag="label"
+                        className={classNames("btn-simple", {
+                          active: bigChartData === "data2",
+                        })}
+                        onClick={() => setBgChartData("data2")}
+                      >
+                        <span className="d-none d-sm-block d-md-block d-lg-block d-xl-block">
+                          Purchases
+                        </span>
+                        <span className="d-block d-sm-none">
+                          <i className="tim-icons icon-gift-2" />
+                        </span>
+                      </Button>
+                      <Button
+                        color="info"
+                        id="2"
+                        size="sm"
+                        tag="label"
+                        className={classNames("btn-simple", {
+                          active: bigChartData === "data3",
+                        })}
+                        onClick={() => setBgChartData("data3")}
+                      >
+                        <span className="d-none d-sm-block d-md-block d-lg-block d-xl-block">
+                          Sessions
+                        </span>
+                        <span className="d-block d-sm-none">
+                          <i className="tim-icons icon-tap-02" />
+                        </span>
+                      </Button>
+                    </ButtonGroup>
+                  </Col>
+                </Row>
+              </CardHeader>
+                 
+              <CardBody>
+                <div className="chart-area">
+                  <Line
+                    data={chartExample1[bigChartData]}
+                    options={chartExample1.options}
+                  />
+                </div>
+              </CardBody>
+            </Card>
+                </Col>
+
+                <Col md={12}>
+                <Card className="card-chart">
+              <CardHeader>
+                <h5 className="card-category">Asset gain</h5>
+                <CardTitle tag="h3">
+                  <i className="tim-icons icon-bell-55 text-info" /> {info.balance-500 || ''}
+                </CardTitle>
+              </CardHeader>
+              <CardBody>
+                <div className="chart-area">
+                  <Line
+                    data={chartExample2.data}
+                    options={chartExample2.options}
+                  />
+                </div>
+              </CardBody>
+            </Card>  
+                </Col>
+               
+
+              </Row>
+            
+            </Col>
             
         </Row>
+        <Footer />
       </div>
     </>
   );
