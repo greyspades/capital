@@ -5,11 +5,12 @@ import users from '../../middleware/models';
 
 const handler = async (req, res) => {
  
-  console.log(req.body)
+  //console.log(req.body)
   
-  users.exists({email:req.body.user.email})
+  /*users.exists({email:req.body.user.email})
   .then((exists)=>{
     if(exists){
+      console.log('found')
       users.findOne({email:req.body.user.email})
       .then((user)=>{
         if(user.password==req.body.user.password){
@@ -31,7 +32,25 @@ const handler = async (req, res) => {
       res.send({status:'WRONG DETAILS'})
       console.log('wrong details')
     }
-  })
+  })*/
+  users.findOne({email:req.body.user.email})
+      .then((user)=>{
+        console.log(user)
+        if(user.password==req.body.user.password){
+          
+          res.send({
+            status:'LOG IN',
+            info:user
+          })
+          
+          console.log('loged in')
+        }
+        else {
+          res.send({status:'WRONG DETAILS'})
+          console.log('wrong details')
+        }
+      })
+    
 }
   
 

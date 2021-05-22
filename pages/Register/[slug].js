@@ -117,6 +117,9 @@ export default function Registration(props) {
       //console.log(userdetail)
     
     })
+    .catch((err)=>{
+      console.log(err)
+    })
     
    
    

@@ -9,7 +9,7 @@ const Admin =async(req,res)=>{
         //console.log(JSON.parse(data))
         
         //const info=data.stringify()
-        //console.log(data)
+        console.log(data)
         let item={
             status:'DONE',
             info:data

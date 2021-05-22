@@ -27,7 +27,7 @@ const connectDB = handler => async (req, res) => {
   })
   .catch((err)=>{
     console.log(err)
-    res.send(JSON.stringify(err))
+    res.send(err)
   })
   
   

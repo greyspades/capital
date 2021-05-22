@@ -27,6 +27,7 @@ import VisibilityOffIcon from '@material-ui/icons/VisibilityOff'
 import Axios from 'axios'
 import styles from "assets/jss/nextjs-material-kit/pages/loginPage.js";
 import cookieCutter from 'cookie-cutter'
+import cookie from 'js-cookie'
 import image from "assets/img/bg7.jpg";
 import LockIcon from '@material-ui/icons/Lock'
 import { Container,Col,Row } from "reactstrap";
@@ -149,18 +150,19 @@ export default function LoginPage(props) {
                         done:false
                       })
 
-                      setTimeout(networkError,20000)
+                      setTimeout(networkError,40000)
                       Axios.post('/api/login',{user})
                       .then((res)=>{
                         if(res.data.status=='LOG IN'){
                           console.log(res.data)
                         cookieCutter.set('logged-in', 'true')
-                        cookieCutter.set('key',JSON.stringify(res.data.info))
-                        setSpinner({
+                        //cookieCutter.set('key',JSON.stringify(res.data.info))
+                        cookie.set('key',JSON.stringify(res.data.info))
+                        /*setSpinner({
                           pending:false,
                           done:true,
-                        })
-                        setMain(res.data.info)
+                        })*/
+                        //setMain(res.data.info)
                         Router.push('/UserProfile')
                         }
                       })

@@ -640,6 +640,11 @@ function UserProfile({data},props) {
   }
   const { ...rest } = props;
 
+  const signOut=()=>{
+    cookieCutter.set('key', '')
+    Router.push('/')
+  }
+
   return (
     <>
       <div style={{backgroundColor:' #050124',marginTop:50}} className="content">
@@ -906,7 +911,7 @@ function UserProfile({data},props) {
                           <span style={{}}>Confirmation</span>
                         </Col>
                         <Col className='transaction-button bottom-button' xs={5} md={3}>
-                          <Button style={{width:40}} >
+                          <Button style={{width:40}} onClick={signOut} >
                            <ExitToAppIcon style={{width:40,height:40,marginLeft:-18,color:'#9a7801'}} color='#9a7801' />
                           
                           </Button>
