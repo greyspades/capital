@@ -135,7 +135,7 @@ export default function LandingPage(props,{data}) {
           </div>
           <div>
           <div className={classes.containerFluid}>
-          <Slider />
+          <Slider bomber={slug} />
               
           </div>
           <ActiveUsers />

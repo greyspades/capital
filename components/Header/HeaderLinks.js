@@ -82,12 +82,12 @@ export default function HeaderLinks(props) {
           Sign Up
         </Button>
       </ListItem>
-      <ListItem className={classes.listItem}>
-        {/*<Tooltip title="Delete">
+      {/*<ListItem className={classes.listItem}>
+        <Tooltip title="Delete">
           <IconButton aria-label="Delete">
             <DeleteIcon />
           </IconButton>
-        </Tooltip>*/}
+        </Tooltip>
         <Tooltip
           id="instagram-twitter"
           title="Follow us on twitter"
@@ -120,7 +120,7 @@ export default function HeaderLinks(props) {
             <i className={classes.socialIcons + " fab fa-facebook"} />
           </Button>
         </Tooltip>
-      </ListItem>
+      </ListItem>*/}
       <ListItem className={classes.listItem}>
         <Tooltip
           id="instagram-tooltip"
@@ -130,7 +130,7 @@ export default function HeaderLinks(props) {
         >
           <Button
             color="transparent"
-            href=""
+            href="https://instagram.com/capitalinvestmentoption?utm_medium=copy_link"
             target="_blank"
             className={classes.navLink}
           >

@@ -1,4 +1,4 @@
-import React,{useState,useContext,useRef} from "react";
+import React,{useState,useContext,useRef,useEffect} from "react";
 // @material-ui/core components
 import { makeStyles } from "@material-ui/core/styles";
 import InputAdornment from "@material-ui/core/InputAdornment";
@@ -84,7 +84,7 @@ export default function Registration(props) {
   const [user,setUser]=useState()
   const Router=useRouter()
 
-  const {slug}=Router.query
+  const {slug}=Router.query || ''
   
   const [spinner,setSpinner]=useState({
     pending:false,
@@ -97,6 +97,10 @@ export default function Registration(props) {
   }, 700);
   const classes = useStyles();
   const { ...rest } = props;
+
+  useEffect(()=>{
+    console.log(slug)
+  })
   
   
   const solve=()=>{

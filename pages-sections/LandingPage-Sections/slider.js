@@ -19,6 +19,7 @@ import {
     Col,
     Button
 } from 'reactstrap'
+import Router from 'next/router'
 import Slide from 'react-slick'
 //import SimpleImageSlider from "react-simple-image-slider";
 const images = [
@@ -34,7 +35,7 @@ const images = [
 
 
 
-const Slider=()=>{
+const Slider=(props)=>{
     const [main,setMain]=useState()
 
 
@@ -129,7 +130,7 @@ const Slider=()=>{
                       Getting Started
                     </h3>
                   <div className='afiliate-ctd'>
-To access the features and benefits being provided by capital investment option kindly <span><a href='/Register'>sign up</a></span> with credentials and get started. It's quite easy and doesn't take 
+To access the features and benefits being provided by capital investment option kindly<Button onClick={()=>{Router.push(`../Register/${props.bomber}`)}} ><span style={{marginLeft:-30,marginRight:-30,marginTop:-7,marginBottom:-7}}>Sign up</span></Button> with credentials and get started. It's quite easy and doesn't take 
 much time, of which you get an offer to become an investor and earn profit. For that reason you mandated to complete the registration process. In order to register yourself as a member of capitalinvestmentoption.com, click on the "Create Account" button, fill in the registration form and press "Register". Your account is ready to use! You are obliged to provide only complete and accurate information about yourself (the "Registration Data") when registering as a Member.
 
                   </div>
