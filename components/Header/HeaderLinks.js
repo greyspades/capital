@@ -8,6 +8,9 @@ import List from "@material-ui/core/List";
 import ListItem from "@material-ui/core/ListItem";
 import Tooltip from "@material-ui/core/Tooltip";
 import Icon from "@material-ui/core/Icon";
+import YouTubeIcon from '@material-ui/icons/YouTube';
+import PinterestIcon from '@material-ui/icons/Pinterest';
+import LinkedInIcon from '@material-ui/icons/LinkedIn';
 
 // @material-ui/icons
 import { Apps, CloudDownload } from "@material-ui/icons";
@@ -82,25 +85,22 @@ export default function HeaderLinks(props) {
           Sign Up
         </Button>
       </ListItem>
-      {/*<ListItem className={classes.listItem}>
-        <Tooltip title="Delete">
-          <IconButton aria-label="Delete">
-            <DeleteIcon />
-          </IconButton>
-        </Tooltip>
+      <ListItem className={classes.listItem}>
+        
+        
         <Tooltip
-          id="instagram-twitter"
-          title="Follow us on twitter"
+          id="instagram-Pinterest"
+          title="Follow us on Pinterest"
           placement={"top"}
           classes={{ tooltip: classes.tooltip }}
         >
           <Button
-            href=""
+            href="https://www.google.com/url?sa=t&source=web&rct=j&url=https://www.pinterest.com/Capitalinvestmentoption/&ved=2ahUKEwjVmPDpm-HwAhVExIUKHcrRBvcQFjABegQIBhAC&usg=AOvVaw3GPtVggFT7_dgREoPGwJFV"
             target="_blank"
             color="transparent"
             className={classes.navLink}
           >
-            <i className={classes.socialIcons + " fab fa-twitter"} />
+            <i className={classes.socialIcons + " fab fa-pinterest"} />
           </Button>
         </Tooltip>
       </ListItem>
@@ -113,14 +113,14 @@ export default function HeaderLinks(props) {
         >
           <Button
             color="transparent"
-            href=""
+            href="https://www.facebook.com/capitalinvestmentoption.uk/"
             target="_blank"
             className={classes.navLink}
           >
             <i className={classes.socialIcons + " fab fa-facebook"} />
           </Button>
         </Tooltip>
-      </ListItem>*/}
+      </ListItem>
       <ListItem className={classes.listItem}>
         <Tooltip
           id="instagram-tooltip"
@@ -135,6 +135,40 @@ export default function HeaderLinks(props) {
             className={classes.navLink}
           >
             <i className={classes.socialIcons + " fab fa-instagram"} />
+          </Button>
+        </Tooltip>
+      </ListItem>
+      <ListItem className={classes.listItem}>
+        <Tooltip
+          id="Youtube-tooltip"
+          title="Follow us on Youtube"
+          placement={"top"}
+          classes={{ tooltip: classes.tooltip }}
+        >
+          <Button
+            color="transparent"
+            href="https://youtube.com/channel/UCecLKqQRkiHT9kp5iKjSAmg"
+            target="_blank"
+            className={classes.navLink}
+          >
+             <i className={classes.socialIcons + " fab fa-youtube"} />
+          </Button>
+        </Tooltip>
+      </ListItem>
+      <ListItem className={classes.listItem}>
+        <Tooltip
+          id="Linkedin-tooltip"
+          title="Follow us on Linked in"
+          placement={"top"}
+          classes={{ tooltip: classes.tooltip }}
+        >
+          <Button
+            color="transparent"
+            href="https://www.linkedin.com/in/capital-investment-option-412501182"
+            target="_blank"
+            className={classes.navLink}
+          >
+             <i className={classes.socialIcons + " fab fa-linkedin"} />
           </Button>
         </Tooltip>
       </ListItem>
