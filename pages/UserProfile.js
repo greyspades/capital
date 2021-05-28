@@ -415,12 +415,7 @@ const fileUpload=()=>{
       )
     }
   }
-  const place=()=>{
-    return (
-      'hey'
-    )
-  }
-
+  const place=()=>''
 
   const withdraw=()=>{
     
@@ -660,7 +655,7 @@ const fileUpload=()=>{
 }} >
   {({handleBlur,handleSubmit,handleChange,values})=>(
    <div style={{height:500,padding:10}}>
-     <h3 style={{color:'white',textAlign:'center'}}>
+     <h3 style={{color:'white',marginRight:30}}>
        Make Investment
      </h3>
      <div></div>

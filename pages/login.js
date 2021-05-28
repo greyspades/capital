@@ -150,7 +150,7 @@ export default function LoginPage(props) {
                         done:false
                       })
 
-                      setTimeout(networkError,60000)
+                      setTimeout(networkError,40000)
                       Axios.post('/api/login',{user})
                       .then((res)=>{
                         if(res.data.status=='LOG IN'){
