@@ -78,9 +78,9 @@ import {
 import dynamic from 'next/dynamic'
 import {Field,Form} from 'formik'
 import {Formik} from 'formik'
-import Axios from "axios";
+import Axios, {post} from "axios";
 import { parseCookies } from "./api/cookies.js";
-
+import CryptoCompare from "react-crypto-compare";
 import Table from 'rc-table'
 import { faYenSign } from "@fortawesome/free-solid-svg-icons";
 import 'react-dropdown/style.css'
@@ -133,21 +133,105 @@ function UserProfile({data},props) {
     pending:false,
     done:false,
   })
+  const [file,setFile]=useState(null)
 
+  const [confirmSpin,setConfirmSpin]=useState({
+    pending:false,
+    done:false,
+  })
+
+  const [InvestAmount,setInvestAmount]=useState()
+
+  const [pair,setPair]=useState(" ")
+  const [proof,setProof]=useState('')
   
   useEffect((req)=>{
     const user=parseCookies(req)
     let item=JSON.parse(user.key)
-    console.log(item)
+    //console.log(item)
    Axios.post('/api/info',{item})
    .then((res)=>{
      //console.log(res.data.balance)
      setInfo(res.data)
      setLoad(false)
-     console.log(res.data.investment)
+     //console.log(res.data.investment)
+   })
+   .catch((err)=>{
+     console.log(err)
+     alert('Unnable to connect, please refresh the page')
    })
   },[])
+
+  const conSpin=()=>{
+    if(confirmSpin.pending==true && confirmSpin.done==false){
+      return (
+        <CircularProgress thickness={10} />
+      )
+    }
+    else if(confirmSpin.pending==false && confirmSpin.done==true){
+      return (
+        <Check />
+      )
+    }
+  }
+const closeConfirmSpinner=()=>{
+  setConfirmSpin({
+    pending:false,
+    done:true
+  })
+  setShowConfirm(false)
+}
   
+  
+const fileChange=(e)=>{
+  setFile(
+    e.target.files[0]
+  )
+}
+const closeConfirm=()=>{
+  setShowConfirm(false)
+  setConfirmSpin({
+    done:false,
+    pending:false
+  })
+}
+
+const fileSubmit=(e)=>{
+  e.preventDefault()
+  let user={
+    username:info.username,
+    file:file
+  }
+  let peep='tim'
+  setConfirmSpin({
+    pending:true,
+    done:false,
+  })
+  setTimeout(closeConfirmSpinner,10000)
+  // Stop form submit
+    fileUpload(file).then((response)=>{
+      console.log(response.data);
+      
+    })
+    /*Axios.post('/api/upload',{peep})
+    .then((res)=>{
+      console.log(res)
+    })*/
+}
+const fileUpload=()=>{
+  const url = '/api/upload';
+  const formData = new FormData();
+  let user=info.username
+  formData.append('file',file)
+  const config = {
+      headers: {
+          'content-type': 'multipart/form-data'
+      }
+  }
+  return  post(url, formData,config,user)
+}
+
+
   const columns=[
     {
       title:'S/N',
@@ -221,6 +305,8 @@ function UserProfile({data},props) {
   }
 
   const OpenWithdraw=()=>setShowWithdraw(true)
+
+
   const closeWithdraw=()=>{
     setShowWithdraw(false)
     setMessage({
@@ -228,6 +314,12 @@ function UserProfile({data},props) {
       type:'',
       item:''
     })
+    setWithdrawn({
+      pending:false,
+      done:false
+    })
+    
+    
   }
 
 
@@ -262,13 +354,13 @@ function UserProfile({data},props) {
     else if(message.show && message.type=='invest'){
       return(
         <Card style={{marginTop:50,backgroundColor:'white',width:320}} className='address-card'>
-    <CardBody style={{width:320}}>
-        <div style={{fontSize:20,padding:5}}>
+    <CardBody style={{width:290}}>
+        <div style={{fontSize:20,padding:5,color:'black'}}>
         Your request is being processed
     </div>
     <div style={{color:'black',}}>
-      You are about to make an investment of {message.item.investment} which is equivalent to {crypto}
-      please pay the amount to the address <p style={{color:'blue'}}>{walletId}</p> please click the confirm button when done.
+      You are about to make an investment of ${message.item.investment} which is equivalent to <CryptoCompare from='USD'  to={pair} amount={InvestAmount} apikey="9e17d4341c26890479617fab12138968c28eecdfd8ac77be8d0bd181fa919870" />
+      please pay the amount to the address <a style={{color:'blue'}}>{walletId}</a> and click the confirm button when done.
     </div>
         </CardBody>
         </Card>
@@ -276,7 +368,7 @@ function UserProfile({data},props) {
     }
   }
   const spin=()=>{
-    if(withdrawn.done==false && withdrawn.pending==true || invested.done==false && invested.pending==true){
+    if(withdrawn.done==false && withdrawn.pending==true || invested.done==false && invested.pending==true && pair){
       return (
         <div>
            <CircularProgress color='white' thickness={5} />
@@ -322,6 +414,11 @@ function UserProfile({data},props) {
         </div>
       )
     }
+  }
+  const place=()=>{
+    return (
+      'hey'
+    )
   }
 
 
@@ -437,7 +534,7 @@ function UserProfile({data},props) {
         </Col>
         <Col md={12} xs={12}>
           <div className='withdraw-pair'>
-          <select onChange={handleChange('pair')} className='pair-drop' name='pair' id='pair' value={values.pair} defaultValue='BTC'>
+          <select required onChange={handleChange('pair')} className='pair-drop' name='pair' id='pair' value={values.pair} defaultValue='BTC'>
             <option hidden>Coin</option>
             <option value='BTC'>BTC</option>
             <option value='ETH'>ETH</option>
@@ -506,7 +603,8 @@ function UserProfile({data},props) {
               status:'pending'
             }
             //console.log(date)
-
+              setPair(value.pair)
+              setInvestAmount(value.investment)
              /*setCoin(()=>{
                return {
                  username:user.username,
@@ -519,9 +617,11 @@ function UserProfile({data},props) {
 
              if(value.pair=='ETH'){
                setWalletId('19iDNESQnhrutam6WStfkPBQ2ANendYnm1')
+               setPair("ETH")
              }
              else if(value.pair=='BTC'){
                setWalletId('0x0eb64b011ac0c4F414f2A13eEAf32649A49E39A2')
+               setPair("BTC")
              }
             
              setInvested({
@@ -529,29 +629,34 @@ function UserProfile({data},props) {
                done:false,
              })
              
+           if(value.pair){
             Axios.post('/api/invest',{item})
-             .then((res)=>{
-               console.log(res.data)
-                 if(res.data=='SUCCESS'){
-                 setInvested({
-                   pending:false,
-                   done:true,
+            .then((res)=>{
+              console.log(res.data)
+                if(res.data=='SUCCESS'){
+                setInvested({
+                  pending:false,
+                  done:true,
+                })
+                 
+                 setMessage({
+                   show:true,
+                   type:'invest',
+                   item:item
                  })
-                  
-                  setMessage({
-                    show:true,
-                    type:'invest',
-                    item:item
-                  })
-                 }
-             })
-             .catch((err)=>{
-               console.log(err)
-               setInvested({
-                 pending:false,
-                 done:false,
-               })
-             })
+                }
+            })
+            .catch((err)=>{
+              console.log(err)
+              setInvested({
+                pending:false,
+                done:false,
+              })
+            })
+           }
+           else if(!value.pair){
+             alert('Please pick a pair')
+           }
 }} >
   {({handleBlur,handleSubmit,handleChange,values})=>(
    <div style={{height:500,padding:10}}>
@@ -562,7 +667,7 @@ function UserProfile({data},props) {
      
       <Form>
         <div style={{}} className='pair-container'>
-        <Field as='select' setFieldValue='BTC' onBlur={handleBlur} onChange={handleChange('pair')} placeholder='coin' className='pair-drop' name='pair' id='pair' value={values.pair} >
+        <Field required  as='select' setFieldValue='BTC'  onChange={handleChange('pair')} placeholder='coin' className='pair-drop' name='pair' id='pair' value={values.pair} >
               <option hidden>Coin</option>
               <option selected value='BTC'>BTC</option>
               <option value='ETH'>ETH</option>
@@ -590,7 +695,7 @@ function UserProfile({data},props) {
       
       <input 
       className='input invest'
-      placeholder={`Amount in ${values.pair}`}
+      placeholder={place}
       type='number'
       onChange={handleChange('price')}
       value={crypto}
@@ -719,7 +824,7 @@ function UserProfile({data},props) {
         </Modal>
         
 
-        <Modal closeOnOverlayClick={true} closeIcon={false} center onClose={()=>setShowConfirm(false)} open={showConfirm} classNames={{
+        <Modal  closeOnOverlayClick={true} closeIcon={true} center onClose={closeConfirm} open={showConfirm} classNames={{
           modal:'confirmation',
           overlay:'modal-overlay',
           modalContainer:'',
@@ -736,9 +841,17 @@ function UserProfile({data},props) {
             <p >
               Please upload proof of payment using th box bellow
             </p>
-            <div style={{borderRadius:5,height:30,width:60,backgroundColor:'goldenrod',display:'grid',placeItems:"center", marginBottom:40, marginTop:40,marginLeft:'40%'}}>
-
-            </div>
+            <form onSubmit={fileSubmit}>
+        
+        <input required  style={{backgroundColor:'goldenrod',width:250,borderRadius:2,borderColor:'goldenrod',marginTop:20}} type="file" onChange={fileChange} />
+          <div style={{marginTop:20}}>
+            
+          <Button style={{padding:5}} type="submit">Upload</Button>
+          </div>
+          <div>
+            {conSpin()}
+          </div>
+      </form>
             <p>
               Your Deposit will be processed immediately it has been confirmed
             </p>
@@ -868,7 +981,7 @@ function UserProfile({data},props) {
             </Card>
           </Col>
           
-          <Col md={8}>
+          <Col className='chart-row' md={8}>
           
               <Row style={{}}>
                 <Col md={12}>

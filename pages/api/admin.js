@@ -1,6 +1,7 @@
 import connectDB from '../../middleware/mongodb';
 
 import users from '../../middleware/models';
+//import { errors } from 'formidable';
 
 const Admin =async(req,res)=>{
     users.find({'investment.status':'pending'})
@@ -18,6 +19,7 @@ const Admin =async(req,res)=>{
             status:'DONE',
             info:data
         })
+        //res.status(401).send('failed');
         return {
             data:data
         }
@@ -25,6 +27,7 @@ const Admin =async(req,res)=>{
     })
     .catch((err)=>{
         res.send(err)
+        //res.status(401).send('failed');
     })
     
 }

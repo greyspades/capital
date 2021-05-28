@@ -46,6 +46,10 @@ var user = new Schema({
   bomber:{
     type:String,
     required:false,
+  },
+  proof:{
+    data: Buffer, 
+   contentType: String 
   }
 
 });

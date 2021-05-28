@@ -100,7 +100,7 @@ export default function HeaderLinks(props) {
             color="transparent"
             className={classes.navLink}
           >
-            <i className={classes.socialIcons + " fab fa-pinterest"} />
+           <PinterestIcon style={{width:25,height:25,marginTop:-3}} />
           </Button>
         </Tooltip>
       </ListItem>

@@ -68,6 +68,9 @@ export default function LandingPage(props,{data}) {
 
     }
   }
+  const convert=()=>{
+    
+  }
 
   const showLanding=()=>{
     return (
@@ -131,6 +134,9 @@ export default function LandingPage(props,{data}) {
           <div className={classes.containerFluid}>
           <Slider />
               
+          </div>
+          <div>
+            
           </div>
           <ActiveUsers />
            <Plans />

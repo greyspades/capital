@@ -90,6 +90,7 @@ export default function Registration(props) {
     pending:false,
     done:false,
   })
+  
   const [showSpin,setShowSpin]=useState(false)
 
   setTimeout(function() {
@@ -297,7 +298,7 @@ const spin=()=>{
                       pending:true,
                       done:false
                     })*/
-                    setTimeout(networkError,30000)
+                    setTimeout(networkError,60000)
                    
                     //registerUser(user)
                    

@@ -39,6 +39,8 @@ useEffect(()=>{
        
        //console.log(main)
        }
+   }).catch((err)=>{
+       console.log(err)
    })
    },[])
 
@@ -136,6 +138,8 @@ useEffect(()=>{
                                               <Col>
                                               {req.pair}
                                               </Col>
+                                              <Col>
+                                              ${req.amount}</Col>
                                               <Col>
                                               <div style={{}}>
                                         {req.date}
