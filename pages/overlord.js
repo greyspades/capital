@@ -80,6 +80,7 @@ useEffect(()=>{
             key:id,
             amount:amount
        }
+       
        setSpinner({
            pending:true,
            done:false
