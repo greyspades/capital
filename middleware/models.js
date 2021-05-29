@@ -47,11 +47,7 @@ var user = new Schema({
     type:String,
     required:false,
   },
-  proof:{
-    data: Buffer, 
-   contentType: String 
-  }
-
+ 
 });
 
 mongoose.models = {};

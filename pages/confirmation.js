@@ -21,7 +21,7 @@ const Confirmation=({data})=>{
         pending:false
     })
     const [showCheck,setCheck]=useState()
-useEffect(()=>{
+/*useEffect(()=>{
    //console.log(JSON.serialise(data))
    Axios.get('/api/admin')
    .then((res)=>{
@@ -42,7 +42,7 @@ useEffect(()=>{
    }).catch((err)=>{
        console.log(err)
    })
-   },[])
+   },[])*/
 
    const spin=(key)=>{
        if(spinner.pending==true && spinner.done==false ){
