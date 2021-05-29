@@ -163,7 +163,7 @@ export default function LoginPage(props) {
                           done:true,
                         })*/
                         //setMain(res.data.info)
-                        Router.push('/UserProfile')
+                        Router.push('/userprofile')
                         }
                         else if(res.data.status=='WRONG DETAILS'){
                           alert('The password you have provided is incorect')

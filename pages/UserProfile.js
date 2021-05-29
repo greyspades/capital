@@ -1267,7 +1267,7 @@ function UserProfile({data},props) {
   })
 
   
-  useEffect((req)=>{
+  /*useEffect((req)=>{
     const user=parseCookies(req)
     let item=JSON.parse(user.key)
     console.log(item)
@@ -1277,7 +1277,7 @@ function UserProfile({data},props) {
      setInfo(res.data)
      console.log(res.data.investment)
    })
-  },[])
+  },[])*/
   
   const columns=[
     {

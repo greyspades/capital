@@ -109,7 +109,7 @@ export default function Registration(props) {
         pending:false,
         done:true,
       })*/
-      Router.push('/UserProfile')
+      Router.push('/userprofile')
      }
      else if(res.data=='THAT EMAILL ADDRESS IS TAKEN'){
        alert('Sorry the email address or username is already taken')
