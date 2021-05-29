@@ -331,7 +331,7 @@ const fileUpload=()=>{
         Your request is being processed
     </div>
     <div style={{color:'black'}}>
-      You are about to make a withdrawal of {message.item.amount} which is equivalent to {crypto} to
+      You are about to make a withdrawal of {message.item.amount} to
       the address {message.item.walletId} you will recieve an alert shortly, please inform us if you do not recieve your money within 24 hours
     </div>
         </CardBody>
@@ -497,7 +497,7 @@ const fileUpload=()=>{
  }} >
  {({handleSubmit,handleChange,values})=>(
  <div style={{height:500,padding:10}}>
-   <h3 style={{color:'white',textAlign:'center'}}>
+   <h3 style={{color:'white',marginRight:30}}>
      Make withdrawal
    </h3>
     <form>
@@ -607,15 +607,15 @@ const fileUpload=()=>{
             //console.log(date)
               setPair(value.pair)
               setInvestAmount(value.investment)
-             setCoin(()=>{
+             /*setCoin(()=>{
                return {
-                 username:user.username,
+                 username:info.username,
                  investment:parseInt(values.investment),
                  pair:coin.pair,
                  price:values.price,
                  date:date,
                }
-             })
+             })*/
 
              if(value.pair=='ETH'){
                setWalletId('19iDNESQnhrutam6WStfkPBQ2ANendYnm1')
