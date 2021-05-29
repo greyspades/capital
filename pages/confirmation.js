@@ -12,7 +12,7 @@ import Check from '@material-ui/icons/Check'
 //import {CircularProgress} from '@material-ui/core'
 
 
-const OverLord=({data})=>{
+const Confirmation=({data})=>{
 
     const[main,setMain]=useState()
     const [mounted,setMounted]=useState(false)
@@ -180,7 +180,7 @@ useEffect(()=>{
         </div>
     )
 }
-export default OverLord
+export default Confirmation
 
 /*export async function getServerSideProps(context){
 
