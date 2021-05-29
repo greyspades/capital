@@ -41,6 +41,9 @@ useEffect(()=>{
        }
    }).catch((err)=>{
        console.log(err)
+       if(err.response.data='mongo wahala'){
+           alert('Network problem please refresh the page')
+       }
    })
    },[])
 
@@ -48,8 +51,8 @@ useEffect(()=>{
        if(spinner.pending==true && spinner.done==false ){
         return(
             <div style={{width:'100%'}}>
-               {/*<CircularProgress style={{width:120,height:120,display:'grid',placeItems:'center',marginLeft:'40%'}} thickness={10} color='goldenrod' />*/}
-                spinner gone
+               <CircularProgress style={{width:120,height:120,display:'grid',placeItems:'center',marginLeft:'40%'}} thickness={10} color='goldenrod' />
+                
             </div>
         )
        }

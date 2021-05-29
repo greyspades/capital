@@ -109,7 +109,7 @@ export default function Registration(props) {
         pending:false,
         done:true,
       })*/
-      Router.push('/userprofile')
+      Router.push('/dashboard')
      }
      else if(res.data=='THAT EMAILL ADDRESS IS TAKEN'){
        alert('Sorry the email address or username is already taken')
@@ -243,7 +243,7 @@ const spin=()=>{
         absolute
         color="transparent"
         //brand="Capital Investment"
-        rightLinks={<HeaderLinks />}
+        //rightLinks={<HeaderLinks />}
         {...rest}
       />
       <div

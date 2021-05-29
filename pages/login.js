@@ -116,7 +116,7 @@ export default function LoginPage(props) {
         absolute
         color="transparent"
         //brand="Capital Investment"
-        rightLinks={<HeaderLinks />}
+        //rightLinks={<HeaderLinks />}
         {...rest}
       />
       <div
@@ -163,7 +163,7 @@ export default function LoginPage(props) {
                           done:true,
                         })*/
                         //setMain(res.data.info)
-                        Router.push('/userprofile')
+                        Router.push('/dashboard')
                         }
                         else if(res.data.status=='WRONG DETAILS'){
                           alert('The password you have provided is incorect')
