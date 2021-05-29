@@ -145,16 +145,16 @@ export default function LoginPage(props) {
                         password:values.password
                       }
                       
-                      setSpinner({
+                      /*setSpinner({
                         pending:true,
                         done:false
-                      })
+                      })*/
 
                       //setTimeout(networkError,40000)
                       Axios.post('/api/login',{user})
                       .then((res)=>{
                         if(res.data.status=='LOG IN'){
-                          console.log(res.data)
+                          //console.log(res.data)
                         cookieCutter.set('logged-in', 'true')
                         //cookieCutter.set('key',JSON.stringify(res.data.info))
                         cookie.set('key',JSON.stringify(res.data.info))
@@ -167,6 +167,10 @@ export default function LoginPage(props) {
                         }
                         else if(res.data.status=='WRONG DETAILS'){
                           alert('The password you have provided is incorect')
+                          setSpinner({
+                            pending:false,
+                            done:false
+                          })
                         }
                       })
 
