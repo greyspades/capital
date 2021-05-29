@@ -35,7 +35,7 @@ useEffect(()=>{
 
        setMain(res.data.info)
        console.log(res.data.info)
-       etMounted(true)
+       setMounted(true)
        
        //console.log(main)
        }

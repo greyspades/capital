@@ -15,7 +15,7 @@
 * The above copyright notice and this permission notice shall be included in all copies or substantial portions of the Software.
 
 */
-/*import React,{useState,useContext,useEffect} from "react";
+import React,{useState,useContext,useEffect} from "react";
 import {UserContext} from '../components/userContext.js'
 // reactstrap components
 import { Line, Bar } from "react-chartjs-2";
@@ -219,7 +219,7 @@ const fileSubmit=(e)=>{
       console.log(response.data);
       
     })
-    /*Axios.post('/api/upload',{peep})
+    Axios.post('/api/upload',{peep})
     .then((res)=>{
       console.log(res)
     })
@@ -624,7 +624,7 @@ const fileUpload=()=>{
             //console.log(date)
               setPair(value.pair)
               setInvestAmount(value.investment)
-             /*setCoin(()=>{
+             setCoin(()=>{
                return {
                  username:user.username,
                  investment:parseInt(values.investment),
@@ -1150,7 +1150,7 @@ export async function getStaticProps({req}) {
   }
 }*/
 
-import React,{useState,useContext,useEffect} from "react";
+/*import React,{useState,useContext,useEffect} from "react";
 import {UserContext} from '../components/userContext.js'
 // reactstrap components
 import { Line, Bar } from "react-chartjs-2";
@@ -1228,7 +1228,7 @@ const Popover=dynamic(()=>import('@idui/react-popover'),
 
 
 
-/*function UserProfile({data},props) {
+function UserProfile({data},props) {
   //const [main,setMain]=useContext(UserContext)
   const [showConfirm,setShowConfirm]=useState(false)
   //const [user,setUser]=useState(()=>JSON.parse(data.key) || '')
@@ -2075,7 +2075,7 @@ const Popover=dynamic(()=>import('@idui/react-popover'),
   );
 
 }*/
-const UserProfile=()=>{
+/*const UserProfile=()=>{
   return (
     <div>
       <h1>
@@ -2083,6 +2083,5 @@ const UserProfile=()=>{
       </h1>
     </div>
   )
-}
+}*/
 
-export default UserProfile;
