@@ -33,9 +33,10 @@ const handler = async (req, res) => {
       console.log('wrong details')
     }
   })*/
+  //console.log(res.status)
   users.findOne({email:req.body.user.email})
       .then((user)=>{
-        console.log(user)
+        //console.log(res.status)
         if(user.password==req.body.user.password){
           
           res.send({
@@ -45,10 +46,14 @@ const handler = async (req, res) => {
           
           console.log('loged in')
         }
-        else {
+        else if(user.password != req.body.user.password){
           res.send({status:'WRONG DETAILS'})
           console.log('wrong details')
         }
+      })
+      .catch((err)=>{
+        res.send(err)
+        res.send('no user')
       })
     
 }

@@ -11,9 +11,11 @@ import Icon from "@material-ui/core/Icon";
 import YouTubeIcon from '@material-ui/icons/YouTube';
 import PinterestIcon from '@material-ui/icons/Pinterest';
 import LinkedInIcon from '@material-ui/icons/LinkedIn';
+import FacebookIcon from '@material-ui/icons/Facebook'
+import InstagramIcon from '@material-ui/icons/Instagram'
 
 // @material-ui/icons
-import { Apps, CloudDownload } from "@material-ui/icons";
+import { Apps, CloudDownload, Instagram } from "@material-ui/icons";
 import DeleteIcon from "@material-ui/icons/Delete";
 import IconButton from "@material-ui/core/IconButton";
 
@@ -117,7 +119,7 @@ export default function HeaderLinks(props) {
             target="_blank"
             className={classes.navLink}
           >
-            <i className={classes.socialIcons + " fab fa-facebook"} />
+              <FacebookIcon style={{width:25,height:25,marginTop:-3}} />
           </Button>
         </Tooltip>
       </ListItem>
@@ -134,7 +136,7 @@ export default function HeaderLinks(props) {
             target="_blank"
             className={classes.navLink}
           >
-            <i className={classes.socialIcons + " fab fa-instagram"} />
+              <InstagramIcon style={{width:25,height:25,marginTop:-3}} />
           </Button>
         </Tooltip>
       </ListItem>
@@ -151,7 +153,7 @@ export default function HeaderLinks(props) {
             target="_blank"
             className={classes.navLink}
           >
-             <i className={classes.socialIcons + " fab fa-youtube"} />
+              <YouTubeIcon style={{width:25,height:25,marginTop:-3}} />
           </Button>
         </Tooltip>
       </ListItem>
@@ -168,7 +170,7 @@ export default function HeaderLinks(props) {
             target="_blank"
             className={classes.navLink}
           >
-             <i className={classes.socialIcons + " fab fa-linkedin"} />
+              <LinkedInIcon style={{width:25,height:25,marginTop:-3}} />
           </Button>
         </Tooltip>
       </ListItem>

@@ -100,6 +100,7 @@ export default function Registration(props) {
     //setSolved(true)
     Axios.post('/api/user',{user})
     .then((res)=>{
+      console.log(res.data)
      if(res.data=='SAVED'){
       console.log('sent')
       //console.log(res)
@@ -110,9 +111,21 @@ export default function Registration(props) {
       })*/
       Router.push('/UserProfile')
      }
+     else if(res.data=='THAT EMAILL ADDRESS IS TAKEN'){
+       alert('Sorry the email address or username is already taken')
+       setShowSpin(false)
+     }
     
       //console.log(userdetail)
     
+    })
+    .catch((err)=>{
+      console.log(err.response.data)
+      //console.log('wahala')
+     if(err.response.data=='mongo wahala'){
+      alert('Unnable to connect to the server please try again later')
+      setShowSpin(false)
+     }
     })
     
    
@@ -285,7 +298,7 @@ const spin=()=>{
                       pending:true,
                       done:false
                     })*/
-                    setTimeout(networkError,60000)
+                    //setTimeout(networkError,60000)
                    
                     //registerUser(user)
                    

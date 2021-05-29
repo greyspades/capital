@@ -19,16 +19,18 @@ const Register = async (req, res) => {
       bomber:req.body.user.bomber || ''
   
     })
-
-  
     console.log(req.body.user)
-   users.exists({email:req.body.user.email, username:req.body.user.username })
+  
+    //console.log(req.body.user)
+    //console.log(res.status)
+   users.exists({email:req.body.user.email },{username:req.body.user.username})
    .then((exists)=>{
-     if(exists){
+     if(exists==true){
        res.send('THAT EMAILL ADDRESS IS TAKEN')
-       
+       console.log('exists')
+       console.log(exists)
      }
-     else {
+     else if(exists==false) {
       newUser.save()
       .then((item)=>{
         console.log('user saved')

@@ -150,7 +150,7 @@ export default function LoginPage(props) {
                         done:false
                       })
 
-                      setTimeout(networkError,40000)
+                      //setTimeout(networkError,40000)
                       Axios.post('/api/login',{user})
                       .then((res)=>{
                         if(res.data.status=='LOG IN'){
@@ -165,15 +165,28 @@ export default function LoginPage(props) {
                         //setMain(res.data.info)
                         Router.push('/UserProfile')
                         }
+                        else if(res.data.status=='WRONG DETAILS'){
+                          alert('The password you have provided is incorect')
+                        }
                       })
 
                       .catch((err)=>{
-                        console.log(err)
+                        console.log(err.response.data)
+                        //console.log('wahala')
+                       if(err.response.data=='mongo wahala'){
                         alert('Unnable to connect to the server please try again later')
                         setSpinner({
                           pending:false,
                           done:false
                         })
+                       }
+                       else if(err.response.data=='no user'){
+                         alert('Invalid Email address')
+                         setSpinner({
+                          pending:false,
+                          done:false
+                        })
+                       }
                       })
                     }}  >
                       {({handleChange,handleSubmit,values})=>(

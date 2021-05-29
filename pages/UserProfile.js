@@ -92,7 +92,8 @@ const Popover=dynamic(()=>import('@idui/react-popover'),
 //import useLocalStorage from 'react-hook-uselocalstorage';
 
 //const cookieCutter=dynamic(()=>import('cookie-cutter'),{ssr:false})
-
+import {cryptoPrice} from 'crypto-price'
+import { FindReplaceOutlined } from "@material-ui/icons";
 
 
 function UserProfile({data},props) {
@@ -139,7 +140,7 @@ function UserProfile({data},props) {
     pending:false,
     done:false,
   })
-
+  const [place,setPlace]=useState('')
   const [InvestAmount,setInvestAmount]=useState()
 
   const [pair,setPair]=useState(" ")
@@ -148,18 +149,24 @@ function UserProfile({data},props) {
   useEffect((req)=>{
     const user=parseCookies(req)
     let item=JSON.parse(user.key)
-    //console.log(item)
+   
    Axios.post('/api/info',{item})
    .then((res)=>{
      //console.log(res.data.balance)
+     
      setInfo(res.data)
      setLoad(false)
      //console.log(res.data.investment)
+     //console.log(pricecrypto)
    })
    .catch((err)=>{
-     console.log(err)
-     alert('Unnable to connect, please refresh the page')
-   })
+    console.log(err.response.data)
+    //console.log('wahala')
+   if(err.response.data=='mongo wahala'){
+    alert('Unnable to connect to the server please try again later')
+    
+   }
+  })
   },[])
 
   const conSpin=()=>{
@@ -292,6 +299,7 @@ const fileUpload=()=>{
       done:false,
       pending:false
     })
+    setPlace('')
   }
 
   const logOut=()=>{
@@ -324,12 +332,10 @@ const fileUpload=()=>{
 
 
   const convert=(item)=>{
-    Axios.get(`/api/convert`)
-    .then((res)=>{
-      
-      setCrypto(res.data)
-      console.log(res.data)
-    })
+    Axios.get('https://min-api.cryptocompare.com/data/pricemulti?fsyms=ETH,DASH&tsyms=BTC,USD,EUR&api_key=9e17d4341c26890479617fab12138968c28eecdfd8ac77be8d0bd181fa919870')
+     .then((res)=>{
+       console.log(res.data)
+     })
   }
   
 
@@ -359,7 +365,7 @@ const fileUpload=()=>{
         Your request is being processed
     </div>
     <div style={{color:'black',}}>
-      You are about to make an investment of ${message.item.investment} which is equivalent to <CryptoCompare from='USD'  to={pair} amount={InvestAmount} apikey="9e17d4341c26890479617fab12138968c28eecdfd8ac77be8d0bd181fa919870" />
+      You are about to make an investment of <span style={{color:'blue'}}>${message.item.investment}</span> which is equivalent to <span style={{color:'blue'}}><CryptoCompare style={{color:'blue'}} from='USD'  to={pair} amount={InvestAmount} apikey="9e17d4341c26890479617fab12138968c28eecdfd8ac77be8d0bd181fa919870" /></span>
       please pay the amount to the address <a style={{color:'blue'}}>{walletId}</a> and click the confirm button when done.
     </div>
         </CardBody>
@@ -415,7 +421,21 @@ const fileUpload=()=>{
       )
     }
   }
-  const place=()=>''
+  const convertCurrency=(pair,amount)=>{
+    Axios.get(`https://min-api.cryptocompare.com/data/price?fsym=USD&tsyms=${pair}&api_key=9e17d4341c26890479617fab12138968c28eecdfd8ac77be8d0bd181fa919870`)
+     .then((res)=>{
+       //console.log(res.data.BTC.toString())
+       //let coin=eval(pair)
+       if(pair=='BTC'){
+         let final=res.data.BTC*amount
+        setPlace(final.toString())
+       }
+       else if(pair=='ETH'){
+        let final=res.data.ETH*amount
+        setPlace(final.toString())
+       }
+     })
+  }
 
   const withdraw=()=>{
     
@@ -479,13 +499,18 @@ const fileUpload=()=>{
              }
            })
            .catch((err)=>{
-             console.log(err)
-             setWithdrawn({
+            console.log(err.response.data)
+            //console.log('wahala')
+           if(err.response.data=='mongo wahala'){
+            alert('Unnable to connect to the server please try again later')
+            setWithdrawn({
               pending:false,
               done:false,
             })
             setShowInvest(false)
-           })
+           }
+          })
+           
         
  }} >
  {({handleSubmit,handleChange,values})=>(
@@ -623,7 +648,7 @@ const fileUpload=()=>{
                pending:true,
                done:false,
              })
-             
+             convertCurrency(value.pair,value.investment)
            if(value.pair){
             Axios.post('/api/invest',{item})
             .then((res)=>{
@@ -642,11 +667,15 @@ const fileUpload=()=>{
                 }
             })
             .catch((err)=>{
-              console.log(err)
+              console.log(err.response.data)
+              //console.log('wahala')
+             if(err.response.data=='mongo wahala'){
+              alert('Unnable to connect to the server please try again later')
               setInvested({
                 pending:false,
                 done:false,
               })
+             }
             })
            }
            else if(!value.pair){
@@ -693,7 +722,7 @@ const fileUpload=()=>{
       placeholder={place}
       type='number'
       onChange={handleChange('price')}
-      value={crypto}
+      value={values.price}
       readOnly
       >
 
@@ -785,8 +814,8 @@ const fileUpload=()=>{
         color="dark"
         
         changeColorOnScroll
-        style={{backgroundColor:"gold"}}
-        rightLinks={<HeaderLinks />}
+        
+        //rightLinks={<HeaderLinks />}
         {...rest}
    
       />

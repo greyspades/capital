@@ -27,7 +27,11 @@ const connectDB = handler => async (req, res) => {
   })
   .catch((err)=>{
     console.log(err)
-    res.send(err)
+    console.log('mongo wahala')
+    res.status(500).send('mongo wahala');
+    //res.send('mongo wahala')
+    //res.send(err)
+    //res.status(400).send('Current password does not match');
   })
   
   
