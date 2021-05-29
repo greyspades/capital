@@ -1228,7 +1228,7 @@ const Popover=dynamic(()=>import('@idui/react-popover'),
 
 
 
-function UserProfile({data},props) {
+/*function UserProfile({data},props) {
   //const [main,setMain]=useContext(UserContext)
   const [showConfirm,setShowConfirm]=useState(false)
   //const [user,setUser]=useState(()=>JSON.parse(data.key) || '')
@@ -1277,7 +1277,7 @@ function UserProfile({data},props) {
      setInfo(res.data)
      console.log(res.data.investment)
    })
-  },[])*/
+  },[])
   
   const columns=[
     {
@@ -1619,7 +1619,7 @@ function UserProfile({data},props) {
                  price:values.price,
                  date:date,
                }
-             })*/
+             })
 
              if(value.pair=='ETH'){
                setWalletId('19iDNESQnhrutam6WStfkPBQ2ANendYnm1')
@@ -2073,6 +2073,16 @@ function UserProfile({data},props) {
       </div>
     </>
   );
+
+}*/
+const UserProfile=()=>{
+  return (
+    <div>
+      <h1>
+        so it works!!!!
+      </h1>
+    </div>
+  )
 }
 
 export default UserProfile;

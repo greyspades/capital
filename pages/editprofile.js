@@ -1,5 +1,5 @@
 import React,{useState,useContext,useEffect} from "react";
-import {UserContext} from '../components/userContext.js'
+//import {UserContext} from '../components/userContext.js'
 // reactstrap components
 import {
   Button,
@@ -18,7 +18,7 @@ import {
 import cookieCutter from "cookie-cutter";
 //import useLocalStorage from 'react-hook-uselocalstorage';
 function Edit() {
-  const [main,setMain]=useContext(UserContext)
+  //const [main,setMain]=useContext(UserContext)
   //const [user,setUser]=useState(JSON.parse(cookieCutter.get('key')))
 
   //const detail=JSON.parse(cookieCutter.get('userDetails'))

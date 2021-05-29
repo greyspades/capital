@@ -9,7 +9,7 @@ import {
 import Admin from '../pages/api/admin'
 import Axios from 'axios'
 import Check from '@material-ui/icons/Check'
-import {CircularProgress} from '@material-ui/core'
+//import {CircularProgress} from '@material-ui/core'
 
 
 const OverLord=({data})=>{
@@ -33,9 +33,9 @@ useEffect(()=>{
       // console.log(item)
        //let data=JSON.parse(res.data[0])
 
-       setMain(res.data.info)
+       //setMain(res.data.info)
        console.log(res.data.info)
-       setMounted(true)
+       //setMounted(true)
        
        //console.log(main)
        }
@@ -48,7 +48,8 @@ useEffect(()=>{
        if(spinner.pending==true && spinner.done==false ){
         return(
             <div style={{width:'100%'}}>
-               <CircularProgress style={{width:120,height:120,display:'grid',placeItems:'center',marginLeft:'40%'}} thickness={10} color='goldenrod' />
+               {/*<CircularProgress style={{width:120,height:120,display:'grid',placeItems:'center',marginLeft:'40%'}} thickness={10} color='goldenrod' />*/}
+                spinner gone
             </div>
         )
        }
