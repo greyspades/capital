@@ -29,6 +29,7 @@ import BarChartIcon from '@material-ui/icons/BarChart'
 //import Axios from 'axios'
 import Header from "../components/Header/Header.js";
 import HeaderLinks from "components/Header/HeaderLinks.js";
+import Footer from '../components/Footer/Footer'
 import DoneOutline from '@material-ui/icons/DoneOutline'
 import { Modal } from 'react-responsive-modal';
 import PersonOutlineIcon from '@material-ui/icons/PersonOutline';
@@ -51,6 +52,7 @@ import {
   Col,
   UncontrolledTooltip,
 } from "reactstrap";
+
 
 //import Card from '../components/Card/Card'
 //import CardBody from '../components/Card/CardBody'
@@ -76,9 +78,9 @@ import {
 import dynamic from 'next/dynamic'
 import {Field,Form} from 'formik'
 import {Formik} from 'formik'
-import Axios from "axios";
+import Axios, {post} from "axios";
 import { parseCookies } from "./api/cookies.js";
-
+import CryptoCompare from "react-crypto-compare";
 import Table from 'rc-table'
 import { faYenSign } from "@fortawesome/free-solid-svg-icons";
 import 'react-dropdown/style.css'
@@ -121,6 +123,7 @@ function UserProfile({data},props) {
     type:''
 
   })
+  const [loading,setLoad]=useState(true)
   const [response,setResponse]=useState()
   const [withdrawn, setWithdrawn]=useState({
     done:false,
@@ -130,20 +133,111 @@ function UserProfile({data},props) {
     pending:false,
     done:false,
   })
+  const [file,setFile]=useState(null)
 
+  const [confirmSpin,setConfirmSpin]=useState({
+    pending:false,
+    done:false,
+  })
+  const [place,setPlace]=useState('')
+  const [InvestAmount,setInvestAmount]=useState()
+
+  const [pair,setPair]=useState(" ")
+  const [proof,setProof]=useState('')
   
   useEffect((req)=>{
     const user=parseCookies(req)
     let item=JSON.parse(user.key)
-    console.log(item)
+   
    Axios.post('/api/info',{item})
    .then((res)=>{
      //console.log(res.data.balance)
+     
      setInfo(res.data)
-     console.log(res.data.investment)
+     //setLoad(false)
+     //console.log(res.data.investment)
+     //console.log(pricecrypto)
    })
+   .catch((err)=>{
+    console.log(err.response.data)
+    //console.log('wahala')
+   if(err.response.data=='mongo wahala'){
+    alert('Unnable to connect to the server please try again later')
+    
+   }
+  })
   },[])
+
+  const conSpin=()=>{
+    if(confirmSpin.pending==true && confirmSpin.done==false){
+      return (
+        <CircularProgress thickness={10} />
+      )
+    }
+    else if(confirmSpin.pending==false && confirmSpin.done==true){
+      return (
+        <Check />
+      )
+    }
+  }
+const closeConfirmSpinner=()=>{
+  setConfirmSpin({
+    pending:false,
+    done:true
+  })
+  setShowConfirm(false)
+}
   
+  
+const fileChange=(e)=>{
+  setFile(
+    e.target.files[0]
+  )
+}
+const closeConfirm=()=>{
+  setShowConfirm(false)
+  setConfirmSpin({
+    done:false,
+    pending:false
+  })
+}
+
+const fileSubmit=(e)=>{
+  e.preventDefault()
+  let user={
+    username:info.username,
+    file:file
+  }
+  let peep='tim'
+  setConfirmSpin({
+    pending:true,
+    done:false,
+  })
+  setTimeout(closeConfirmSpinner,10000)
+  // Stop form submit
+    fileUpload(file).then((response)=>{
+      console.log(response.data);
+      
+    })
+    Axios.post('/api/upload',{peep})
+    .then((res)=>{
+      console.log(res)
+    })
+}
+const fileUpload=()=>{
+  const url = '/api/upload';
+  const formData = new FormData();
+  let user=info.username
+  formData.append('file',file)
+  const config = {
+      headers: {
+          'content-type': 'multipart/form-data'
+      }
+  }
+  return  post(url, formData,config,user)
+}
+
+
   const columns=[
     {
       title:'S/N',
@@ -204,6 +298,7 @@ function UserProfile({data},props) {
       done:false,
       pending:false
     })
+    setPlace('')
   }
 
   const logOut=()=>{
@@ -217,6 +312,8 @@ function UserProfile({data},props) {
   }
 
   const OpenWithdraw=()=>setShowWithdraw(true)
+
+
   const closeWithdraw=()=>{
     setShowWithdraw(false)
     setMessage({
@@ -224,16 +321,20 @@ function UserProfile({data},props) {
       type:'',
       item:''
     })
+    setWithdrawn({
+      pending:false,
+      done:false
+    })
+    
+    
   }
 
 
   const convert=(item)=>{
-    Axios.get(`/api/convert`)
-    .then((res)=>{
-      
-      setCrypto(res.data)
-      console.log(res.data)
-    })
+    Axios.get('https://min-api.cryptocompare.com/data/pricemulti?fsyms=ETH,DASH&tsyms=BTC,USD,EUR&api_key=9e17d4341c26890479617fab12138968c28eecdfd8ac77be8d0bd181fa919870')
+     .then((res)=>{
+       console.log(res.data)
+     })
   }
   
 
@@ -257,14 +358,14 @@ function UserProfile({data},props) {
     }
     else if(message.show && message.type=='invest'){
       return(
-        <Card style={{marginTop:50,backgroundColor:'white'}} className='address-card'>
-        <CardBody>
-        <div style={{fontSize:20,padding:5}}>
+        <Card style={{marginTop:50,backgroundColor:'white',width:320}} className='address-card'>
+    <CardBody style={{width:290}}>
+        <div style={{fontSize:20,padding:5,color:'black'}}>
         Your request is being processed
     </div>
     <div style={{color:'black',}}>
-      You are about to make an investment of {message.item.investment} which is equivalent to {crypto}
-      please pay the amount to the address <span style={{color:'blue'}}>{walletId}</span> please click the confirm button when done.
+      You are about to make an investment of <span style={{color:'blue'}}>${message.item.investment}</span> which is equivalent to <span style={{color:'blue'}}><CryptoCompare style={{color:'blue'}} from='USD'  to={pair} amount={InvestAmount} apikey="9e17d4341c26890479617fab12138968c28eecdfd8ac77be8d0bd181fa919870" /></span>
+      please pay the amount to the address <a style={{color:'blue'}}>{walletId}</a> and click the confirm button when done.
     </div>
         </CardBody>
         </Card>
@@ -272,7 +373,7 @@ function UserProfile({data},props) {
     }
   }
   const spin=()=>{
-    if(withdrawn.done==false && withdrawn.pending==true || invested.done==false && invested.pending==true){
+    if(withdrawn.done==false && withdrawn.pending==true || invested.done==false && invested.pending==true && pair){
       return (
         <div>
            <CircularProgress color='white' thickness={5} />
@@ -303,6 +404,37 @@ function UserProfile({data},props) {
    
   }
 
+  const Load=()=>{
+    if(loading==true){
+      return (
+        <div>
+         <CircularProgress color='white' thickness={5} />
+        </div>
+      )
+    }
+    else if(loading==false){
+      return (
+        <div>
+          {info.username}
+        </div>
+      )
+    }
+  }
+  const convertCurrency=(pair,amount)=>{
+    Axios.get(`https://min-api.cryptocompare.com/data/price?fsym=USD&tsyms=${pair}&api_key=9e17d4341c26890479617fab12138968c28eecdfd8ac77be8d0bd181fa919870`)
+     .then((res)=>{
+       //console.log(res.data.BTC.toString())
+       //let coin=eval(pair)
+       if(pair=='BTC'){
+         let final=res.data.BTC*amount
+        setPlace(final.toString())
+       }
+       else if(pair=='ETH'){
+        let final=res.data.ETH*amount
+        setPlace(final.toString())
+       }
+     })
+  }
 
   const withdraw=()=>{
     
@@ -312,10 +444,14 @@ function UserProfile({data},props) {
             <LocalAtmIcon style={{width:40,height:40,marginLeft:-18,color:'#9a7801'}} />
           </Button>
           <Modal classNames={{
-            modal:'pop',
+            modal:'investment-modal',
+            overlay:'modal-overlay',
+            modalContainer:'',
+            closeIcon:'close-icon'
 
-          }} center open={showWithdraw} onClose={closeWithdraw}>
-          <div className='pop-content' style={{}}>
+          }} closeOnOverlayClick={true} center open={showWithdraw} onClose={closeWithdraw}>
+          <div className='pop-content' style={{color:'white',backgroundColor:' #050124',height:'100%',width:'100%',
+            margin:'auto',position:'absolute',top:0,left:0,textAlign:'center',right:0}}>
          
            
          <Formik initialValues={{amount:'',walletId:'',pair:''}} onSubmit={(value)=>{
@@ -362,13 +498,18 @@ function UserProfile({data},props) {
              }
            })
            .catch((err)=>{
-             console.log(err)
-             setWithdrawn({
+            console.log(err.response.data)
+            //console.log('wahala')
+           if(err.response.data=='mongo wahala'){
+            alert('Unnable to connect to the server please try again later')
+            setWithdrawn({
               pending:false,
               done:false,
             })
             setShowInvest(false)
-           })
+           }
+          })
+           
         
  }} >
  {({handleSubmit,handleChange,values})=>(
@@ -412,7 +553,7 @@ function UserProfile({data},props) {
         </Col>
         <Col md={12} xs={12}>
           <div className='withdraw-pair'>
-          <select onChange={handleChange('pair')} className='pair-drop' name='pair' id='pair' value={values.pair} defaultValue='BTC'>
+          <select required onChange={handleChange('pair')} className='pair-drop' name='pair' id='pair' value={values.pair} defaultValue='BTC'>
             <option hidden>Coin</option>
             <option value='BTC'>BTC</option>
             <option value='ETH'>ETH</option>
@@ -450,10 +591,16 @@ function UserProfile({data},props) {
         <Button style={{width:50}} onClick={openInvest}>
          <CreditCardIcon style={{width:40,height:40,marginLeft:-18,color:'#9a7801'}} />
         </Button>
+        
         <Modal classNames={{
-          modal:'pop'
-        }} center open={showInvest} onClose={closeInvest}>
-        <div className='pop-content' >
+          
+          modal:'investment-modal',
+          overlay:'modal-overlay',
+          modalContainer:'',
+          closeIcon:'close-icon'
+        }} closeOnOverlayClick={true} center open={showInvest} onClose={closeInvest}>
+        <div className='pop-content' style={{color:'white',backgroundColor:' #050124',height:'100%',width:'100%',
+            margin:'auto',position:'absolute',top:0,left:0,textAlign:'center',right:0}} >
          
            
            <Formik initialValues={{investment:'',price:'',pair:''}} onSubmit={(value)=>{
@@ -474,9 +621,10 @@ function UserProfile({data},props) {
               date:date,
               status:'pending'
             }
-            console.log(date)
-
-             /*setCoin(()=>{
+            //console.log(date)
+              setPair(value.pair)
+              setInvestAmount(value.investment)
+             setCoin(()=>{
                return {
                  username:user.username,
                  investment:parseInt(values.investment),
@@ -484,53 +632,65 @@ function UserProfile({data},props) {
                  price:values.price,
                  date:date,
                }
-             })*/
+             })
 
              if(value.pair=='ETH'){
                setWalletId('19iDNESQnhrutam6WStfkPBQ2ANendYnm1')
+               setPair("ETH")
              }
              else if(value.pair=='BTC'){
                setWalletId('0x0eb64b011ac0c4F414f2A13eEAf32649A49E39A2')
+               setPair("BTC")
              }
             
              setInvested({
                pending:true,
                done:false,
              })
-             
+             convertCurrency(value.pair,value.investment)
+           if(value.pair){
             Axios.post('/api/invest',{item})
-             .then((res)=>{
-               console.log(res.data)
-                 if(res.data=='SUCCESS'){
-                 setInvested({
-                   pending:false,
-                   done:true,
+            .then((res)=>{
+              console.log(res.data)
+                if(res.data=='SUCCESS'){
+                setInvested({
+                  pending:false,
+                  done:true,
+                })
+                 
+                 setMessage({
+                   show:true,
+                   type:'invest',
+                   item:item
                  })
-                  
-                  setMessage({
-                    show:true,
-                    type:'invest',
-                    item:item
-                  })
-                 }
-             })
-             .catch((err)=>{
-               console.log(err)
-               setInvested({
-                 pending:false,
-                 done:false,
-               })
-             })
+                }
+            })
+            .catch((err)=>{
+              console.log(err.response.data)
+              //console.log('wahala')
+             if(err.response.data=='mongo wahala'){
+              alert('Unnable to connect to the server please try again later')
+              setInvested({
+                pending:false,
+                done:false,
+              })
+             }
+            })
+           }
+           else if(!value.pair){
+             alert('Please pick a pair')
+           }
 }} >
   {({handleBlur,handleSubmit,handleChange,values})=>(
    <div style={{height:500,padding:10}}>
-     <h3 style={{color:'white',textAlign:'center'}}>
+     <h3 style={{color:'white',marginRight:30}}>
        Make Investment
      </h3>
      <div></div>
+     
       <Form>
         <div style={{}} className='pair-container'>
-        <Field as='select' setFieldValue='BTC' onBlur={handleBlur} onChange={handleChange('pair')} placeholder='coin' className='pair-drop' name='pair' id='pair' value={values.pair} >
+        <Field required  as='select' setFieldValue='BTC'  onChange={handleChange('pair')} placeholder='coin' className='pair-drop' name='pair' id='pair' value={values.pair} >
               <option hidden>Coin</option>
               <option selected value='BTC'>BTC</option>
               <option value='ETH'>ETH</option>
@@ -558,10 +718,10 @@ function UserProfile({data},props) {
       
       <input 
       className='input invest'
-      placeholder={`Amount in ${values.pair}`}
+      placeholder={place}
       type='number'
       onChange={handleChange('price')}
-      value={crypto}
+      value={values.price}
       readOnly
       >
 
@@ -647,12 +807,14 @@ function UserProfile({data},props) {
 
   return (
     <>
-      <div style={{backgroundColor:' #050124',marginTop:50}} className="content">
+      <div style={{backgroundColor:' #050124',}} className="content">
       <Header
-        absolute
-        color="gold"
         
-        rightLinks={<HeaderLinks />}
+        color="dark"
+        
+        changeColorOnScroll
+        
+        //rightLinks={<HeaderLinks />}
         {...rest}
    
       />
@@ -685,7 +847,7 @@ function UserProfile({data},props) {
         </Modal>
         
 
-        <Modal closeOnOverlayClick={true} closeIcon={false} center onClose={()=>setShowConfirm(false)} open={showConfirm} classNames={{
+        <Modal  closeOnOverlayClick={true} closeIcon={true} center onClose={closeConfirm} open={showConfirm} classNames={{
           modal:'confirmation',
           overlay:'modal-overlay',
           modalContainer:'',
@@ -702,123 +864,31 @@ function UserProfile({data},props) {
             <p >
               Please upload proof of payment using th box bellow
             </p>
-            <div style={{borderRadius:5,height:30,width:60,backgroundColor:'goldenrod',display:'grid',placeItems:"center", marginBottom:40, marginTop:40,marginLeft:'40%'}}>
-
-            </div>
+            <form onSubmit={fileSubmit}>
+        
+        <input required  style={{backgroundColor:'goldenrod',width:250,borderRadius:2,borderColor:'goldenrod',marginTop:20}} type="file" onChange={fileChange} />
+          <div style={{marginTop:20}}>
+            
+          <Button style={{padding:5}} type="submit">Upload</Button>
+          </div>
+          <div>
+            {conSpin()}
+          </div>
+      </form>
             <p>
               Your Deposit will be processed immediately it has been confirmed
             </p>
           </div>
         </Modal>
         <Row>
-            <Col md={8}>
-              <Row>
-                <Col md={12}>
-                <Card className="card-chart">
-              <CardHeader>
-                <Row>
-                  <Col className="text-left" sm="6">
-                    <h5 className="card-category">Total Shipments</h5>
-                    <CardTitle tag="h2">Activity</CardTitle>
-                  </Col>
-                  <Col sm="6">
-                    <ButtonGroup
-                      className="btn-group-toggle float-right"
-                      data-toggle="buttons"
-                    >
-                      <Button
-                        tag="label"
-                        className={classNames("btn-simple", {
-                          active: bigChartData === "data1",
-                        })}
-                        color="info"
-                        id="0"
-                        size="sm"
-                        onClick={() => setBgChartData("data1")}
-                      >
-                        <span className="d-none d-sm-block d-md-block d-lg-block d-xl-block">
-                          Accounts
-                        </span>
-                        <span className="d-block d-sm-none">
-                          <i className="tim-icons icon-single-02" />
-                        </span>
-                      </Button>
-                      <Button
-                        color="info"
-                        id="1"
-                        size="sm"
-                        tag="label"
-                        className={classNames("btn-simple", {
-                          active: bigChartData === "data2",
-                        })}
-                        onClick={() => setBgChartData("data2")}
-                      >
-                        <span className="d-none d-sm-block d-md-block d-lg-block d-xl-block">
-                          Purchases
-                        </span>
-                        <span className="d-block d-sm-none">
-                          <i className="tim-icons icon-gift-2" />
-                        </span>
-                      </Button>
-                      <Button
-                        color="info"
-                        id="2"
-                        size="sm"
-                        tag="label"
-                        className={classNames("btn-simple", {
-                          active: bigChartData === "data3",
-                        })}
-                        onClick={() => setBgChartData("data3")}
-                      >
-                        <span className="d-none d-sm-block d-md-block d-lg-block d-xl-block">
-                          Sessions
-                        </span>
-                        <span className="d-block d-sm-none">
-                          <i className="tim-icons icon-tap-02" />
-                        </span>
-                      </Button>
-                    </ButtonGroup>
-                  </Col>
-                </Row>
-              </CardHeader>
-                 
-              <CardBody>
-                <div className="chart-area">
-                  <Line
-                    data={chartExample1[bigChartData]}
-                    options={chartExample1.options}
-                  />
-                </div>
-              </CardBody>
-            </Card>
-                </Col>
-
-                <Col md={12}>
-                <Card className="card-chart">
-              <CardHeader>
-                <h5 className="card-category">Asset gain</h5>
-                <CardTitle tag="h3">
-                  <i className="tim-icons icon-bell-55 text-info" /> {info.balance-500 || ''}
-                </CardTitle>
-              </CardHeader>
-              <CardBody>
-                <div className="chart-area">
-                  <Line
-                    data={chartExample2.data}
-                    options={chartExample2.options}
-                  />
-                </div>
-              </CardBody>
-            </Card>  
-                </Col>
-               
-
-              </Row>
             
-            </Col>
 
           <Col md={4} className=''>
+          <h2 style={{marginTop:-30}}>
+                Dashboard
+              </h2>
             <Card className="card-user profile-card ">
+             
               <CardBody>
                 <CardText />
                 <div className="author">
@@ -828,7 +898,7 @@ function UserProfile({data},props) {
                   <div className="block block-four" />
                   <a href="#pablo" onClick={(e) => e.preventDefault()}>
                         <PersonOutlineIcon className='profile-icon' style={{width:100,height:100,color:'#9a7801',marginTop:50,marginBottom:-30}}   />
-                    <h3 className="titl username">{info.username}</h3>
+                    <h3 className="titl username">{Load()}</h3>
                   </a>
                   <Row>
                     <Col style={{}} md={6} xs={12}>
@@ -933,39 +1003,123 @@ function UserProfile({data},props) {
               </CardFooter>
             </Card>
           </Col>
+          
+          <Col className='chart-row' md={8}>
+          
+              <Row style={{}}>
+                <Col md={12}>
+                <h3 stle={{color:'white'}}>
+              Track Progress
+            </h3>
+                <Card className="card-chart">
+              <CardHeader>
+                <Row>
+                  <Col className="text-left" sm="6">
+                    <h5 className="card-category">Total Shipments</h5>
+                    <CardTitle tag="h2">Activity</CardTitle>
+                  </Col>
+                  <Col sm="6">
+                    <ButtonGroup
+                      className="btn-group-toggle float-right"
+                      data-toggle="buttons"
+                    >
+                      <Button
+                        tag="label"
+                        className={classNames("btn-simple", {
+                          active: bigChartData === "data1",
+                        })}
+                        color="info"
+                        id="0"
+                        size="sm"
+                        onClick={() => setBgChartData("data1")}
+                      >
+                        <span className="d-none d-sm-block d-md-block d-lg-block d-xl-block">
+                          Accounts
+                        </span>
+                        <span className="d-block d-sm-none">
+                          <i className="tim-icons icon-single-02" />
+                        </span>
+                      </Button>
+                      <Button
+                        color="info"
+                        id="1"
+                        size="sm"
+                        tag="label"
+                        className={classNames("btn-simple", {
+                          active: bigChartData === "data2",
+                        })}
+                        onClick={() => setBgChartData("data2")}
+                      >
+                        <span className="d-none d-sm-block d-md-block d-lg-block d-xl-block">
+                          Purchases
+                        </span>
+                        <span className="d-block d-sm-none">
+                          <i className="tim-icons icon-gift-2" />
+                        </span>
+                      </Button>
+                      <Button
+                        color="info"
+                        id="2"
+                        size="sm"
+                        tag="label"
+                        className={classNames("btn-simple", {
+                          active: bigChartData === "data3",
+                        })}
+                        onClick={() => setBgChartData("data3")}
+                      >
+                        <span className="d-none d-sm-block d-md-block d-lg-block d-xl-block">
+                          Sessions
+                        </span>
+                        <span className="d-block d-sm-none">
+                          <i className="tim-icons icon-tap-02" />
+                        </span>
+                      </Button>
+                    </ButtonGroup>
+                  </Col>
+                </Row>
+              </CardHeader>
+                 
+              <CardBody>
+                <div className="chart-area">
+                  <Line
+                    data={chartExample1[bigChartData]}
+                    options={chartExample1.options}
+                  />
+                </div>
+              </CardBody>
+            </Card>
+                </Col>
+
+                <Col md={12}>
+                <Card className="card-chart">
+              <CardHeader>
+                <h5 className="card-category">Asset gain</h5>
+                <CardTitle tag="h3">
+                  <i className="tim-icons icon-bell-55 text-info" /> {info.balance-500 || ''}
+                </CardTitle>
+              </CardHeader>
+              <CardBody>
+                <div className="chart-area">
+                  <Line
+                    data={chartExample2.data}
+                    options={chartExample2.options}
+                  />
+                </div>
+              </CardBody>
+            </Card>  
+                </Col>
+               
+
+              </Row>
+            
+            </Col>
             
         </Row>
+        <Footer />
       </div>
     </>
   );
 }
 
 export default UserProfile;
-
-/*UserProfile.getInitialProps=(res)=>{
-  const info=JSON.parse(cookieCutter.get('key'))
-
-  return {
-    data:info
-  }
-}
-
-export async function getStaticProps({req}) {
-  /*let user=JSON.parse(cookieCutter.get('key'))
-  Axios.post('/api/info',{user})
-  .then((res)=>{
-    return {
-      data:res.data
-    }
-  })
-  
-  const user=parseCookies(req)
-  //const info=cookies.key
-  //const info =JSON.parse(cookieCutter.parse('key'))
-  //info(user)
-  
-  return {
-    data:user.key || ''
-  }
-}*/
 
