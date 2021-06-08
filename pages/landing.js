@@ -3,7 +3,7 @@ import React,{useState,useEffect} from "react";
 import classNames from "classnames";
 // @material-ui/core components
 import { makeStyles } from "@material-ui/core/styles";
-
+import tawkTo from "tawkto-react";
 import Head from 'next/head'
 
 // core components
@@ -33,7 +33,7 @@ import {
 import ProductSection from "pages-sections/LandingPage-Sections/ProductSection.js";
 import TeamSection from "pages-sections/LandingPage-Sections/TeamSection.js";
 import WorkSection from "pages-sections/LandingPage-Sections/WorkSection.js";
-
+import Axios from 'axios'
 
 import ActiveUsers from '../pages-sections/LandingPage-Sections/activeUsers'
 import cookies from "next-cookies";
@@ -48,6 +48,10 @@ export default function LandingPage(props,{data}) {
   const [parallax,setParallax]=useState(false)
   const [loading,setLoading]=useState(true)
   
+  //const tawkToPropertyId = '60bce4f64ae6dd0abe7cc090'
+  //const tawkToKey = 'get_key_from_tawkto_dashboard'
+
+
 
   useEffect(()=>{
     /*const handleResize=()=>{
@@ -62,6 +66,11 @@ export default function LandingPage(props,{data}) {
     }
     console.log(window.innerWidth)
     setLoading(false)
+    //tawkTo(tawkToPropertyId, tawkToKey)
+    /*Axios.get('/api/mail')
+    .then(()=>{
+      console.log('sent mail')
+    })*/
   },[])
   const Review=()=>{
     if(main==''){ 
@@ -79,6 +88,32 @@ export default function LandingPage(props,{data}) {
           <title>
             Capital Investment Option
           </title>
+          <script type="text/javascript" dangerouslySetInnerHTML={{__html:`
+var Tawk_API=Tawk_API||{}, Tawk_LoadStart=new Date();
+(function(){
+var s1=document.createElement("script"),s0=document.getElementsByTagName("script")[0];
+s1.async=true;
+s1.src='https://embed.tawk.to/60bce4f64ae6dd0abe7cc090/1f7gtsphd';
+s1.charset='UTF-8';
+s1.setAttribute('crossorigin','*');
+s0.parentNode.insertBefore(s1,s0);
+})();
+`
+}} />
+<script type="text/javascript" dangerouslySetInnerHTML={{__html:`baseUrl = "https://widgets.cryptocompare.com/";
+var scripts = document.getElementsByTagName("script");
+var embedder = scripts[ scripts.length - 1 ];
+var cccTheme = {"General":{"background":"#000","borderColor":"#9a7801"},"Form":{"borderColor":"#9a7801"}};
+(function (){
+var appName = encodeURIComponent(window.location.hostname);
+if(appName==""){appName="local";}
+var s = document.createElement("script");
+s.type = "text/javascript";
+s.async = true;
+var theUrl = baseUrl+'serve/v1/coin/converter?fsym=BTC&tsyms=USD,EUR,CNY,GBP';
+s.src = theUrl + ( theUrl.indexOf("?") >= 0 ? "&" : "?") + "app=" + appName;
+embedder.parentNode.appendChild(s);
+})();`}}/>
         </Head>
         <Header
           color="transparent"
@@ -140,6 +175,8 @@ export default function LandingPage(props,{data}) {
           </div>
           <ActiveUsers />
            <Plans />
+           
+           <Testimonials />
            <TeamSection />
  
            

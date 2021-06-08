@@ -60,47 +60,51 @@ export default function ProductSection() {
       <div>
         <GridContainer className='product-grid'>
         <GridItem xs={12} sm={12} md={3}>
-              <Popover trigger='click' content={()=>(<div className='modal-content'>We offer loans for buissnesses, students, and the like to enable fast productivity, our interest rates are reasonable and without worry</div>)}>
-              <div  className='product-card'>
+              <Popover trigger='hover' content={()=>(<div className='modal-content'>We offer loans for buissnesses, students, and the like to enable fast productivity, our interest rates are reasonable and without worry</div>)}>
+             <div >
+             <div  className='product-card'>
                   
-                 <Button>
-                 <FontAwesomeIcon icon={faHandHoldingUsd} style={{width:100,height:100}} className='product-logo' />
-                 </Button>
-                  <h5 style={{color:'white'}} >Loans</h5>
-                  </div>
+                
+                  <FontAwesomeIcon icon={faHandHoldingUsd} style={{width:100,height:100}} className='product-logo' />
+                  
+                   <h5 style={{color:'white'}} >Loans</h5>
+                   </div>
+             </div>
               </Popover>
           </GridItem>
          
           <GridItem xs={12} sm={12} md={3}>
-           <Popover trigger='click' content={()=>(<div>Invest in our crypto trades and get live trade data and analysis with a 25% guarante in all our investments</div>)}>
+           <Popover trigger='hover' content={()=>(<div>Invest in our crypto trades and get live trade data and analysis with a 25% guarante in all our investments</div>)}>
+           <div>
            <div  className='product-card'>
-                  <Button>
+                
                   <FontAwesomeIcon icon={faPiggyBank} style={{width:100,height:100}} className='product-logo' />
-                  </Button>
+                  
                   <h5 style={{color:'white'}}>Investment</h5>
             </div>
+           </div>
            </Popover>
           </GridItem>
           <GridItem xs={12} sm={12} md={3}>
-          <Popover trigger='click' content={()=>(<div>Conduct live crypto and cash transactions which are completely transparent and encrypted by our team of data encryption experts</div>)}>
+          <Popover trigger='hover' content={()=>(<div style={{color:'goldenrod'}}>Conduct live crypto and cash transactions which are completely transparent and encrypted by our team of data encryption experts</div>)}>
+          <div >
           <div className='product-card' >
               
-              <Button>
-              <FontAwesomeIcon icon={faMoneyCheckAlt} style={{width:100,height:100}} className='product-logo' />
-              </Button>
-                  <h5 style={{color:'white'}}>Transactions</h5>
-
             
+              <FontAwesomeIcon icon={faMoneyCheckAlt} style={{width:100,height:100}} className='product-logo' />
+              
+                  <h5 style={{color:'white'}}>Transactions</h5>
            </div>
+          </div>
           </Popover>
           </GridItem>
           <GridItem xs={12} sm={12} md={3}>
-          <Popover trigger='click' content={()=>(<div>Invest in our state of the art crypto mining services using the latest blockcain and cryptographic technologies</div>)}>
+          <Popover trigger='hover' content={()=>(<div style={{color:'goldenrod'}}>Invest in our state of the art crypto mining services using the latest blockcain and cryptographic technologies</div>)}>
           <div  className='product-card'>
               
-                    <Button>
+                  
                     <FontAwesomeIcon icon={faCoins} style={{width:100,height:100}} className='product-logo' />
-                    </Button>
+                    
                   <h5 style={{color:'white'}}>Crypto Mining</h5>
            </div>
           </Popover>

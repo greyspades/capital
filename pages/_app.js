@@ -110,6 +110,7 @@ export default class MyApp extends App {
           
             <Head>
           <title>Capital Investment Option</title>
+       
           </Head>
           
         

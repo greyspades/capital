@@ -64,7 +64,8 @@ import PhoneIcon from '@material-ui/icons/Phone'
 import cookieCutter from "cookie-cutter";
 //import { Container } from "@material-ui/core";
 
-//dynamic import of google recaptcha
+//email js
+import emailjs from 'emailjs-com';
 
 
 
@@ -131,6 +132,11 @@ export default function Registration(props) {
    
    
   }
+  useEffect(()=>{
+    console.log('mounted')
+    init("user_i5h5cumEytlzj4MMhNWzU");
+    
+  })
 
   const submit=(handleSubmit)=>{
     if(spinner.pending==false && spinner.done==false && startCaptcha==false){

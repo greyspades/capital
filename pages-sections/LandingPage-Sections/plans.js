@@ -1,6 +1,7 @@
 import React,{useState,useContext,useEffect} from 'react'
 import {MyContext} from '../../components/context'
 import PolicyIcon from '@material-ui/icons/Policy';
+import Head from 'next/head'
 import {useRouter} from 'next/router'
 //import tech1 from "assets/img/tech1"
 import {motion} from 'framer-motion'
@@ -170,7 +171,12 @@ Our affiliate rewards program offers earning at four levels and pays 8% of the d
             </Container>
             <Container className='affiliate' style={{}}>
               
-                
+            <Head>
+           
+
+
+
+           </Head>
             </Container>
             <Container>
                 <Row>
@@ -178,7 +184,10 @@ Our affiliate rewards program offers earning at four levels and pays 8% of the d
                         Privacy-policy
                     </h3>
                     <div>
-
+                    Please read the following terms regarding our privacy policy. An important part of the relationship we have with our Clients is the information you share with us.
+                     We want you to know how we treat your private information. capitalinvestmentoption.com protects our clients' privacy and does its best to provide their safety and convenience online. 
+                     The capitalinvestmentoption.com website is subject to this "Privacy Policy". It regulates
+                     data accumulation and usage at the website. Using the capitalinvestmentoption.com website infers your consent to the data practices given in this statement.
                     </div>
                 </Row>
             </Container>
