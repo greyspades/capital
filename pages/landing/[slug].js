@@ -25,7 +25,7 @@ import rc from '../../assets/img/rc.jpg'
 import Slider from "../../pages-sections/LandingPage-Sections/slider"
 import Testimonials from '../../pages-sections/LandingPage-Sections/testimonials'
 import {CircularProgress} from '@material-ui/core'
-import ScriptTag from 'react-script-tag'
+//import ScriptTag from 'react-script-tag'
 import {
   Input,
   InputGroupAddon,
@@ -160,20 +160,6 @@ s0.parentNode.insertBefore(s1,s0);
            <Plans bomber={slug} />
            <Testimonials />
            <TeamSection />
-           <ScriptTag  type="text/javascript" dangerouslySetInnerHTML={{__html:`baseUrl = "https://widgets.cryptocompare.com/";
-var scripts = document.getElementsByTagName("script");
-var embedder = scripts[ scripts.length - 1 ];
-var cccTheme = {"General":{"background":"#000","priceText":"#fff"},"Currency":{"color":"#fff"}};
-(function (){
-var appName = encodeURIComponent(window.location.hostname);
-if(appName==""){appName="local";}
-var s = document.createElement("script");
-s.type = "text/javascript";
-s.async = true;
-var theUrl = baseUrl+'serve/v3/coin/header?fsyms=BTC,ETH,XMR,LTC,DASH&tsyms=USD,EUR,CNY,GBP';
-s.src = theUrl + ( theUrl.indexOf("?") >= 0 ? "&" : "?") + "app=" + appName;
-embedder.parentNode.appendChild(s);
-})();`}} />
            
            <WorkSection />
           </div>
