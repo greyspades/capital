@@ -106,6 +106,11 @@ export default function Registration(props) {
   
   const solve=()=>{
     //setSolved(true)
+    let per={
+      name:user.firstname,
+      mail:user.email
+    }
+    
     Axios.post('/api/user',{user})
     .then((res)=>{
      if(res.data=='SAVED'){
@@ -116,7 +121,8 @@ export default function Registration(props) {
         pending:false,
         done:true,
       })*/
-      Router.push('../Dashboard')
+      mail(per)
+      Router.push('../success')
      }
      else if(res.data=='THAT EMAILL ADDRESS IS TAKEN'){
       alert('Sorry the email address or username is already taken')
@@ -223,6 +229,17 @@ export default function Registration(props) {
       )
     }
   }
+
+  const mail=(user)=>{
+    
+    Axios.post('/api/mail',{user})
+    .then((res)=>{
+      console.log('sent mail')
+      console.log(res.data)
+    })
+    //console.log(mail,name)
+  }
+
   const networkError=(() => {
     setShowSpin(false)
     setCaptcha(false)
@@ -284,7 +301,10 @@ const spin=()=>{
                    
                   }
                  
-                  
+                  let per={
+                    name:values.firstname,
+                    mail:values.email
+                  }
                 
                   if(values.password==values.nextPassword&&values.password.length>=8 &&values.firstname&&values.lastname&&values.phone&&values.email&&values.username){
                     setUser({
@@ -299,7 +319,9 @@ const spin=()=>{
                     })
                     //console.log(user)
                     //setCaptcha(true)
-                    solve()
+                   
+                    solve(per)
+                   
                     setShowSpin(true)
                     //reRef.current.execute()
                     
@@ -527,7 +549,7 @@ const spin=()=>{
             </GridItem>
           </GridContainer>
         </div>
-        <Footer whiteFont />
+
       </div>
     </div>
   );

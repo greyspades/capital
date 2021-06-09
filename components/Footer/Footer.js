@@ -49,13 +49,13 @@ export default function Footer(props) {
                  <Row className='' style={{}}>
                     
                     <Col className='footer-link' xs={6} md={6} style={{}}>
-                    <a style={{color:'white'}} href='signup'>
+                    <a style={{color:'white'}} href='/signup'>
                     Get Started
                     </a>
                   </Col>
                     
                   <Col xs={6} md={6} style={{}} className='footer-link' xs={6} md={6}>
-                    <a href='login' style={{color:'white'}}>
+                    <a href='/login' style={{color:'white'}}>
                       Login
                     </a>
                   </Col>

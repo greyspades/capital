@@ -5,7 +5,8 @@ import classNames from "classnames";
 import { makeStyles } from "@material-ui/core/styles";
 import tawkTo from "tawkto-react";
 import Head from 'next/head'
-
+import NextScript from 'next/experimental-script'
+import ScriptTag from 'react-script-tag'
 // core components
 import Header from "components/Header/Header.js";
 import Footer from "components/Footer/Footer.js";
@@ -16,7 +17,7 @@ import HeaderLinks from "components/Header/HeaderLinks.js";
 import Parallax from "components/Parallax/Parallax.js";
 import Plans from '../pages-sections/LandingPage-Sections/plans.js'
 import styles from "assets/jss/nextjs-material-kit/pages/landingPage.js";
-
+import Converter from '../pages-sections/LandingPage-Sections/converter.js'
 import rc from '../assets/img/rc.jpg'
 import Slider from "../pages-sections/LandingPage-Sections/slider"
 import Testimonials from '../pages-sections/LandingPage-Sections/testimonials'
@@ -67,10 +68,7 @@ export default function LandingPage(props,{data}) {
     console.log(window.innerWidth)
     setLoading(false)
     //tawkTo(tawkToPropertyId, tawkToKey)
-    /*Axios.get('/api/mail')
-    .then(()=>{
-      console.log('sent mail')
-    })*/
+    
   },[])
   const Review=()=>{
     if(main==''){ 
@@ -100,20 +98,7 @@ s0.parentNode.insertBefore(s1,s0);
 })();
 `
 }} />
-<script type="text/javascript" dangerouslySetInnerHTML={{__html:`baseUrl = "https://widgets.cryptocompare.com/";
-var scripts = document.getElementsByTagName("script");
-var embedder = scripts[ scripts.length - 1 ];
-var cccTheme = {"General":{"background":"#000","borderColor":"#9a7801"},"Form":{"borderColor":"#9a7801"}};
-(function (){
-var appName = encodeURIComponent(window.location.hostname);
-if(appName==""){appName="local";}
-var s = document.createElement("script");
-s.type = "text/javascript";
-s.async = true;
-var theUrl = baseUrl+'serve/v1/coin/converter?fsym=BTC&tsyms=USD,EUR,CNY,GBP';
-s.src = theUrl + ( theUrl.indexOf("?") >= 0 ? "&" : "?") + "app=" + appName;
-embedder.parentNode.appendChild(s);
-})();`}}/>
+
         </Head>
         <Header
           color="transparent"
@@ -171,14 +156,41 @@ embedder.parentNode.appendChild(s);
               
           </div>
           <div>
-            
+          
+
+
           </div>
           <ActiveUsers />
            <Plans />
-           
+           <ScriptTag  type="text/javascript" dangerouslySetInnerHTML={{__html:`baseUrl = "https://widgets.cryptocompare.com/";
+var scripts = document.getElementsByTagName("script");
+var embedder = scripts[ scripts.length - 1 ];
+var cccTheme = {"General":{"background":"#000","priceText":"#fff"},"Currency":{"color":"#fff"}};
+(function (){
+var appName = encodeURIComponent(window.location.hostname);
+if(appName==""){appName="local";}
+var s = document.createElement("script");
+s.type = "text/javascript";
+s.async = true;
+var theUrl = baseUrl+'serve/v3/coin/header?fsyms=BTC,ETH,XMR,LTC,DASH&tsyms=USD,EUR,CNY,GBP';
+s.src = theUrl + ( theUrl.indexOf("?") >= 0 ? "&" : "?") + "app=" + appName;
+embedder.parentNode.appendChild(s);
+})();`}} />
            <Testimonials />
            <TeamSection />
- 
+            <NextScript defer dangerouslySetInnerHTML={{__html:`var scripts = document.getElementsByTagName("script");
+var embedder = scripts[ scripts.length - 1 ];
+var cccTheme = {"General":{"background":"#000","priceText":"#fff"},"Currency":{"color":"#fff"}};
+(function (){
+var appName = encodeURIComponent(window.location.hostname);
+if(appName==""){appName="local";}
+var s = document.createElement("script");
+s.type = "text/javascript";
+s.async = true;
+var theUrl = baseUrl+'serve/v3/coin/header?fsyms=BTC,ETH,XMR,LTC,DASH&tsyms=USD,EUR,CNY,GBP';
+s.src = theUrl + ( theUrl.indexOf("?") >= 0 ? "&" : "?") + "app=" + appName;
+embedder.parentNode.appendChild(s);
+})();`}} />
            
            
           </div>

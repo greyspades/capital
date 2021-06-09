@@ -41,7 +41,7 @@ const Testimonials =()=>{
        };
 
     return (
-        <div style={{marginTop:500}}>
+        <div style={{marginTop:50}}>
             <Container style={{}}>
             <div>
                   <h4>

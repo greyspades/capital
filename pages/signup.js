@@ -1,4 +1,4 @@
-import React,{useState,useContext,useRef} from "react";
+import React,{useState,useContext,useRef,useEffect} from "react";
 // @material-ui/core components
 import { makeStyles } from "@material-ui/core/styles";
 import InputAdornment from "@material-ui/core/InputAdornment";
@@ -83,6 +83,7 @@ export default function Registration(props) {
   const [solved,setSolved]=useState(false)
   const reRef=useRef()
   const [user,setUser]=useState()
+  const [showButton,setShowButton]=useState(true)
   
   const [spinner,setSpinner]=useState({
     pending:false,
@@ -99,6 +100,10 @@ export default function Registration(props) {
   
   const solve=()=>{
     //setSolved(true)
+    let per={
+      name:user.firstname,
+      mail:user.email
+    }
     Axios.post('/api/user',{user})
     .then((res)=>{
       console.log(res.data)
@@ -110,7 +115,8 @@ export default function Registration(props) {
         pending:false,
         done:true,
       })*/
-      Router.push('/Dashboard')
+      mail(per)
+      Router.push('/success')
      }
      else if(res.data=='THAT EMAILL ADDRESS IS TAKEN'){
        alert('Sorry the email address or username is already taken')
@@ -134,12 +140,22 @@ export default function Registration(props) {
   }
   useEffect(()=>{
     console.log('mounted')
-    init("user_i5h5cumEytlzj4MMhNWzU");
+    //init("user_i5h5cumEytlzj4MMhNWzU");
     
   })
+  const mail=(user)=>{
+    setShowSpin(true)
+    setShowButton(false)
+    Axios.post('/api/mail',{user})
+    .then((res)=>{
+      console.log('sent mail')
+      console.log(res.data)
+    })
+    //console.log(mail,name)
+  }
 
   const submit=(handleSubmit)=>{
-    if(spinner.pending==false && spinner.done==false && startCaptcha==false){
+    if(spinner.pending==false && spinner.done==false && showButton==true){
       return (
         <div>
           <button style={{border:0}}>
@@ -279,9 +295,11 @@ const spin=()=>{
                     balance:0.00
                    
                   }
+                  let per={
+                    name:values.firstname,
+                    mail:values.email
+                  }
                  
-                  
-                
                   if(values.password==values.nextPassword&&values.password.length>=8 &&values.firstname&&values.lastname&&values.phone&&values.email&&values.username){
                     setUser({
                       firstname:values.firstname,
@@ -295,7 +313,7 @@ const spin=()=>{
                     //console.log(user)
                     //setCaptcha(true)
                     solve()
-                    setShowSpin(true)
+                    
                     //reRef.current.execute()
                     
                     
@@ -311,12 +329,18 @@ const spin=()=>{
                   }
                   else if(values.password!=values.nextPassword&&values.firstname&&values.lastname&&values.email){
                     alert('The passwords do not match')
+                    setShowSpin(false)
+                    setShowButton(true)
                   }
                   else if(values.password.length<8){
                     alert('Password must contain at least 8 characters')
+                    setShowSpin(false)
+                    setShowButton(true)
                   }
                   else if(!values.firstname||!values.lastname||!values.email||!values.password||!values.phone)
                   alert('All fields are required')
+                  setShowSpin(false)
+                    setShowButton(true)
                 }}>
                   {({handleChange,handleSubmit,values,user})=>((
                     <form className={classes.form,'login'}>
@@ -511,7 +535,7 @@ const spin=()=>{
                 
                <Container>
                  <Row style={{width:'100%'}}>
-                 <div style={{display:'grid',alignItems:'center',marginLeft:'50%',marginTop:-60}}>
+                 <div style={{display:'grid',alignItems:'center',marginLeft:'50%',marginTop:-20}}>
                       {spin()}
                      </div>
                  </Row>
@@ -520,7 +544,7 @@ const spin=()=>{
             </GridItem>
           </GridContainer>
         </div>
-        <Footer whiteFont />
+        
       </div>
     </div>
   );
