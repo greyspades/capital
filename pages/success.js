@@ -41,33 +41,22 @@ const Success=(props)=>{
 
     return(
         <div>
-             <Header
-          color="transparent"
-          routes={dashboardRoutes}
-          
-          rightLinks={<HeaderLinks />}
-          fixed
-          changeColorOnScroll={{
-            height: 400,
-            color: "white",
-          }}
-          {...rest}
-        />
+            
             <Container>
                 <Card style={{}} className='success-card'>
                     <CardHeader>
-                        <h2>
+                        <h2 style={{textAlign:'center'}}>
                             Your Registration was successful
                         </h2>
                     </CardHeader>
                     <CardBody>
-                        <div>
+                        <div style={{textAlign:'center'}}>
                         Please check your email to confirm your account and unlock all features 
                         </div>
-                        <div>
+                        <div style={{textAlign:'center'}}>
                             did not recieve email ? <Button onClick={()=>{mail}}>click here to resend</Button>
                         </div>
-                        <div style={{marginTop:40}}>
+                        <div style={{marginTop:40,textAlign:'center'}}>
                             Or go directly to your <a style={{color:'goldenrod'}} href="/Dashboard">Dashboard</a>
 
                         </div>
