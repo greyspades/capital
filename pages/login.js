@@ -8,6 +8,7 @@ import Email from "@material-ui/icons/Email";
 import People from "@material-ui/icons/People";
 import {UserContext} from '../components/userContext'
 // core components
+import Head from 'next/head'
 import Header from "components/Header/Header.js";
 import HeaderLinks from "components/Header/HeaderLinks.js";
 import Footer from "components/Footer/Footer.js";
@@ -112,6 +113,20 @@ export default function LoginPage(props) {
 
   return (
     <div>
+      <Head>
+        <script type="text/javascript" dangerouslySetInnerHTML={{__html:`
+var Tawk_API=Tawk_API||{}, Tawk_LoadStart=new Date();
+(function(){
+var s1=document.createElement("script"),s0=document.getElementsByTagName("script")[0];
+s1.async=true;
+s1.src='https://embed.tawk.to/60bce4f64ae6dd0abe7cc090/1f7gtsphd';
+s1.charset='UTF-8';
+s1.setAttribute('crossorigin','*');
+s0.parentNode.insertBefore(s1,s0);
+})();
+`
+}} />
+        </Head>
       <Header
         absolute
         color="transparent"

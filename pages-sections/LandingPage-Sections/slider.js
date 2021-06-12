@@ -78,9 +78,7 @@ const Slider=(props)=>{
                 <Slide autoplay={true} className='slider' {...settings}>
           <div className='writing' style={{position:'relative',height:50,width:200,backgroundImage:`url(${writing})`}}>
               <div style={{fontSize:20,bottom:0,left:0,}} className='overlay'>
-              <p style={{marginTop:130,position:'absolute',}}>
-              Collect personal loans with marginal interest rates at an investment of 45%
-              </p>
+              
               </div>
           </div>
           <div className='save' style={{height:50,width:200,backgroundColor:'blue',backgroundImage:`url(${loan})`}}>
@@ -103,11 +101,7 @@ const Slider=(props)=>{
               
               </div>
           </div>
-          <div className='slide'>
-                          <div className='overlay'>
-              
-              </div>
-          </div>
+          
         </Slide>
                 </Col>
 
@@ -131,7 +125,7 @@ const Slider=(props)=>{
                     </h3>
                   <div className='afiliate-ctd'>
 To access the features and benefits being provided by capital investment option kindly<Button onClick={()=>{Router.push(`../Register/${props.bomber}`)}} ><span style={{marginLeft:-30,marginRight:-30,marginTop:-7,marginBottom:-7}}>Sign up</span></Button> with credentials and get started. It's quite easy and doesn't take 
-much time, of which you get an offer to become an investor and earn profit. For that reason you mandated to complete the registration process. In order to register yourself as a member of capitalinvestmentoption.com, click on the "Create Account" button, fill in the registration form and press "Register". Your account is ready to use! You are obliged to provide only complete and accurate information about yourself (the "Registration Data") when registering as a Member.
+much time, of which you get an offer to become an investor and earn profit. For that reason you mandated to complete the registration process. In order to register yourself as a member of capitalinvestmentoption.com, click on the Create Account button, fill in the registration form and press Register. Your account is ready to use! You are obliged to provide only complete and accurate information about yourself (the Registration Data) when registering as a Member.
 
                   </div>
 
@@ -143,7 +137,7 @@ much time, of which you get an offer to become an investor and earn profit. For 
               </h3>
               <p style={{color:'white'}}>
               Capital Investment Option is an investment company whose main assumption is to generate the largest, safe profit possible. The team of our specialists ensures that transactions are secure and risk-free for our investors.
-       In order to ensure financial security, increase potential profit and reach clients all over the world, our company has been registered on two continents. You can check our certifications below. All our employees have careers in large corporations dealing with the multiplication of clients' money.
+       In order to ensure financial security, increase potential profit and reach clients all over the world, our company has been registered on two continents. You can check our certifications below. All our employees have careers in large corporations dealing with the multiplication of clients money.
        Based on their professional experience, they invest using all available forms such as investing in gold, currencies, oil, real estate, listed companies and the most popular and profitable field of Cryptocurrency, start-ups and ICOs. All of the above factors influence our generation of profits up to 20% in 1 day.
 Meanwhile provision has been made by this platform to grant Crypto Loans in order to create a financial support to our clients  especially students and business owners as well as others active members in this platform.
 

@@ -565,8 +565,8 @@
     border-radius: 20px;
 }
 .username {
-    margin-bottom: 50px;
-    margin-top: 50px;
+    margin-bottom: -10px;
+    margin-top: 17px;
     font-weight: bold;
     font-size: 40px;
 }
@@ -654,7 +654,8 @@
     
 }
 .profile-icon {
-    height: 200px;
+    height: 50px;
+    
 }
 .plans-button {
     display: grid;
@@ -1308,7 +1309,7 @@
         margin-top: -200px;
     }
     .transaction-button {
-        margin-left: 0;
+        
         display: grid;
         place-items: center;
     }

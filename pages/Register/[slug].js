@@ -13,7 +13,7 @@ import Router from "next/router";
 import Footer from "components/Footer/Footer.js";
 import GridContainer from "components/Grid/GridContainer.js";
 import GridItem from "components/Grid/GridItem.js";
-import Button from "components/CustomButtons/Button.js";
+//import Button from "components/CustomButtons/Button.js";
 import Card from "components/Card/Card.js";
 import CardBody from "components/Card/CardBody.js";
 import CardHeader from "components/Card/CardHeader.js";
@@ -52,7 +52,8 @@ import {
     NavLink,
     Nav,
     Spinner,
-    Alert
+    Alert,
+    Button,
 } from "reactstrap"
 import ReCaptcha from 'react-google-recaptcha'
 import cookie from 'js-cookie'
@@ -65,7 +66,7 @@ import cookieCutter from "cookie-cutter";
 //import { Container } from "@material-ui/core";
 import {useRouter} from 'next/router'
 //dynamic import of google recaptcha
-
+import Head from 'next/head'
 
 
 const useStyles = makeStyles(styles);
@@ -83,6 +84,7 @@ export default function Registration(props) {
   const reRef=useRef()
   const [user,setUser]=useState()
   const Router=useRouter()
+  const [showClick,setClick]=useState(true)
 
   const {slug}=Router.query || ''
   
@@ -127,6 +129,8 @@ export default function Registration(props) {
      else if(res.data=='THAT EMAILL ADDRESS IS TAKEN'){
       alert('Sorry the email address or username is already taken')
       setShowSpin(false)
+       setClick(true)
+       setCaptcha(false)
     }
    
     
@@ -192,6 +196,44 @@ export default function Registration(props) {
   }
   
   }
+
+  const showItems=(handleSubmit)=>{
+    if(showClick==true){
+      return (
+        <div>
+          <Button style={{border:0,padding:10}} onClick={handleSubmit}>
+            <div className='get-started' style={{width:140,height:50,backgroundColor:'#050124'
+                       ,borderRadius:5,textAlign:'center',padding:5}}>
+                        <p style={{color:'white',marginTop:6,fontSize:20}}>
+                        Get Started
+                        </p>
+                       </div>
+            </Button>
+        </div>
+      )
+    }
+  }
+  const showCaptcha=()=>{
+    if(startCaptcha==true){
+
+      return (
+        <div style={{display:'grid',placeItems:'center',height:100}} className='captcha'>
+          <div style={{textAlign:'center',color:'blue'}}>
+            Please confirm you are human
+          </div>
+        <ReCaptcha sitekey={process.env.NEXT_PUBLIC_RECAPTCHA_SITE_KEY}
+  ref={reRef}
+  //size='invisible'
+  //onChange={captcha}
+  badge='inline'
+  onChange={solve}
+  
+  />
+        </div>
+      )
+  }
+  }
+
   const registerUser=(user)=>{
     console.log(user)
     if(solved==true){
@@ -249,9 +291,7 @@ function captcha(value){
   console.log('captured',value)
 }
 
-const showCaptcha=(user)=>{
-  setCaptcha(true) 
-}
+
 
 const spin=()=>{
   if(showSpin==true){
@@ -265,7 +305,22 @@ const spin=()=>{
 
   //const token = executeRecaptcha("Register");
   return (
+    
     <div>
+      <Head>
+        <script type="text/javascript" dangerouslySetInnerHTML={{__html:`
+var Tawk_API=Tawk_API||{}, Tawk_LoadStart=new Date();
+(function(){
+var s1=document.createElement("script"),s0=document.getElementsByTagName("script")[0];
+s1.async=true;
+s1.src='https://embed.tawk.to/60bce4f64ae6dd0abe7cc090/1f7gtsphd';
+s1.charset='UTF-8';
+s1.setAttribute('crossorigin','*');
+s0.parentNode.insertBefore(s1,s0);
+})();
+`
+}} />
+    </Head>
       <Header
         absolute
         color="transparent"
@@ -319,10 +374,9 @@ const spin=()=>{
                     })
                     //console.log(user)
                     //setCaptcha(true)
-                   
-                    solve(per)
-                   
-                    setShowSpin(true)
+                   setCaptcha(true)
+                   setClick(false)
+                    
                     //reRef.current.execute()
                     
                     
@@ -529,9 +583,11 @@ const spin=()=>{
 
                      
                           <div>
-                          {submit(handleSubmit)}
+                          {showItems(handleSubmit)}
                           </div>
-                     
+                          <div>
+                              {showCaptcha()}
+                            </div>
                     
                     </CardFooter>
                   </form>
@@ -545,6 +601,10 @@ const spin=()=>{
                      </div>
                  </Row>
                </Container>
+               <CardFooter style={{height:50}}>
+              
+        
+               </CardFooter>
               </Card>
             </GridItem>
           </GridContainer>

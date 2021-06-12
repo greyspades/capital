@@ -10,6 +10,7 @@ import {CircularProgress} from '@material-ui/core'
 import AttachMoneyIcon from '@material-ui/icons/AttachMoney'
 import BarChartIcon from '@material-ui/icons/BarChart'
 //import Axios from 'axios'
+import Head from 'next/head'
 import Header from "../components/Header/Header.js";
 import HeaderLinks from "components/Header/HeaderLinks.js";
 import Footer from '../components/Footer/Footer'
@@ -68,6 +69,7 @@ import Table from 'rc-table'
 import { faYenSign } from "@fortawesome/free-solid-svg-icons";
 import 'react-dropdown/style.css'
 import Router from "next/router";
+import { deepPurple } from "@material-ui/core/colors";
 const Popover=dynamic(()=>import('@idui/react-popover'),
   {ssr:false}
 )
@@ -127,6 +129,11 @@ function UserProfile({data},props) {
 
   const [pair,setPair]=useState(" ")
   const [proof,setProof]=useState('')
+
+  const [dp, setDp]=useState({
+    status:'Nill',
+    url:'' || 'default'
+  })
   
   useEffect((req)=>{
     const user=parseCookies(req)
@@ -222,25 +229,19 @@ const fileUpload=()=>{
 
 
   const columns=[
-    {
-      title:'S/N',
-      dataIndex:'S/N',
-      key:'S/N',
-      width:50,
-      fixed:false
-    },
-    {
-      title:'Plan',
-      dataIndex:'plan',
-      key:'plan',
-      width:100,
-      fixed:false
-    },
+    
     {
       title:'Amount($)',
       dataIndex:'amount',
       key:'amount',
-      width:100,
+      width:50,
+      fixed:false
+    },
+    {
+      title:'Pair',
+      dataIndex:'pair',
+      key:'pair',
+      width:50,
       fixed:false
     },
    
@@ -248,24 +249,10 @@ const fileUpload=()=>{
       title:'Date',
       dataIndex:'date',
       key:'date',
-      width:100,
+      width:50,
       fixed:false
     },
-    {
-      title:'Status',
-      dataIndex:'Status',
-      key:'Status',
-      width:100,
-      fixed:false
-    },
-   
-    {
-      title:'Pair',
-      dataIndex:'pair',
-      key:'pair',
-      width:100,
-      fixed:false
-    }
+    
   ]
   const openInvest=()=>{
     setShowInvest(true)
@@ -320,6 +307,37 @@ const fileUpload=()=>{
      })
   }
   
+  const displayPic=()=>{
+    if(dp.status=='SET'){
+      return (
+        <image src={dp.url}>
+  
+        </image>
+      )
+    }
+    else {
+      return (
+        <div style={{width:'100%'}}>
+                  <div style={{width:200,height:200, marginLeft:'27%', backgroundColor:' #050124',borderRadius:100,textAlign:'center',display:'grid',placeItems:'center'}}>
+                     <PersonOutlineIcon className='profile-icon' style={{width:150,height:150,color:'#9a7801',marginBottom:-10,}}   />
+        </div>
+        </div>
+      )
+    }
+  }
+  
+  const newDp=()=>{
+    const url = '/api/upload';
+  const formData = new FormData();
+  let user=info.username
+  formData.append('file',file)
+  const config = {
+      headers: {
+          'content-type': 'multipart/form-data'
+      }
+  }
+  return  post(url, formData,config,user)
+  }
 
 
   const showMessage=(item)=>{
@@ -791,13 +809,32 @@ const fileUpload=()=>{
   return (
     <>
       <div style={{backgroundColor:' #050124',}} className="content">
+        <Head>
+        <script type="text/javascript" dangerouslySetInnerHTML={{__html:`
+var Tawk_API=Tawk_API||{}, Tawk_LoadStart=new Date();
+(function(){
+var s1=document.createElement("script"),s0=document.getElementsByTagName("script")[0];
+s1.async=true;
+s1.src='https://embed.tawk.to/60bce4f64ae6dd0abe7cc090/1f7gtsphd';
+s1.charset='UTF-8';
+s1.setAttribute('crossorigin','*');
+s0.parentNode.insertBefore(s1,s0);
+})();
+`
+}} />
+        </Head>
       <Header
         
         color="dark"
         
         changeColorOnScroll
         
-        //rightLinks={<HeaderLinks />}
+        rightLinks={
+          <div>
+            click
+          </div>
+
+        }
         {...rest}
    
       />
@@ -870,6 +907,9 @@ const fileUpload=()=>{
           <h2 style={{marginTop:-30}}>
                 Dashboard
               </h2>
+
+
+
             <Card className="card-user profile-card ">
              
               <CardBody>
@@ -879,14 +919,21 @@ const fileUpload=()=>{
                   <div className="block block-two" />
                   <div className="block block-three" />
                   <div className="block block-four" />
-                  <a href="#pablo" onClick={(e) => e.preventDefault()}>
-                        <PersonOutlineIcon className='profile-icon' style={{width:100,height:100,color:'#9a7801',marginTop:50,marginBottom:-30}}   />
-                    <h3 className="titl username">{Load()}</h3>
-                  </a>
-                  <Row>
+                  <div style={{}} onClick={(e) => e.preventDefault()}>
+
+                  
+                        {displayPic()}
+                    
+
+                  </div>
+                  <div style={{marginTop:20}}>
+                  <h3 className="titl username">{Load()}</h3>
+                  </div>
+                  
+                  <Row style={{marginTop:35}}>
                     <Col style={{}} md={6} xs={12}>
                    <div className='star'>
-                   <StarBorderIcon style={{width:60,height:60,color:'#9a7801',marginTop:-20}} />
+                   <StarBorderIcon style={{width:35,height:35,color:'#9a7801',marginTop:-8,marginBottom:20}} />
                    </div>
                     </Col>
                     <Col style={{color:'white'}} className='level-talk' md={6} xs={12}>
@@ -894,7 +941,7 @@ const fileUpload=()=>{
                     </Col>
                   </Row>
                 </div>
-                <Container style={{marginTop:-50}}>
+                <Container style={{marginTop:-70}}>
                   <Row>
                     <Col xs={3} md={3}>
                         <AccountBalanceWalletIcon className='wallet-icon' style={{width:80,height:80,color:'white'}} />
@@ -919,7 +966,7 @@ const fileUpload=()=>{
                       
                     </Col>
                   </Row>
-                  <Row>
+                  <Row style={{marginTop:-10}}>
                     <Col xs={3} md={3}>
                         <BarChartIcon className='wallet-icon' style={{width:100,height:100,color:'white'}} />
                     </Col>
@@ -945,37 +992,31 @@ const fileUpload=()=>{
 
                 </Container>
                     
-                    <Container className='transaction-group' style={{marginTop:20}}>
+                    <Container className='transaction-group' style={{marginTop:-20}}>
                      <Row style={{backgroundColor:'#050124',borderRadius:5}}>
-                       <Col className='transaction-button' xs={5} md={3}>
+                       <Col className='transaction-button' xs={3} md={3}>
                           {invest()}
                           Invest
                        </Col>
                        
-                       <Col className='transaction-button' xs={5} md={3}>
+                       <Col className='transaction-button' xs={3} md={3}>
                           {withdraw()}
                           Withdraw
                        </Col>
-                        <Col className='transaction-button' xs={5} md={3}>
+                        <Col className='transaction-button' xs={3} md={3}>
                           <Button style={{width:50}} onClick={()=>{setShowConfirm(true)}}>
                            <DoneOutline style={{width:40,height:40,marginLeft:-18,color:'#9a7801'}} color='#9a7801' />
                            
                           </Button>
                           <span style={{}}>Confirmation</span>
                         </Col>
-                        <Col className='transaction-button bottom-button' xs={5} md={3}>
-                          <Button style={{width:40}} onClick={signOut} >
-                           <ExitToAppIcon style={{width:40,height:40,marginLeft:-18,color:'#9a7801'}} color='#9a7801' />
-                          
-                          </Button>
-                          Sign out
-                        </Col>
+                       
                      </Row>
                     </Container>
                         
-                  <div style={{marginTop:50}}>
-                  <h3 style={{marginBottom:-40,textAlign:'center'}}>Pending Investments</h3>
-                    <Table className='invest-table' tableLayout='auto' useFixedHeader={false} scroll={{y:true,x:true}} columns={columns} data={info.investment} />
+                  <div style={{marginTop:10}}>
+                  <h4 style={{marginBottom:-40,textAlign:'center'}}>Pending Investments</h4>
+                    <Table className='invest-table' tableLayout='auto' useFixedHeader={false} scroll={{y:true,x:false}} columns={columns} data={info.investment} />
                     
                   </div>
                 
@@ -991,7 +1032,7 @@ const fileUpload=()=>{
           
               <Row style={{}}>
                 <Col md={12}>
-                <h3 stle={{color:'white'}}>
+                <h3 stle={{color:'white',marginLeft:10}}>
               Track Progress
             </h3>
                 <Card className="card-chart">
@@ -1001,64 +1042,7 @@ const fileUpload=()=>{
                     <h5 className="card-category">Total Shipments</h5>
                     <CardTitle tag="h2">Activity</CardTitle>
                   </Col>
-                  <Col sm="6">
-                    <ButtonGroup
-                      className="btn-group-toggle float-right"
-                      data-toggle="buttons"
-                    >
-                      <Button
-                        tag="label"
-                        className={classNames("btn-simple", {
-                          active: bigChartData === "data1",
-                        })}
-                        color="info"
-                        id="0"
-                        size="sm"
-                        onClick={() => setBgChartData("data1")}
-                      >
-                        <span className="d-none d-sm-block d-md-block d-lg-block d-xl-block">
-                          Accounts
-                        </span>
-                        <span className="d-block d-sm-none">
-                          <i className="tim-icons icon-single-02" />
-                        </span>
-                      </Button>
-                      <Button
-                        color="info"
-                        id="1"
-                        size="sm"
-                        tag="label"
-                        className={classNames("btn-simple", {
-                          active: bigChartData === "data2",
-                        })}
-                        onClick={() => setBgChartData("data2")}
-                      >
-                        <span className="d-none d-sm-block d-md-block d-lg-block d-xl-block">
-                          Purchases
-                        </span>
-                        <span className="d-block d-sm-none">
-                          <i className="tim-icons icon-gift-2" />
-                        </span>
-                      </Button>
-                      <Button
-                        color="info"
-                        id="2"
-                        size="sm"
-                        tag="label"
-                        className={classNames("btn-simple", {
-                          active: bigChartData === "data3",
-                        })}
-                        onClick={() => setBgChartData("data3")}
-                      >
-                        <span className="d-none d-sm-block d-md-block d-lg-block d-xl-block">
-                          Sessions
-                        </span>
-                        <span className="d-block d-sm-none">
-                          <i className="tim-icons icon-tap-02" />
-                        </span>
-                      </Button>
-                    </ButtonGroup>
-                  </Col>
+                 
                 </Row>
               </CardHeader>
                  
@@ -1073,8 +1057,12 @@ const fileUpload=()=>{
             </Card>
                 </Col>
 
-                <Col md={12}>
+                <Col style={{}} md={12}>
+                <h3 style={{marginTop:40,marginLeft:10}}>
+                    Track Assets
+                  </h3>
                 <Card className="card-chart">
+                
               <CardHeader>
                 <h5 className="card-category">Asset gain</h5>
                 <CardTitle tag="h3">
@@ -1098,7 +1086,9 @@ const fileUpload=()=>{
             </Col>
             
         </Row>
-        <Footer />
+<div style={{marginTop:-70}}>
+<Footer  />
+</div>
       </div>
     </>
   );

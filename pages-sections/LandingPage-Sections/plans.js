@@ -185,9 +185,9 @@ Our affiliate rewards program offers earning at four levels and pays 8% of the d
                     </h3>
                     <div style={{color:'white'}}>
                     Please read the following terms regarding our privacy policy. An important part of the relationship we have with our Clients is the information you share with us.
-                     We want you to know how we treat your private information. capitalinvestmentoption.com protects our clients' privacy and does its best to provide their safety and convenience online. 
+                     We want you to know how we treat your private information. capitalinvestmentoption.com protects our clients privacy and does its best to provide their safety and convenience online. 
                      The capitalinvestmentoption.com website is subject to this "Privacy Policy". It regulates
-                     data accumulation and usage at the website. Using the capitalinvestmentoption.com website infers your consent to the data practices given in this statement.
+                     data accumulation and usage on the website. Using the capitalinvestmentoption.com website infers your consent to the data practices given in this statement.
                     </div>
                 </Row>
             </Container>

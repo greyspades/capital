@@ -13,7 +13,7 @@ import Router from "next/router";
 import Footer from "components/Footer/Footer.js";
 import GridContainer from "components/Grid/GridContainer.js";
 import GridItem from "components/Grid/GridItem.js";
-import Button from "components/CustomButtons/Button.js";
+//import Button from "components/CustomButtons/Button.js";
 import Card from "components/Card/Card.js";
 import CardBody from "components/Card/CardBody.js";
 import CardHeader from "components/Card/CardHeader.js";
@@ -52,8 +52,11 @@ import {
     NavLink,
     Nav,
     Spinner,
-    Alert
+    Alert,
+    Button
+
 } from "reactstrap"
+import Head from 'next/head'
 import ReCaptcha from 'react-google-recaptcha'
 import cookie from 'js-cookie'
 import cookies from 'next-cookies'
@@ -84,7 +87,7 @@ export default function Registration(props) {
   const reRef=useRef()
   const [user,setUser]=useState()
   const [showButton,setShowButton]=useState(true)
-  
+  const [showClick,setClick]=useState(true)
   const [spinner,setSpinner]=useState({
     pending:false,
     done:false,
@@ -121,6 +124,8 @@ export default function Registration(props) {
      else if(res.data=='THAT EMAILL ADDRESS IS TAKEN'){
        alert('Sorry the email address or username is already taken')
        setShowSpin(false)
+       setClick(true)
+       setCaptcha(false)
      }
     
       //console.log(userdetail)
@@ -154,41 +159,29 @@ export default function Registration(props) {
     //console.log(mail,name)
   }
 
-  const submit=(handleSubmit)=>{
-    if(spinner.pending==false && spinner.done==false && showButton==true){
+  
+  const submit=()=>{
+    if(showButton==true){
       return (
         <div>
-          <button style={{border:0}}>
-          <div className='get-started' style={{width:160,height:50,backgroundColor:'#050124'
-                     ,borderRadius:5,textAlign:'center',padding:5}} onClick={handleSubmit}>
-                      <p style={{color:'white',marginTop:6,fontSize:20}}>
-                      Get Started
-                      </p>
-                     </div>
-          </button>
+          
         </div>
       )
     }
-    else if(spinner.pending==true && spinner.done==false){
+    else if(showSpin==true && showButton==false){
       return (
         <div>
-          <Spinner />
-      </div>
-      )
-    }
-    else if(spinner.pending==false && spinner.done==true){
-      return (
-        <div>
-          <Check />
+            <Spinner />
         </div>
       )
     }
+    
     else if(startCaptcha==true){
       return (
         <div style={{display:'grid',placeItems:'center',color:'red'}} className='captcha'>
         <ReCaptcha sitekey={process.env.NEXT_PUBLIC_RECAPTCHA_SITE_KEY}
   ref={reRef}
-  size='invisible'
+  //size='invisible'
   //onChange={captcha}
   badge='inline'
   onChange={solve}
@@ -199,6 +192,44 @@ export default function Registration(props) {
   }
   
   }
+  const showItems=(handleSubmit)=>{
+    if(showClick==true){
+      return (
+        <div>
+          <Button style={{border:0,padding:10}} onClick={handleSubmit}>
+            <div className='get-started' style={{width:140,height:50,backgroundColor:'#050124'
+                       ,borderRadius:5,textAlign:'center',padding:5}}>
+                        <p style={{color:'white',marginTop:6,fontSize:20}}>
+                        Get Started
+                        </p>
+                       </div>
+            </Button>
+        </div>
+      )
+    }
+  }
+
+  const showCaptcha=()=>{
+    if(startCaptcha==true){
+
+      return (
+        <div style={{display:'grid',placeItems:'center',height:100}} className='captcha'>
+          <div style={{textAlign:'center',color:'blue'}}>
+            Please confirm you are human
+          </div>
+        <ReCaptcha sitekey={process.env.NEXT_PUBLIC_RECAPTCHA_SITE_KEY}
+  ref={reRef}
+  //size='invisible'
+  //onChange={captcha}
+  badge='inline'
+  onChange={solve}
+  
+  />
+        </div>
+      )
+  }
+  }
+
   const registerUser=(user)=>{
     console.log(user)
     if(solved==true){
@@ -244,9 +275,7 @@ function captcha(value){
   console.log('captured',value)
 }
 
-const showCaptcha=(user)=>{
-  setCaptcha(true) 
-}
+
 
 const spin=()=>{
   if(showSpin==true){
@@ -261,6 +290,20 @@ const spin=()=>{
   //const token = executeRecaptcha("Register");
   return (
     <div>
+      <Head>
+        <script type="text/javascript" dangerouslySetInnerHTML={{__html:`
+var Tawk_API=Tawk_API||{}, Tawk_LoadStart=new Date();
+(function(){
+var s1=document.createElement("script"),s0=document.getElementsByTagName("script")[0];
+s1.async=true;
+s1.src='https://embed.tawk.to/60bce4f64ae6dd0abe7cc090/1f7gtsphd';
+s1.charset='UTF-8';
+s1.setAttribute('crossorigin','*');
+s0.parentNode.insertBefore(s1,s0);
+})();
+`
+}} />
+    </Head>
       <Header
         absolute
         color="transparent"
@@ -295,11 +338,8 @@ const spin=()=>{
                     balance:0.00
                    
                   }
-                  let per={
-                    name:values.firstname,
-                    mail:values.email
-                  }
                  
+                  
                   if(values.password==values.nextPassword&&values.password.length>=8 &&values.firstname&&values.lastname&&values.phone&&values.email&&values.username){
                     setUser({
                       firstname:values.firstname,
@@ -310,37 +350,24 @@ const spin=()=>{
                     username:values.username,
                     balance:0.00
                     })
-                    //console.log(user)
-                    //setCaptcha(true)
-                    solve()
-                    
-                    //reRef.current.execute()
-                    
-                    
-                    //setMain({name:'maximus'})
-                    /*setSpinner({
-                      pending:true,
-                      done:false
-                    })*/
-                    //setTimeout(networkError,60000)
-                   
-                    //registerUser(user)
+                   setClick(false)
+                   setCaptcha(true)
                    
                   }
                   else if(values.password!=values.nextPassword&&values.firstname&&values.lastname&&values.email){
                     alert('The passwords do not match')
                     setShowSpin(false)
-                    setShowButton(true)
+                    setClick(false)
                   }
                   else if(values.password.length<8){
                     alert('Password must contain at least 8 characters')
                     setShowSpin(false)
-                    setShowButton(true)
+                    setClick(false)
                   }
                   else if(!values.firstname||!values.lastname||!values.email||!values.password||!values.phone)
                   alert('All fields are required')
                   setShowSpin(false)
-                    setShowButton(true)
+                    setClick(false)
                 }}>
                   {({handleChange,handleSubmit,values,user})=>((
                     <form className={classes.form,'login'}>
@@ -525,7 +552,12 @@ const spin=()=>{
                     <CardFooter className={classes.cardFooter}>
 
                     
-                            {submit(handleSubmit,user)}
+                            <div>
+                            {showItems(handleSubmit)}
+                            </div>
+                            <div>
+                              {showCaptcha()}
+                            </div>
                     
                     
                     </CardFooter>
@@ -540,6 +572,10 @@ const spin=()=>{
                      </div>
                  </Row>
                </Container>
+               <CardFooter style={{height:50}}>
+              
+        
+               </CardFooter>
               </Card>
             </GridItem>
           </GridContainer>
