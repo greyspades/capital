@@ -65,27 +65,27 @@ export default function Footer(props) {
                <Row>
                 <Col>
                 <a href="https://www.facebook.com/capitalinvestmentoption.uk/">
-                <FacebookIcon style={{color:'goldenrod'}} />
+                <FacebookIcon style={{color:'#9a7801'}} />
                 </a>
               </Col>
               <Col>
                 <a  href="https://instagram.com/capitalinvestmentoption?utm_medium=copy_link">
-                <InstagramIcon style={{color:'goldenrod'}} />
+                <InstagramIcon style={{color:'#9a7801'}} />
                 </a>
               </Col>
               <Col>
                 <a href="https://youtube.com/channel/UCecLKqQRkiHT9kp5iKjSAmg">
-                <YouTubeIcon style={{color:'goldenrod'}} />
+                <YouTubeIcon style={{color:'#9a7801'}} />
                 </a>
               </Col>
               <Col>
                 <a href="https://www.linkedin.com/in/capital-investment-option-412501182">
-                <LinkedInIcon style={{color:'goldenrod'}} />
+                <LinkedInIcon style={{color:'#9a7801'}} />
                 </a>
               </Col>
               <Col >
                 <a href="https://www.google.com/url?sa=t&source=web&rct=j&url=https://www.pinterest.com/Capitalinvestmentoption/&ved=2ahUKEwjVmPDpm-HwAhVExIUKHcrRBvcQFjABegQIBhAC&usg=AOvVaw3GPtVggFT7_dgREoPGwJFV">
-                <PinterestIcon style={{color:'goldenrod'}} />
+                <PinterestIcon style={{color:'#9a7801'}} />
                 </a>
               </Col>
                 </Row>
@@ -96,21 +96,21 @@ export default function Footer(props) {
             <Col xs={12}>
               <Row style={{textAlign:'left'}}>
               <Col md={12} xs={12}>
-              <PhoneIcon style={{color:'goldenrod'}} />
+              <PhoneIcon style={{color:'#9a7801'}} />
              <span style={{marginLeft:5}}>
              Phone: +48732121453
              </span>
 
             </Col>
             <Col style={{marginTop:30,marginBottom:30}} md={12} xs={12}>
-              <EmailIcon style={{color:'goldenrod'}} />
+              <EmailIcon style={{color:'#9a7801'}} />
               <span style={{marginLeft:5}}>
              E-mail: capitalinvestmentoption@gmail.com</span>
             </Col>
             <Col md={12} xs={12}>
-              <AddressIcon style={{color:'goldenrod'}} />
+              <AddressIcon style={{color:'#9a7801'}} />
               <span style={{marginLeft:5}}>
-                Address: 63 ul. Słowackiego Juliusza Street, Mikołów, Poland 43-19
+                Address: 63 ul. Słowackiego Juliusza Street, Mikolow, Poland 43-19
              </span>
             </Col>
             
@@ -128,6 +128,7 @@ export default function Footer(props) {
             href="/landing"
             className={aClasses}
             target="_blank"
+            style={{color:'#9a7801'}}
           >
             Capital Investment Option
           </a>{" "}

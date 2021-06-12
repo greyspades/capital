@@ -366,7 +366,7 @@ const fileUpload=()=>{
     </div>
     <div style={{color:'black',}}>
       You are about to make an investment of <span style={{color:'blue'}}>${message.item.investment}</span> which is equivalent to <span style={{color:'blue'}}><CryptoCompare style={{color:'blue'}} from='USD'  to={pair} amount={InvestAmount} apikey="9e17d4341c26890479617fab12138968c28eecdfd8ac77be8d0bd181fa919870" /></span>
-      please pay the amount to the address <a style={{color:'blue'}}>{walletId}</a> and click the confirm button when done.
+      please pay the amount to the address <a style={{color:'blue'}}>{walletId}</a> and click the confirmation button when done.
     </div>
         </CardBody>
         </Card>
@@ -830,9 +830,10 @@ s0.parentNode.insertBefore(s1,s0);
         changeColorOnScroll
         
         rightLinks={
-          <div>
-            click
-          </div>
+          <a href='#' style={{color:'#9a7801'}}  onClick={()=>{setGetOut(true)}}>
+            Log out
+            <ExitToAppIcon style={{marginLeft:10}} />
+          </a>
 
         }
         {...rest}
@@ -1037,7 +1038,7 @@ s0.parentNode.insertBefore(s1,s0);
             </h3>
                 <Card className="card-chart">
               <CardHeader>
-                <Row>
+                <Row style={{marginTop:-2}}>
                   <Col className="text-left" sm="6">
                     <h5 className="card-category">Total Shipments</h5>
                     <CardTitle tag="h2">Activity</CardTitle>

@@ -739,7 +739,7 @@
     margin-top: 30px;
 }
 .footer-link {
-    border:5px solid goldenrod;
+    border:5px solid #9a7801;
     width: 50px;
     height: 40px;
     padding: 0px;
@@ -1325,7 +1325,7 @@
         margin-top: -70px;
     }
     .footer-link {
-        border:5px solid goldenrod;
+        border:5px solid #9a7801;
         width: 50px;
         height: 40px;
         padding: 0px;
