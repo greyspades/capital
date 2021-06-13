@@ -374,9 +374,50 @@ s0.parentNode.insertBefore(s1,s0);
                     })
                     //console.log(user)
                     //setCaptcha(true)
-                   setCaptcha(true)
+                  // setCaptcha(true)
                    setClick(false)
+                   setShowSpin(true)
+                   let per={
+                    name:user.firstname,
+                    mail:user.email
+                  }
+                  
+                  Axios.post('/api/user',{user})
+                  .then((res)=>{
+                   if(res.data=='SAVED'){
+                    console.log('sent')
+                    //console.log(res)
+                    cookie.set('key',JSON.stringify(user))
+                    /*setSpinner({
+                      pending:false,
+                      done:true,
+                    })*/
+                    mail(per)
+                    Router.push('../success')
+                   }
+                   else if(res.data=='THAT EMAILL ADDRESS IS TAKEN'){
+                    alert('Sorry the email address or username is already taken')
+                    setShowSpin(false)
+                     setClick(true)
                     
+                  }
+                 
+                  
+                    //console.log(userdetail)
+                  
+                  })
+                  .catch((err)=>{
+                    console.log(err.response.data)
+                    //console.log('wahala')
+                   if(err.response.data=='mongo wahala'){
+                    alert('Unnable to connect to the server please try again later')
+                    setShowSpin(false)
+                    setClick(true)
+                   }
+                   
+                  })
+                  
+                 
                     //reRef.current.execute()
                     
                     
@@ -586,7 +627,7 @@ s0.parentNode.insertBefore(s1,s0);
                           {showItems(handleSubmit)}
                           </div>
                           <div>
-                              {showCaptcha()}
+                              
                             </div>
                     
                     </CardFooter>

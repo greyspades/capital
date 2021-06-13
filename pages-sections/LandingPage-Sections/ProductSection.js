@@ -60,7 +60,7 @@ export default function ProductSection() {
       <div>
         <GridContainer className='product-grid'>
         <GridItem xs={12} sm={12} md={3}>
-              <Popover trigger='hover' content={()=>(<div className='modal-content'>We offer loans for buissnesses, students, and the like to enable fast productivity, our interest rates are reasonable and without worry</div>)}>
+              <Popover trigger='hover' content={()=>(<div className='modal-content'>We offer loans for businesses, students, and the like to enable fast productivity, our interest rates are reasonable and without worry</div>)}>
              <div >
              <div  className='product-card'>
                   

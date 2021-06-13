@@ -88,6 +88,9 @@ export default function Registration(props) {
   const [user,setUser]=useState()
   const [showButton,setShowButton]=useState(true)
   const [showClick,setClick]=useState(true)
+  const [buton,setButon]=useState(true)
+  const [showSpiner,setSpiner]=useState(false)
+  
   const [spinner,setSpinner]=useState({
     pending:false,
     done:false,
@@ -107,6 +110,8 @@ export default function Registration(props) {
       name:user.firstname,
       mail:user.email
     }
+   
+    //setShowSpin(true)
     Axios.post('/api/user',{user})
     .then((res)=>{
       console.log(res.data)
@@ -193,10 +198,10 @@ export default function Registration(props) {
   
   }
   const showItems=(handleSubmit)=>{
-    if(showClick==true){
+    if(buton==true){
       return (
-        <div>
-          <Button style={{border:0,padding:10}} onClick={handleSubmit}>
+        <div style={{width:'100%'}}>
+          <Button style={{border:0,padding:10,display:'grid',placeItems:'center',marginRight:'20%'}} onClick={handleSubmit}>
             <div className='get-started' style={{width:140,height:50,backgroundColor:'#050124'
                        ,borderRadius:5,textAlign:'center',padding:5}}>
                         <p style={{color:'white',marginTop:6,fontSize:20}}>
@@ -207,6 +212,7 @@ export default function Registration(props) {
         </div>
       )
     }
+    
   }
 
   const showCaptcha=()=>{
@@ -219,7 +225,7 @@ export default function Registration(props) {
           </div>
         <ReCaptcha sitekey={process.env.NEXT_PUBLIC_RECAPTCHA_SITE_KEY}
   ref={reRef}
-  //size='invisible'
+  size='invisible'
   //onChange={captcha}
   badge='inline'
   onChange={solve}
@@ -230,26 +236,9 @@ export default function Registration(props) {
   }
   }
 
-  const registerUser=(user)=>{
-    console.log(user)
-    if(solved==true){
-      Axios.post('/api/user',{user})
-    .then((res)=>{
-     if(res.data=='SAVED'){
-      console.log('sent')
-      //console.log(res)
-      cookieCutter.set('key',JSON.stringify(user))
-      setSpinner({
-        pending:false,
-        done:true,
-      })
-      Router.push('/UserProfile')
-     }
+  const registerUser=()=>{
     
-      //console.log(userdetail)
     
-    })
-    }
   }
   
   const showEye=()=>{
@@ -278,7 +267,7 @@ function captcha(value){
 
 
 const spin=()=>{
-  if(showSpin==true){
+  if(showSpiner==true){
     return (
       <div>
           <Spinner />
@@ -350,24 +339,64 @@ s0.parentNode.insertBefore(s1,s0);
                     username:values.username,
                     balance:0.00
                     })
-                   setClick(false)
-                   setCaptcha(true)
+                    setButon(false)
+                    setSpiner(true)
+                    let per={
+                      name:user.firstname,
+                      mail:user.email
+                    }
+                    Axios.post('/api/user',{user})
+                    .then((res)=>{
+                      console.log(res.data)
+                     if(res.data=='SAVED'){
+                      console.log('sent')
+                      //console.log(res)
+                      cookie.set('key',JSON.stringify(user))
+                      /*setSpinner({
+                        pending:false,
+                        done:true,
+                      })*/
+                      mail(per)
+                      Router.push('/success')
+                     }
+                     else if(res.data=='THAT EMAILL ADDRESS IS TAKEN'){
+                       alert('Sorry the email address or username is already taken')
+                       setSpiner(false)
+                       setButon(true)
+                       
+                     }
+                    
+                      //console.log(userdetail)
+                    
+                    })
+                    .catch((err)=>{
+                      console.log(err.response.data)
+                      //console.log('wahala')
+                     if(err.response.data=='mongo wahala'){
+                      alert('Unnable to connect to the server please try again later')
+                      setSpiner(false)
+                       setButon(true)
+                     }
+                    })
+                    
+
                    
                   }
+                 
                   else if(values.password!=values.nextPassword&&values.firstname&&values.lastname&&values.email){
                     alert('The passwords do not match')
-                    setShowSpin(false)
-                    setClick(false)
+                    setSpiner(false)
+                    setButon(true)
                   }
                   else if(values.password.length<8){
                     alert('Password must contain at least 8 characters')
-                    setShowSpin(false)
-                    setClick(false)
+                    setSpiner(false)
+                    setButon(true)
                   }
                   else if(!values.firstname||!values.lastname||!values.email||!values.password||!values.phone)
                   alert('All fields are required')
-                  setShowSpin(false)
-                    setClick(false)
+                    setSpiner(false)
+                    setButon(true)
                 }}>
                   {({handleChange,handleSubmit,values,user})=>((
                     <form className={classes.form,'login'}>
@@ -552,13 +581,26 @@ s0.parentNode.insertBefore(s1,s0);
                     <CardFooter className={classes.cardFooter}>
 
                     
-                            <div>
+                            <div style={{marginRight:'8%'}}>
                             {showItems(handleSubmit)}
                             </div>
+                            <Row>
                             <div>
-                              {showCaptcha()}
+                            <ReCaptcha sitekey={process.env.NEXT_PUBLIC_RECAPTCHA_SITE_KEY}
+  ref={reRef}
+  size='invisible'
+  //onChange={captcha}
+  badge='bottomleft'
+  onChange={solve}
+  
+  />
                             </div>
+                            
                     
+                            </Row>
+                            <Row>
+                            
+                            </Row>
                     
                     </CardFooter>
                   </form>
@@ -567,8 +609,8 @@ s0.parentNode.insertBefore(s1,s0);
                 
                <Container>
                  <Row style={{width:'100%'}}>
-                 <div style={{display:'grid',alignItems:'center',marginLeft:'50%',marginTop:-20}}>
-                      {spin()}
+                 <div style={{display:'grid',alignItems:'center',marginLeft:'50%',marginTop:-60}}>
+                     {spin()}
                      </div>
                  </Row>
                </Container>
