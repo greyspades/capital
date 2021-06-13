@@ -225,7 +225,7 @@ export default function Registration(props) {
           </div>
         <ReCaptcha sitekey={process.env.NEXT_PUBLIC_RECAPTCHA_SITE_KEY}
   ref={reRef}
-  size='invisible'
+  //size='invisible'
   //onChange={captcha}
   badge='inline'
   onChange={solve}
@@ -584,23 +584,7 @@ s0.parentNode.insertBefore(s1,s0);
                             <div style={{marginRight:'8%'}}>
                             {showItems(handleSubmit)}
                             </div>
-                            <Row>
-                            <div>
-                            <ReCaptcha sitekey={process.env.NEXT_PUBLIC_RECAPTCHA_SITE_KEY}
-  ref={reRef}
-  size='invisible'
-  //onChange={captcha}
-  badge='bottomleft'
-  onChange={solve}
-  
-  />
-                            </div>
                             
-                    
-                            </Row>
-                            <Row>
-                            
-                            </Row>
                     
                     </CardFooter>
                   </form>
