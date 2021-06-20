@@ -543,7 +543,7 @@ const fileUpload=()=>{
     <input
     className='input invest'
     placeholder={`Your wallet ID`}
-    type='number'
+    type='text'
     onChange={handleChange('walletId')}
     value={values.walletId}
     >

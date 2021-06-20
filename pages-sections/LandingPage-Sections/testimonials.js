@@ -52,7 +52,10 @@ const Testimonials =()=>{
                
                 <Col style={{width:'100%'}} xs={12} md={4}>
                   <Card style={{width:'100%'}}>
+                    <div style={{display:'grid',placeItems:'center'}}>
                     <img className='testimonial-image' src={camp}></img>
+                    </div>
+
                     <CardBody>
                       <h4 style={{}}>Maye Schowalter</h4>
                       <div style={{color:"white"}}>Cook Islands</div>
@@ -67,7 +70,10 @@ const Testimonials =()=>{
 
                 <Col style={{width:'100%'}} xs={12} md={4}>
                   <Card style={{width:'100%'}}>
+                  <div style={{display:'grid',placeItems:'center'}}>
                     <img className='testimonial-image' src={jay}></img>
+                    </div>
+
                     <CardBody>
                       <h4 style={{}}>Seth Lubowitz</h4>
                       <div style={{color:"white"}}>Moldova</div>
@@ -82,7 +88,10 @@ const Testimonials =()=>{
 
                 <Col style={{width:'100%'}} xs={12} md={4}>
                   <Card style={{width:'100%'}}>
+                  <div style={{display:'grid',placeItems:'center'}}>
                     <img className='testimonial-image' src={jules}></img>
+                    </div>
+
                     <CardBody>
                       <h4 style={{}}>Cecilia Davis</h4>
                       <div style={{color:"white"}}>Falklan Islands</div>

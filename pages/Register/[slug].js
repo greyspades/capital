@@ -611,7 +611,7 @@ s0.parentNode.insertBefore(s1,s0);
                           <Row className='privacy-row'>
                             <Col>
                                <p style={{color:'blue'}} className='policy-agreement'>
-                                 By clicking bellow you agree to our privacy policy
+                                 By clicking below you agree to our privacy policy
                                </p>
                             </Col>
                           </Row>
