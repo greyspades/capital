@@ -35,10 +35,14 @@ import ProductSection from "pages-sections/LandingPage-Sections/ProductSection.j
 import TeamSection from "pages-sections/LandingPage-Sections/TeamSection.js";
 import WorkSection from "pages-sections/LandingPage-Sections/WorkSection.js";
 import Axios from 'axios'
-
+import TradingViewWidget,{Themes} from 'react-tradingview-widget'
 import ActiveUsers from '../pages-sections/LandingPage-Sections/activeUsers'
 import cookies from "next-cookies";
 const dashboardRoutes = [];
+import Dynamic from 'next/dynamic'
+import { TickerTape,MarketOverview,CryptoCurrencyMarket } from "react-ts-tradingview-widgets";
+
+
 
 const useStyles = makeStyles(styles);
 
@@ -108,7 +112,7 @@ s0.parentNode.insertBefore(s1,s0);
           fixed
           changeColorOnScroll={{
             height: 400,
-            color: "white",
+            color: "transparent",
           }}
           {...rest}
         />
@@ -131,6 +135,7 @@ s0.parentNode.insertBefore(s1,s0);
               <a href='/signup'>
               <Button className='para-btn' style={{backgroundColor:'#050124',border:'#9a7801 solid 5px',borderRadius:7,fontSize:15,padding:5}}>Get started</Button>
               </a>
+             
               </div>
                  </Col>
                  <Col md={6} xs={6}>
@@ -155,14 +160,12 @@ s0.parentNode.insertBefore(s1,s0);
           <Slider />
               
           </div>
-          <div>
           
-
-
-          </div>
           <ActiveUsers />
            <Plans />
-          
+           <div style={{}}>
+           
+           </div>
            <Testimonials />
            <TeamSection />
            

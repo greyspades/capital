@@ -15,6 +15,7 @@ import cryptloan from '../../assets/img/cryptoloan.svg'
 import afiliate from '../../assets/img/afiliate.svg'
 //import LibraryAddCheck from 'material-ui'
 import Router from 'next/router'
+import { TickerTape,MarketOverview,CryptoCurrencyMarket,TechnicalAnalysis } from "react-ts-tradingview-widgets";
 import {
     
     Container,
@@ -34,6 +35,7 @@ const Plans=(props)=>{
   
     return (
         <div className=''>
+            
            <Row>
               
                <Col className='loan-container' xs={12} md={6}>
@@ -169,14 +171,11 @@ Our affiliate rewards program offers earning at four levels and pays 8% of the d
                
             </Container>
             </Container>
-            <Container className='affiliate' style={{}}>
-              
-            <Head>
-           
-
-
-
-           </Head>
+            <Container className='market-chart' style={{}}>
+              <h3 style={{color:"#9a7801"}}>
+                  Market Overview
+              </h3>
+            <MarketOverview colorTheme="dark" width='100%' height={400}></MarketOverview>
             </Container>
             <Container>
                 <Row>
@@ -186,41 +185,58 @@ Our affiliate rewards program offers earning at four levels and pays 8% of the d
                     <div style={{color:'white'}}>
                     Please read the following terms regarding our privacy policy. An important part of the relationship we have with our Clients is the information you share with us.
                      We want you to know how we treat your private information. capitalinvestmentoption.com protects our clients privacy and does its best to provide their safety and convenience online. 
-                     The capitalinvestmentoption.com website is subject to this "Privacy Policy". It regulates
+                     The capitalinvestmentoption.com website is subject to this Privacy Policy. It regulates
                      data accumulation and usage on the website. Using the capitalinvestmentoption.com website infers your consent to the data practices given in this statement.
                     </div>
                 </Row>
             </Container>
             <Container style={{marginTop:50}} className='why-choose' >
                 <Row >
-                    <h3 style={{color:'#9a7801',marginTop:50}}>
-                        Why choose Capital Investment Option
-                    </h3>
+                <Container className='about-us' style={{}}>
+                <div style={{}} className='about-overlay'>
+                <h3>
+                About Capital Investment Option
+              </h3>
+              <p style={{color:'white'}}>
+              Capital Investment Option is an investment company whose main assumption is to generate the largest, safe profit possible. The team of our specialists ensures that transactions are secure and risk-free for our investors.
+       In order to ensure financial security, increase potential profit and reach clients all over the world, our company has been registered on two continents. You can check our certifications below. All our employees have careers in large corporations dealing with the multiplication of clients money.
+       Based on their professional experience, they invest using all available forms such as investing in gold, currencies, oil, real estate, listed companies and the most popular and profitable field of Cryptocurrency, start-ups and ICOs. All of the above factors influence our generation of profits up to 20% in 1 day.
+Meanwhile provision has been made by this platform to grant Crypto Loans in order to create a financial support to our clients  especially students and business owners as well as others active members in this platform.
+
+              </p>
+                </div>
+            </Container>
                 </Row>
                 <div style={{marginBottom:-20,fontSize:20,color:'white'}}>
                         By Selecting any of our services you are ensured of
                     </div>
                 <Row style={{marginTop:30}} className='license-talk' >
-                    <Col xs={12} md={3} lg={3} style={{textAlign:'center',backgroundColor:'goldenrod',borderRadius:5,padding:10,marginTop:30}} className='policy'>
-                        <PolicyIcon style={{height:70,width:70,marginBottom:20,color:'white'}} />
+                    <Col xs={12} md={4} lg={4} style={{display:'grid',placeItems:'center',textAlign:'center',borderRadius:5,padding:10,marginTop:30,width:100}} >
+                       <div style={{}} className='policy'>
+                       <PolicyIcon style={{height:70,width:70,marginBottom:20,color:'white'}} />
                         <h4>Reliability</h4>
                         <p>
                         You can always contact us whenever you have questions and we'll get back to you within 24 hours.
                         </p>
+                       </div>
                     </Col>
-                    <Col xs={12} md={3} lg={3} style={{textAlign:'center',backgroundColor:'goldenrod',borderRadius:5,padding:10,marginTop:30}} className='policy'>
-                        <AssignmentTurnedInIcon style={{height:70,width:70,marginBottom:20,color:'white'}} />
+                    <Col xs={12} md={4} lg={4} style={{display:'grid',placeItems:'center',textAlign:'center',borderRadius:5,padding:10,marginTop:30}} >
+                       <div style={{}} className='policy'>
+                       <AssignmentTurnedInIcon style={{height:70,width:70,marginBottom:20,color:'white'}} />
                         <h4>Trust</h4>
                         <p>
-                            Your funds are protected by industry leading protocols.
+                            Your funds are protected by industry leading protocols,dedicated to efficiency and flexibility, while maintaining ease of use
                         </p>
+                       </div>
                     </Col>
-                    <Col xs={12} md={3} lg={3} style={{textAlign:'center',backgroundColor:'goldenrod',borderRadius:5,padding:10,marginTop:30}} className='policy'>
+                    <Col xs={12} md={4} lg={4} style={{display:'grid',placeItems:'center',textAlign:'center',borderRadius:5,padding:10,marginTop:30}} >
+                        <div style={{}} className='policy'>
                         <LockIcon style={{height:70,width:70,marginBottom:20,color:'white'}} />
                         <h4>Privacy</h4>
                         <p>
-                        We will never share your private data without your permission.
+                        We will never share your private data without your permission, you are always in control of your information and privacy
                         </p>
+                        </div>
                     </Col>
                 </Row>
             </Container>

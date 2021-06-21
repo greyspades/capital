@@ -747,6 +747,10 @@
 .success-card {
     margin-top: 100px;
 }
+.market-chart {
+    margin-top: -230px;
+    margin-bottom: 30px;
+}
 
 
 
@@ -867,7 +871,7 @@
     
     }
     .policy {
-        margin-inline: 40px;
+        
     }
     .policy-row {
         display: flex;
@@ -1007,8 +1011,8 @@
     .logo {
         height: 500px;
         width: 500px;
-        margin-top: 20px;
-        margin-left:-200px;
+        margin-top: 100px;
+        margin-left:-120px;
     
         font-size: 70px;
         
@@ -1212,7 +1216,7 @@
     .plans-container {
         background-color: #26253d;
         height: 600px;
-        margin-top: 100px;
+        margin-top: 20px;
         
     }
     .slider-container {
@@ -1333,7 +1337,13 @@
     .started-footer {
         margin-left: -30px;
     }
-    
+    .market-chart {
+        margin-top: 50px;
+        margin-bottom: 30px;
+    }
+    .landing-buttons {
+        margin-bottom: 40px;
+    }
 }
 
 

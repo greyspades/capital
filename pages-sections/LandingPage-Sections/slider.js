@@ -22,6 +22,9 @@ import {
 import Router from 'next/router'
 import Slide from 'react-slick'
 //import SimpleImageSlider from "react-simple-image-slider";
+import { TickerTape } from "react-ts-tradingview-widgets";
+
+
 const images = [
   { url: save },
 { url: loan },
@@ -72,6 +75,7 @@ const Slider=(props)=>{
             </div>
           </div>
     </Fade>*/}
+    <TickerTape colorTheme="dark"></TickerTape>
             <Container fluid className='slider-container'>
               <Row >
                 <Col  md={8}>
@@ -130,20 +134,7 @@ much time, of which you get an offer to become an investor and earn profit. For 
                   </div>
 
             </Container>
-            <Container className='about-us' style={{}}>
-                <div style={{}} className='about-overlay'>
-                <h3>
-                About Capital Investment option
-              </h3>
-              <p style={{color:'white'}}>
-              Capital Investment Option is an investment company whose main assumption is to generate the largest, safe profit possible. The team of our specialists ensures that transactions are secure and risk-free for our investors.
-       In order to ensure financial security, increase potential profit and reach clients all over the world, our company has been registered on two continents. You can check our certifications below. All our employees have careers in large corporations dealing with the multiplication of clients money.
-       Based on their professional experience, they invest using all available forms such as investing in gold, currencies, oil, real estate, listed companies and the most popular and profitable field of Cryptocurrency, start-ups and ICOs. All of the above factors influence our generation of profits up to 20% in 1 day.
-Meanwhile provision has been made by this platform to grant Crypto Loans in order to create a financial support to our clients  especially students and business owners as well as others active members in this platform.
-
-              </p>
-                </div>
-            </Container>
+            
         
         </div>
     )
