@@ -24,6 +24,9 @@ import Slide from 'react-slick'
 //import SimpleImageSlider from "react-simple-image-slider";
 import { TickerTape } from "react-ts-tradingview-widgets";
 
+// const TickerTape = dynamic(()=>import('react-ts-tradingview-widgets'),
+//   {ssr:false}
+// )
 
 const images = [
   { url: save },
@@ -75,7 +78,7 @@ const Slider=(props)=>{
             </div>
           </div>
     </Fade>*/}
-    <TickerTape colorTheme="dark"></TickerTape>
+    <TickerTape colorTheme="dark"/>
             <Container fluid className='slider-container'>
               <Row >
                 <Col  md={8}>

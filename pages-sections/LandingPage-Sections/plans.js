@@ -15,7 +15,7 @@ import cryptloan from '../../assets/img/cryptoloan.svg'
 import afiliate from '../../assets/img/afiliate.svg'
 //import LibraryAddCheck from 'material-ui'
 import Router from 'next/router'
-import { TickerTape,MarketOverview,CryptoCurrencyMarket,TechnicalAnalysis } from "react-ts-tradingview-widgets";
+//import { TickerTape,MarketOverview,CryptoCurrencyMarket,TechnicalAnalysis } from "react-ts-tradingview-widgets";
 import {
     
     Container,
@@ -175,7 +175,7 @@ Our affiliate rewards program offers earning at four levels and pays 8% of the d
               <h3 style={{color:"#9a7801"}}>
                   Market Overview
               </h3>
-            <MarketOverview colorTheme="dark" width='100%' height={400}></MarketOverview>
+            {/*<MarketOverview colorTheme="dark" width='100%' height={400}></MarketOverview>*/}
             </Container>
             <Container>
                 <Row>
@@ -192,6 +192,8 @@ Our affiliate rewards program offers earning at four levels and pays 8% of the d
             </Container>
             <Container style={{marginTop:50}} className='why-choose' >
                 <Row >
+
+                <div ref={props.about}>
                 <Container className='about-us' style={{}}>
                 <div style={{}} className='about-overlay'>
                 <h3>
@@ -206,6 +208,7 @@ Meanwhile provision has been made by this platform to grant Crypto Loans in orde
               </p>
                 </div>
             </Container>
+                </div>
                 </Row>
                 <div style={{marginBottom:-20,fontSize:20,color:'white'}}>
                         By Selecting any of our services you are ensured of

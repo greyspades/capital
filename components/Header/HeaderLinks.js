@@ -90,7 +90,7 @@ export default function HeaderLinks(props) {
       <ListItem className={classes.listItem}>
         
         
-        <Tooltip
+        {/*<Tooltip
           id="instagram-Pinterest"
           title="Follow us on Pinterest"
           placement={"top"}
@@ -174,6 +174,117 @@ export default function HeaderLinks(props) {
           </Button>
         </Tooltip>
       </ListItem>
+      <ListItem className={classes.listItem}>
+        <Tooltip
+          id="Youtube-tooltip"
+          title="Follow us on Youtube"
+          placement={"top"}
+          classes={{ tooltip: classes.tooltip }}
+        >
+          <Button
+            color="transparent"
+            //href="https://youtube.com/channel/UCecLKqQRkiHT9kp5iKjSAmg"
+            target="_blank"
+            className={classes.navLink}
+            onClick={props.refProp}
+          >
+              move
+          </Button>
+        </Tooltip>*/}
+      </ListItem>
+      
+      <ListItem className={classes.listItem}>
+        <Tooltip
+          id="Youtube-tooltip"
+          title="Follow us on Youtube"
+          placement={"top"}
+          classes={{ tooltip: classes.tooltip }}
+        >
+          <Button
+            color="transparent"
+            //href="https://youtube.com/channel/UCecLKqQRkiHT9kp5iKjSAmg"
+            target="_blank"
+            className={classes.navLink}
+            onClick={props.service}
+          >
+              Services
+          </Button>
+        </Tooltip>
+        </ListItem>
+
+        <ListItem className={classes.listItem}>
+        <Tooltip
+          id="Youtube-tooltip"
+          title="Follow us on Youtube"
+          placement={"top"}
+          classes={{ tooltip: classes.tooltip }}
+        >
+          <Button
+            color="transparent"
+            //href="https://youtube.com/channel/UCecLKqQRkiHT9kp5iKjSAmg"
+            target="_blank"
+            className={classes.navLink}
+            onClick={props.about}
+          >
+              About Us
+          </Button>
+        </Tooltip>
+        </ListItem>
+        <ListItem className={classes.listItem}>
+        <Tooltip
+          id="Youtube-tooltip"
+          title="Follow us on Youtube"
+          placement={"top"}
+          classes={{ tooltip: classes.tooltip }}
+        >
+          <Button
+            color="transparent"
+            //href="https://youtube.com/channel/UCecLKqQRkiHT9kp5iKjSAmg"
+            target="_blank"
+            className={classes.navLink}
+            onClick={props.package}
+          >
+              Packages
+          </Button>
+        </Tooltip>
+        </ListItem>
+        <ListItem className={classes.listItem}>
+        <Tooltip
+          id="Youtube-tooltip"
+          title="Follow us on Youtube"
+          placement={"top"}
+          classes={{ tooltip: classes.tooltip }}
+        >
+          <Button
+            color="transparent"
+            //href="https://youtube.com/channel/UCecLKqQRkiHT9kp5iKjSAmg"
+            target="_blank"
+            className={classes.navLink}
+            onClick={props.testimonial}
+          >
+              Testimonials
+          </Button>
+        </Tooltip>
+        </ListItem>
+        
+        <ListItem className={classes.listItem}>
+        <Tooltip
+          id="Youtube-tooltip"
+          title="Follow us on Youtube"
+          placement={"top"}
+          classes={{ tooltip: classes.tooltip }}
+        >
+          <Button
+            color="transparent"
+            //href="https://youtube.com/channel/UCecLKqQRkiHT9kp5iKjSAmg"
+            target="_blank"
+            className={classes.navLink}
+            onClick={props.contact}
+          >
+              Contact Us
+          </Button>
+        </Tooltip>
+        </ListItem>
     </List>
   );
 }

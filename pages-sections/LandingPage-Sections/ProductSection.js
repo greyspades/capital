@@ -45,9 +45,9 @@ export default function ProductSection() {
     <div className={classes.section}>
       <GridContainer justify="center" >
         <GridItem xs={12} sm={12} md={8}>
-          <h2 className={classes.title}>Let{"'"}s talk product</h2>
+          <h2 style={{color:'#9a7801'}} className={classes.title}>CRYPTOCURRENCY INVESTMENT FOR DAILY GROWTH</h2>
           <h5 className={classes.description,'talk'}  style={{}}>
-         
+          We are committed in creating wealth for you whenever,wherever. You can always trust us to deliver. Capital Investment Option is always for their customers and will continually doour best to bring meaningful returns on investments.
               
           </h5>
         </GridItem>
@@ -74,7 +74,7 @@ export default function ProductSection() {
           </GridItem>
          
           <GridItem xs={12} sm={12} md={3}>
-           <Popover trigger='hover' content={()=>(<div style={{color:'goldenrod'}}>Invest in our crypto trades and get live trade data and analysis with a 25% guarante in all our investments</div>)}>
+           <Popover trigger='hover' content={()=>(<div style={{color:'#9a7801'}}>Invest in our crypto trades and get live trade data and analysis with a 25% guarante in all our investments</div>)}>
            <div>
            <div  className='product-card'>
                 
@@ -86,7 +86,7 @@ export default function ProductSection() {
            </Popover>
           </GridItem>
           <GridItem xs={12} sm={12} md={3}>
-          <Popover trigger='hover' content={()=>(<div style={{color:'goldenrod'}}>Conduct live crypto and cash transactions which are completely transparent and encrypted by our team of data encryption experts</div>)}>
+          <Popover trigger='hover' content={()=>(<div style={{color:'#9a7801'}}>Conduct live crypto and cash transactions which are completely transparent and encrypted by our team of data encryption experts</div>)}>
           <div >
           <div className='product-card' >
               
@@ -99,7 +99,7 @@ export default function ProductSection() {
           </Popover>
           </GridItem>
           <GridItem xs={12} sm={12} md={3}>
-          <Popover trigger='hover' content={()=>(<div style={{color:'goldenrod'}}>Invest in our state of the art crypto mining services using the latest blockcain and cryptographic technologies</div>)}>
+          <Popover trigger='hover' content={()=>(<div style={{color:'#9a7801'}}>Invest in our state of the art crypto mining services using the latest blockcain and cryptographic technologies</div>)}>
           <div  className='product-card'>
               
                   

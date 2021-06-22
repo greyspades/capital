@@ -3,14 +3,16 @@ import React from "react";
 import { makeStyles } from "@material-ui/core/styles";
 
 // @material-ui/icons
-
+import Formik from 'formik'
 // core components
 import GridContainer from "components/Grid/GridContainer.js";
 import GridItem from "components/Grid/GridItem.js";
-//import CustomInput from ".components/CustomInput/CustomInput.js";
+import CustomInput from "components/CustomInput/CustomInput.js";
 //import Button from "components/CustomButtons/Button.js";
 import {Button} from 'reactstrap'
 import styles from "assets/jss/nextjs-material-kit/pages/landingPageSections/workStyle.js";
+
+
 
 const useStyles = makeStyles(styles);
 
@@ -18,9 +20,9 @@ export default function WorkSection() {
   const classes = useStyles();
   return (
     <div className={classes.section}>
-      {/*<GridContainer justify="center">
+      <GridContainer justify="center">
         <GridItem cs={12} sm={12} md={8}>
-          <h2 className={classes.title}>Contact Us</h2>
+          <h2 style={{color:"#9a7801"}} className={classes.title}>Contact Us</h2>
           
           <form>
             <GridContainer>
@@ -55,12 +57,12 @@ export default function WorkSection() {
                 }}
               />
               <GridItem xs={12} sm={12} md={4} className={classes.textCenter}>
-                <Button color="primary">Send Message</Button>
+                <Button color="#9a7801">Send Message</Button>
               </GridItem>
             </GridContainer>
           </form>
         </GridItem>
-              </GridContainer>*/}
+              </GridContainer>
     </div>
   );
 }

@@ -1,4 +1,4 @@
-import React,{useState,useEffect} from "react";
+import React,{useState,useEffect,useRef} from "react";
 // nodejs library that concatenates classes
 import classNames from "classnames";
 // @material-ui/core components
@@ -40,7 +40,7 @@ import ActiveUsers from '../pages-sections/LandingPage-Sections/activeUsers'
 import cookies from "next-cookies";
 const dashboardRoutes = [];
 import Dynamic from 'next/dynamic'
-import { TickerTape,MarketOverview,CryptoCurrencyMarket } from "react-ts-tradingview-widgets";
+//import { TickerTape,MarketOverview,CryptoCurrencyMarket } from "react-ts-tradingview-widgets";
 
 
 
@@ -55,7 +55,11 @@ export default function LandingPage(props,{data}) {
   
   //const tawkToPropertyId = '60bce4f64ae6dd0abe7cc090'
   //const tawkToKey = 'get_key_from_tawkto_dashboard'
-
+  const aboutRef = useRef(null)
+  const serviceRef=useRef(null)
+  const packageRef=useRef(null)
+  const contactRef=useRef(null)
+  const testimonialRef=useRef(null)
 
 
   useEffect(()=>{
@@ -82,6 +86,11 @@ export default function LandingPage(props,{data}) {
   const convert=()=>{
     
   }
+  const aboutScroll = () => aboutRef.current.scrollIntoView()  
+  const serviceScroll = () => serviceRef.current.scrollIntoView()  
+  const packageScroll = () => packageRef.current.scrollIntoView()  
+  const testimonialScroll = () => testimonialRef.current.scrollIntoView() 
+  const contactScroll = () => contactRef.current.scrollIntoView()   
 
   const showLanding=()=>{
     return (
@@ -108,7 +117,7 @@ s0.parentNode.insertBefore(s1,s0);
           color="transparent"
           routes={dashboardRoutes}
           
-          rightLinks={<HeaderLinks />}
+          rightLinks={<HeaderLinks contact={contactScroll} testimonial={testimonialScroll} package={packageScroll} service={serviceScroll} about={aboutScroll} />}
           fixed
           changeColorOnScroll={{
             height: 400,
@@ -151,7 +160,7 @@ s0.parentNode.insertBefore(s1,s0);
           </div>
         </Parallax>
         <div className={classNames(classes.main, classes.mainRaised)} style={{backgroundColor:'#050124'}}>
-          <div  className={classes.container}>
+          <div ref={serviceRef}  className={classes.container}>
             <ProductSection />
 
           </div>
@@ -160,15 +169,27 @@ s0.parentNode.insertBefore(s1,s0);
           <Slider />
               
           </div>
-          
+         
           <ActiveUsers />
-           <Plans />
+
+          <div ref={packageRef}>
+          <Plans about={aboutRef} />
+          </div>
            <div style={{}}>
            
            </div>
-           <Testimonials />
-           <TeamSection />
+
+            <div ref={testimonialRef}>
+            <Testimonials />
+
+            </div>
+          <div >
+          < TeamSection />
+          </div>
            
+           <div ref={contactRef}>
+             <WorkSection />
+           </div>
            
           </div>
         </div>
