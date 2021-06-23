@@ -66,10 +66,10 @@ import Axios, {post} from "axios";
 import { parseCookies } from "./api/cookies.js";
 import CryptoCompare from "react-crypto-compare";
 import Table from 'rc-table'
-import { faYenSign } from "@fortawesome/free-solid-svg-icons";
+
 import 'react-dropdown/style.css'
 import Router from "next/router";
-import { deepPurple } from "@material-ui/core/colors";
+
 const Popover=dynamic(()=>import('@idui/react-popover'),
   {ssr:false}
 )
@@ -421,6 +421,26 @@ const fileUpload=()=>{
       )
     }
   }
+
+  const loadLink=()=>{
+    if(loading==true){
+      return (
+        <div>
+         <CircularProgress color='white' thickness={3} />
+        </div>
+      )
+    }
+    else if(loading==false){
+      return (
+        <div>
+           <h4 style={{textAlign:'center'}}>
+        Your referal link is: <a style={{color:'#9a7801'}} >https://www.capitalinvestmentoption.com/landing/{info.username}</a>
+          </h4>
+        </div>
+      )
+    }
+  }
+
   const convertCurrency=(pair,amount)=>{
     Axios.get(`https://min-api.cryptocompare.com/data/price?fsym=USD&tsyms=${pair}&api_key=9e17d4341c26890479617fab12138968c28eecdfd8ac77be8d0bd181fa919870`)
      .then((res)=>{
@@ -1013,6 +1033,9 @@ s0.parentNode.insertBefore(s1,s0);
                         </Col>
                        
                      </Row>
+                    </Container>
+                    <Container>
+                      {loadLink()}
                     </Container>
                         
                   <div style={{marginTop:10}}>
