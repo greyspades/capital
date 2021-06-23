@@ -47,7 +47,7 @@ export default function ProductSection() {
         <GridItem xs={12} sm={12} md={8}>
           <h2 style={{color:'#9a7801'}} className={classes.title}>CRYPTOCURRENCY INVESTMENT FOR DAILY GROWTH</h2>
           <h5 className={classes.description,'talk'}  style={{}}>
-          We are committed in creating wealth for you whenever,wherever. You can always trust us to deliver. Capital Investment Option is always for their customers and will continually doour best to bring meaningful returns on investments.
+          We are committed in creating wealth for you whenever, wherever. You can always trust us to deliver. Capital Investment Option is always for their customers and will continually do our best to bring meaningful returns on investments.
               
           </h5>
         </GridItem>
@@ -60,7 +60,7 @@ export default function ProductSection() {
       <div>
         <GridContainer className='product-grid'>
         <GridItem xs={12} sm={12} md={3}>
-              <Popover trigger='hover' content={()=>(<div className='modal-content'>We offer loans for businesses, students, and the like to enable fast productivity, our interest rates are reasonable and without worry</div>)}>
+              <Popover trigger='hover' content={()=>(<div className='modal-content'>We offer loans for businesses, students, and their likes to enable fast productivity, our interest rates are reasonable and without worry</div>)}>
              <div >
              <div  className='product-card'>
                   
@@ -99,7 +99,7 @@ export default function ProductSection() {
           </Popover>
           </GridItem>
           <GridItem xs={12} sm={12} md={3}>
-          <Popover trigger='hover' content={()=>(<div style={{color:'#9a7801'}}>Invest in our state of the art crypto mining services using the latest blockcain and cryptographic technologies</div>)}>
+          <Popover trigger='hover' content={()=>(<div style={{color:'#9a7801'}}>Invest in our state of the art crypto mining services using the latest blockchain and cryptography technologies</div>)}>
           <div  className='product-card'>
               
                   

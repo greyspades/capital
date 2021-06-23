@@ -80,7 +80,7 @@
     border-radius: 7px;
     padding-top: 20px;
     height: 1500px;
-    margin-bottom: 300px;
+    margin-bottom: 120px;
 }
 .second {
 
@@ -751,6 +751,13 @@
     margin-top: -230px;
     margin-bottom: 30px;
 }
+.about-header {
+    color: #9a7801;
+    text-align: center;
+}
+.privacy-header {
+    text-align: center;
+}
 
 
 
@@ -1343,6 +1350,9 @@
     }
     .landing-buttons {
         margin-bottom: 40px;
+    }
+    .about-header {
+        color: white;
     }
 }
 

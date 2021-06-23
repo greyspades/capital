@@ -31,7 +31,7 @@ export default function TeamSection() {
   );
   return (
     <div style={{color:'white',backgroundColor:'#26253d',marginTop:50}} className='team-container'  className={classes.section}>
-      <h2 style={{color:'white'}} className={classes.title}>Here is our team</h2>
+      <h2 style={{color:'#9a7801'}} className={classes.title}>Here is our team</h2>
       <div>
         <GridContainer style={{}}>
           <GridItem xs={12} sm={12} md={4}>
@@ -58,7 +58,7 @@ export default function TeamSection() {
               <h4 style={{color:'white'}}className={classes.cardTitle}>
                 Aiden Sambel
                 <br />
-                <small style={{color:'white'}} className={classes.smallTitle}>Buissness Development Representative</small>
+                <small style={{color:'white'}} className={classes.smallTitle}>Business Development Representative</small>
               </h4>
               <CardBody>
                 

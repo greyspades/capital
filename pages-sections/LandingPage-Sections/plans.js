@@ -47,7 +47,7 @@ const Plans=(props)=>{
                    <h3 style={{textAlign:'center',marginTop:-10,color:'goldenrod'}}>
                      Crypto Loans
                     </h3>
-                   <div className='loan-talk' style={{color:'white',padding:10}}>
+                   <div className='loan-talk' style={{color:'white',padding:10,textAlign:'center'}}>
                  
                  Introducing Crypto Loans. With Capital investment option, you can instantly borrow USD or EUR against your cryptocurrency assets. The loans range in size from $500 to $500,000 and in duration from a week to a year.
                  </div>
@@ -65,7 +65,7 @@ const Plans=(props)=>{
                    <h3 style={{textAlign:'center',color:'goldenrod',marginTop:-20}}>
                          Affiliate Links
                     </h3>
-                    <div style={{color:'white',padding:10}} className='loan-talk'>
+                    <div style={{color:'white',padding:10,textAlign:'center'}} className='loan-talk'>
                     You may use, reproduce and share any links to any page of this Website. You should use Your individual referral link to take part in the affiliate program. 
 The affiliate program is a way to get extra earnings for referring other people to the products and services offered through this Website. 
 
@@ -78,10 +78,10 @@ The affiliate program is a way to get extra earnings for referring other people 
            
                </Col>
            </Row>
-           <h3 style={{textAlign:'center',marginTop:60,color:'goldenrod'}}>
+           <h3 style={{textAlign:'center',marginTop:60,color:'#9a7801'}}>
                Affiliate Policy
            </h3>
-           <div className='afiliate-ctd' >
+           <div className='afiliate-ctd' style={{textAlign:'center'}} >
                You do not have to make a deposit or have an active investment to get affiliate bonuses.
 
 Clients are not allowed to send SPAM or any kind of unsolicited commercial e-mail to promote the Company, its products and services.
@@ -89,9 +89,17 @@ Clients are not allowed to send SPAM or any kind of unsolicited commercial e-mai
 Our affiliate rewards program offers earning at four levels and pays 8% of the deposits made by your first-line referrals, 2% of the deposits made by you second-line referrals (the people invited by your first-line referrals), 1% of the deposits of your third-line referrals (the people invited by your second-line referrals) and 1% of the deposits of your fourth-line referrals (the people invited by your third-line referrals)
 
                </div>
+             
             <Container fluid className='plans-container'>
+            <div>
+             <h2 style={{color:'#9a7801',textAlign:'center',marginTop:90,marginBottom:-60}}>
+                       Our Plans
+                   </h2>
+             </div>
             <Container fluid style={{}} className='plans'>
-               
+               <Row>
+                  
+               </Row>
                 <Row className='tales' style={{}}>
                     <Col xs={12} md={3} style={{}} className='plans-co'>
                       <motion.div onClick={()=>{Router.push(`../Register/${props.bomber}`)}} whileHover={{scale:1.2}}  className='plans-card plans-one'>
@@ -121,7 +129,7 @@ Our affiliate rewards program offers earning at four levels and pays 8% of the d
                     </Col>
                     
                     <Col xs={12} md={3} >
-                       <motion.div onClick={()=>{Router.push(`../Register/${props.bomber}`)}} whileHover={{scale:1.2}}  className='plans-card second-card' >
+                       <motion.div onClick={()=>{Router.push(`../Register/${props.bomber}`)}} whileHover={{scale:1.2}}  className=' second-card plans-card ' >
                        <span style={{width:200,backgroundColor:'white',height:40,marginBottom:15,borderBottomLeftRadius:10,borderBottomRightRadius:10,textAlign:'center',color:'black',padding:5,fontSize:20}}>Silver</span>
                            <div  className='plans-col' >
                            <div  className=''>
@@ -171,18 +179,14 @@ Our affiliate rewards program offers earning at four levels and pays 8% of the d
                
             </Container>
             </Container>
-            <Container className='market-chart' style={{}}>
-              <h3 style={{color:"#9a7801"}}>
-                  Market Overview
-              </h3>
-            {/*<MarketOverview colorTheme="dark" width='100%' height={400}></MarketOverview>*/}
-            </Container>
             <Container>
-                <Row>
-                    <h3 style={{color:'#9a7801',textAlign:'center'}}>
-                        Privacy-policy
+                <div>
+                <h3 className='privacy-header' style={{color:'#9a7801',textAlign:'center',marginTop:60}}>
+                        Privacy Policy
                     </h3>
-                    <div style={{color:'white'}}>
+                </div>
+                <Row>
+                    <div style={{color:'white',padding:5,textAlign:'center'}}>
                     Please read the following terms regarding our privacy policy. An important part of the relationship we have with our Clients is the information you share with us.
                      We want you to know how we treat your private information. capitalinvestmentoption.com protects our clients privacy and does its best to provide their safety and convenience online. 
                      The capitalinvestmentoption.com website is subject to this Privacy Policy. It regulates
@@ -190,16 +194,17 @@ Our affiliate rewards program offers earning at four levels and pays 8% of the d
                     </div>
                 </Row>
             </Container>
+            
             <Container style={{marginTop:50}} className='why-choose' >
                 <Row >
 
                 <div ref={props.about}>
                 <Container className='about-us' style={{}}>
                 <div style={{}} className='about-overlay'>
-                <h3>
+                <h3 className='about-header' style={{}}>
                 About Capital Investment Option
               </h3>
-              <p style={{color:'white'}}>
+              <p style={{color:'white',textAlign:'center'}}>
               Capital Investment Option is an investment company whose main assumption is to generate the largest, safe profit possible. The team of our specialists ensures that transactions are secure and risk-free for our investors.
        In order to ensure financial security, increase potential profit and reach clients all over the world, our company has been registered on two continents. You can check our certifications below. All our employees have careers in large corporations dealing with the multiplication of clients money.
        Based on their professional experience, they invest using all available forms such as investing in gold, currencies, oil, real estate, listed companies and the most popular and profitable field of Cryptocurrency, start-ups and ICOs. All of the above factors influence our generation of profits up to 20% in 1 day.
@@ -210,14 +215,14 @@ Meanwhile provision has been made by this platform to grant Crypto Loans in orde
             </Container>
                 </div>
                 </Row>
-                <div style={{marginBottom:-20,fontSize:20,color:'white'}}>
+                <h3 style={{marginBottom:-20,fontSize:20,color:'white',marginTop:60}}>
                         By Selecting any of our services you are ensured of
-                    </div>
+                    </h3>
                 <Row style={{marginTop:30}} className='license-talk' >
                     <Col xs={12} md={4} lg={4} style={{display:'grid',placeItems:'center',textAlign:'center',borderRadius:5,padding:10,marginTop:30,width:100}} >
                        <div style={{}} className='policy'>
                        <PolicyIcon style={{height:70,width:70,marginBottom:20,color:'white'}} />
-                        <h4>Reliability</h4>
+                        <h3 style={{color:"#050124"}}>Reliability</h3>
                         <p>
                         You can always contact us whenever you have questions and we'll get back to you within 24 hours.
                         </p>
@@ -226,7 +231,7 @@ Meanwhile provision has been made by this platform to grant Crypto Loans in orde
                     <Col xs={12} md={4} lg={4} style={{display:'grid',placeItems:'center',textAlign:'center',borderRadius:5,padding:10,marginTop:30}} >
                        <div style={{}} className='policy'>
                        <AssignmentTurnedInIcon style={{height:70,width:70,marginBottom:20,color:'white'}} />
-                        <h4>Trust</h4>
+                        <h3 style={{color:"#050124"}}>Trust</h3>
                         <p>
                             Your funds are protected by industry leading protocols,dedicated to efficiency and flexibility, while maintaining ease of use
                         </p>
@@ -235,7 +240,7 @@ Meanwhile provision has been made by this platform to grant Crypto Loans in orde
                     <Col xs={12} md={4} lg={4} style={{display:'grid',placeItems:'center',textAlign:'center',borderRadius:5,padding:10,marginTop:30}} >
                         <div style={{}} className='policy'>
                         <LockIcon style={{height:70,width:70,marginBottom:20,color:'white'}} />
-                        <h4>Privacy</h4>
+                        <h3 style={{color:"#050124"}}>Privacy</h3>
                         <p>
                         We will never share your private data without your permission, you are always in control of your information and privacy
                         </p>

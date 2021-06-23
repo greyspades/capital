@@ -113,7 +113,7 @@ const Slider=(props)=>{
                 </Col>
 
                 <Col md={4}>
-                  <div className='talk-2' style={{color:'white'}}>
+                  <div className='talk-2' style={{color:'white',textAlign:'center'}}>
                     
 
                   We are committed in creating wealth for you whenever, wherever. You can always trust us to deliver. Capital investment option is always for their customers and will continually do our best to bring meaningful returns on investments as well as adopting an unlimited CapitalLoan protocol which is aimed at creating financial assistance to everyone across the platform.
@@ -130,7 +130,7 @@ const Slider=(props)=>{
               <h3 className='getting-started' style={{color:'goldenrod',textAlign:'center'}}>
                       Getting Started
                     </h3>
-                  <div className='afiliate-ctd'>
+                  <div style={{textAlign:'center'}} className='afiliate-ctd'>
 To access the features and benefits being provided by capital investment option kindly<Button onClick={()=>{Router.push(`../Register/${props.bomber}`)}} ><span style={{marginLeft:-30,marginRight:-30,marginTop:-7,marginBottom:-7}}>Sign up</span></Button> with credentials and get started. It's quite easy and doesn't take 
 much time, of which you get an offer to become an investor and earn profit. For that reason you mandated to complete the registration process. In order to register yourself as a member of capitalinvestmentoption.com, click on the Create Account button, fill in the registration form and press Register. Your account is ready to use! You are obliged to provide only complete and accurate information about yourself (the Registration Data) when registering as a Member.
 
