@@ -138,6 +138,7 @@ function UserProfile({data},props) {
   useEffect((req)=>{
     const user=parseCookies(req)
     let item=JSON.parse(user.key)
+    
    
    Axios.post('/api/info',{item})
    .then((res)=>{
