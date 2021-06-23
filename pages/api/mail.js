@@ -16,7 +16,7 @@ const request = mailjet
   "Messages":[
     {
       "From": {
-        "Email": "capitalinvestmentoption@gmail.com",
+        "Email": "capitalinvestmentoption1@hotmail.com",
         "Name": "Capital investment option"
       },
       "To": [
