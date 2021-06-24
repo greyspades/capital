@@ -268,7 +268,7 @@ s0.parentNode.insertBefore(s1,s0);
                         Not yet a member? 
                       </p>
                       <div style={{marginTop:20}}>
-                      <a href='/Register'>Sign up now</a>
+                      <a href='/signup'>Sign up now</a>
                       </div>
                      </div>
                       <CardFooter  className={classes.cardFooter}>
