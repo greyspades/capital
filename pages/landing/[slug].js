@@ -1,4 +1,4 @@
-import React,{useState,useEffect} from "react";
+import React,{useState,useEffect,useRef} from "react";
 // nodejs library that concatenates classes
 import classNames from "classnames";
 // @material-ui/core components
@@ -59,6 +59,13 @@ export default function LandingPage(props,{data}) {
   const Router=useRouter()
   const {slug}=Router.query
 
+  const aboutRef = useRef(null)
+  const serviceRef=useRef(null)
+  const packageRef=useRef(null)
+  const contactRef=useRef(null)
+  const testimonialRef=useRef(null)
+
+
   useEffect(()=>{
     /*const handleResize=()=>{
       setWindowSize(window.innerWidth)
@@ -79,6 +86,13 @@ export default function LandingPage(props,{data}) {
 
     }
   }
+
+
+  const aboutScroll = () => aboutRef.current.scrollIntoView()  
+  const serviceScroll = () => serviceRef.current.scrollIntoView()  
+  const packageScroll = () => packageRef.current.scrollIntoView()  
+  const testimonialScroll = () => testimonialRef.current.scrollIntoView() 
+  const contactScroll = () => contactRef.current.scrollIntoView()  
 
   const showLanding=()=>{
     return (
@@ -105,7 +119,7 @@ s0.parentNode.insertBefore(s1,s0);
           color="transparent"
           routes={dashboardRoutes}
           
-          rightLinks={<HeaderLinks />}
+          rightLinks={<HeaderLinks contact={contactScroll} testimonial={testimonialScroll} package={packageScroll} service={serviceScroll} about={aboutScroll} />}
           fixed
           changeColorOnScroll={{
             height: 400,
@@ -147,7 +161,7 @@ s0.parentNode.insertBefore(s1,s0);
           </div>
         </Parallax>
         <div className={classNames(classes.main, classes.mainRaised)} style={{backgroundColor:'#050124'}}>
-          <div  className={classes.container}>
+          <div ref={serviceRef} className={classes.container}>
             <ProductSection />
 
           </div>
@@ -157,11 +171,19 @@ s0.parentNode.insertBefore(s1,s0);
               
           </div>
           <ActiveUsers />
-           <Plans bomber={slug} />
-           <Testimonials />
+          <div ref={packageRef}>
+          <Plans about={aboutRef} bomber={slug} />
+          </div>
+
+          <div ref={testimonialRef}>
+            <Testimonials />
+
+            </div>
            <TeamSection />
            
-           <WorkSection />
+           <div ref={contactRef}>
+             <WorkSection />
+           </div>
           </div>
         </div>
         <Footer />

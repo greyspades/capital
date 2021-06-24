@@ -904,7 +904,7 @@ s0.parentNode.insertBefore(s1,s0);
               Confirm Investment
             </h3>
             <p >
-              Please upload proof of payment using th box bellow
+              Please upload proof of payment using the box bellow
             </p>
             <form onSubmit={fileSubmit}>
         
