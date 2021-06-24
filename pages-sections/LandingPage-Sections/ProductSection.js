@@ -74,7 +74,7 @@ export default function ProductSection() {
           </GridItem>
          
           <GridItem xs={12} sm={12} md={3}>
-           <Popover trigger='hover' content={()=>(<div style={{color:'#9a7801'}}>Invest in our crypto trades and get live trade data and analysis with a 25% guarante in all our investments</div>)}>
+           <Popover trigger='hover' content={()=>(<div style={{color:'#9a7801'}}>Invest in our crypto trades and get live trade data and analysis with a 25% guarantee in all our investments</div>)}>
            <div>
            <div  className='product-card'>
                 

@@ -143,7 +143,7 @@ Our affiliate rewards program offers earning at four levels and pays 8% of the d
                            <p style={{color:'white'}}>Pay:<span style={{color:'goldenrod',marginLeft:10}}>5% Return</span></p>
                            <p style={{color:'white'}}>For:<span style={{color:'goldenrod',marginLeft:10}}>21 Months</span></p>
                            <p style={{color:'white'}}>Amount Spent:<span style={{color:'goldenrod',marginLeft:10}}>$3550-19500</span></p>
-                           <p style={{color:'white'}}>Max Loan:<span style={{color:'goldenrod',marginLeft:10}}>112,000</span></p>
+                           <p style={{color:'white'}}>Max Loan:<span style={{color:'goldenrod',marginLeft:10}}>$112,000</span></p>
                            <p style={{color:'white'}}>Principal:<span style={{color:'goldenrod',marginLeft:10}}>Back</span></p>
                            <p style={{color:'white'}}>Profit:<span style={{color:'goldenrod',marginLeft:10}}>Calender Days</span></p>
                            </div>
@@ -168,7 +168,7 @@ Our affiliate rewards program offers earning at four levels and pays 8% of the d
                            <p style={{color:'white'}}>For:<span style={{color:'goldenrod',marginLeft:10}}>30 Months</span></p>
                            <p style={{color:'white'}}>Amount Spent:<span style={{color:'goldenrod',marginLeft:3}}>$49300-$2.5M</span></p>
                            <p style={{color:'white'}}>Max Loan:<span style={{color:'goldenrod',marginLeft:10}}>$1500000</span></p>
-                           <p style={{color:'white'}}>Principal:<span style={{color:'goldenrod',marginLeft:10}}>include</span></p>
+                           <p style={{color:'white'}}>Principal:<span style={{color:'goldenrod',marginLeft:10}}>Include</span></p>
                            <p style={{color:'white'}}>Profit:<span style={{color:'goldenrod',marginLeft:10}}>Buisiness Days</span></p>
                            </div>
                         </div>
