@@ -910,7 +910,8 @@ s0.parentNode.insertBefore(s1,s0);
         
         <input required  style={{backgroundColor:'goldenrod',width:250,borderRadius:2,borderColor:'goldenrod',marginTop:20}} type="file" onChange={fileChange} />
           <div style={{marginTop:20}}>
-            
+  
+  
           <Button style={{padding:5}} type="submit">Upload</Button>
           </div>
           <div>
