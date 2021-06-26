@@ -59,7 +59,7 @@ const Success=(props)=>{
                             did not recieve email ? <Button onClick={mail}>click here to resend</Button>
                         </div>
                         <div style={{marginTop:40,textAlign:'center'}}>
-                            Or login and go directly to your <a style={{color:'goldenrod'}} href="/Dashboard">Dashboard</a>
+                            Or login and go directly to your <a style={{color:'goldenrod'}} href="/login">Dashboard</a>
 
                         </div>
                     
