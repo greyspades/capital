@@ -319,7 +319,7 @@ const fileUpload=()=>{
     else {
       return (
         <div style={{width:'100%'}}>
-                  <div style={{width:200,height:200, marginLeft:'27%', backgroundColor:' #050124',borderRadius:100,textAlign:'center',display:'grid',placeItems:'center'}}>
+                  <div style={{width:200,height:200, marginLeft:'23%', backgroundColor:' #050124',borderRadius:100,textAlign:'center',display:'grid',placeItems:'center'}}>
                      <PersonOutlineIcon className='profile-icon' style={{width:150,height:150,color:'#9a7801',marginBottom:-10,}}   />
         </div>
         </div>
@@ -942,7 +942,7 @@ s0.parentNode.insertBefore(s1,s0);
                   <div className="block block-two" />
                   <div className="block block-three" />
                   <div className="block block-four" />
-                  <div style={{}} onClick={(e) => e.preventDefault()}>
+                  <div style={{display:'grid',placeItems:"center"}} onClick={(e) => e.preventDefault()}>
 
                   
                         {displayPic()}
